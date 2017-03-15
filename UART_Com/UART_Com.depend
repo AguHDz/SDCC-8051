@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1488379029 source:d:\file programs\sdcc\uart_com\main.c
+	<mcs51/8051.h>
+
+1488379029 source:d:\data files\sdcc\uart_com\main.c
+	<mcs51/8051.h>
+
