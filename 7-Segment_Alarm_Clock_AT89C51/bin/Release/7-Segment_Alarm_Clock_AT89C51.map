@@ -73,16 +73,16 @@ C:   0000002E  s_GSINIT3
 C:   0000003F  s_SSEG                          
 C:   00000041  l_SSEG                          
 C:   00000050  s_GSINIT4                       
-C:   0000006C  l_GSINIT                        
+C:   00000078  l_GSINIT                        
 C:   0000007A  s_GSINIT                        
 C:   0000007A  s_GSINIT5                       
 C:   00000080  l_DSEG                          
 C:   00000080  l_IRAM                          
-C:   000000E6  s_GSFINAL                       
-C:   000000E9  s_CSEG                          
+C:   000000F2  s_GSFINAL                       
+C:   000000F5  s_CSEG                          
 C:   00000571  l_CSEG                          
-C:   0000065A  s_CONST                         
-C:   0000065A  s_XINIT                         
+C:   00000666  s_CONST                         
+C:   00000666  s_XINIT                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -313,7 +313,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSINIT                              0000007A    0000006C =         108. bytes (REL,CON,CODE)
+GSINIT                              0000007A    00000078 =         120. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -322,7 +322,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSFINAL                             000000E6    00000003 =           3. bytes (REL,CON,CODE)
+GSFINAL                             000000F2    00000003 =           3. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -331,18 +331,18 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                000000E9    00000571 =        1393. bytes (REL,CON,CODE)
+CSEG                                000000F5    00000571 =        1393. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000000E9  _delay                             main
-C:   0000011C  _setfn                             main
-C:   000001F3  _increase                          main
-C:   0000038E  _resetfn                           main
-C:   000004C0  _display                           main
-C:   00000538  _moveclock                         main
-C:   000005D9  _main                              main
-C:   00000656  __sdcc_external_startup            _startup
+C:   000000F5  _delay                             main
+C:   00000128  _setfn                             main
+C:   000001FF  _increase                          main
+C:   0000039A  _resetfn                           main
+C:   000004CC  _display                           main
+C:   00000544  _moveclock                         main
+C:   000005E5  _main                              main
+C:   00000662  __sdcc_external_startup            _startup
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 16.
 

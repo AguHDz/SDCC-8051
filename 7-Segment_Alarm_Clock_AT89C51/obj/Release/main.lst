@@ -1,0 +1,1478 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.6.0 #9615 (MINGW32)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _moveclock
+                                     13 	.globl _display
+                                     14 	.globl _resetfn
+                                     15 	.globl _increase
+                                     16 	.globl _setfn
+                                     17 	.globl _delay
+                                     18 	.globl _CY
+                                     19 	.globl _AC
+                                     20 	.globl _F0
+                                     21 	.globl _RS1
+                                     22 	.globl _RS0
+                                     23 	.globl _OV
+                                     24 	.globl _F1
+                                     25 	.globl _P
+                                     26 	.globl _PS
+                                     27 	.globl _PT1
+                                     28 	.globl _PX1
+                                     29 	.globl _PT0
+                                     30 	.globl _PX0
+                                     31 	.globl _RD
+                                     32 	.globl _WR
+                                     33 	.globl _T1
+                                     34 	.globl _T0
+                                     35 	.globl _INT1
+                                     36 	.globl _INT0
+                                     37 	.globl _TXD
+                                     38 	.globl _RXD
+                                     39 	.globl _P3_7
+                                     40 	.globl _P3_6
+                                     41 	.globl _P3_5
+                                     42 	.globl _P3_4
+                                     43 	.globl _P3_3
+                                     44 	.globl _P3_2
+                                     45 	.globl _P3_1
+                                     46 	.globl _P3_0
+                                     47 	.globl _EA
+                                     48 	.globl _ES
+                                     49 	.globl _ET1
+                                     50 	.globl _EX1
+                                     51 	.globl _ET0
+                                     52 	.globl _EX0
+                                     53 	.globl _P2_7
+                                     54 	.globl _P2_6
+                                     55 	.globl _P2_5
+                                     56 	.globl _P2_4
+                                     57 	.globl _P2_3
+                                     58 	.globl _P2_2
+                                     59 	.globl _P2_1
+                                     60 	.globl _P2_0
+                                     61 	.globl _SM0
+                                     62 	.globl _SM1
+                                     63 	.globl _SM2
+                                     64 	.globl _REN
+                                     65 	.globl _TB8
+                                     66 	.globl _RB8
+                                     67 	.globl _TI
+                                     68 	.globl _RI
+                                     69 	.globl _P1_7
+                                     70 	.globl _P1_6
+                                     71 	.globl _P1_5
+                                     72 	.globl _P1_4
+                                     73 	.globl _P1_3
+                                     74 	.globl _P1_2
+                                     75 	.globl _P1_1
+                                     76 	.globl _P1_0
+                                     77 	.globl _TF1
+                                     78 	.globl _TR1
+                                     79 	.globl _TF0
+                                     80 	.globl _TR0
+                                     81 	.globl _IE1
+                                     82 	.globl _IT1
+                                     83 	.globl _IE0
+                                     84 	.globl _IT0
+                                     85 	.globl _P0_7
+                                     86 	.globl _P0_6
+                                     87 	.globl _P0_5
+                                     88 	.globl _P0_4
+                                     89 	.globl _P0_3
+                                     90 	.globl _P0_2
+                                     91 	.globl _P0_1
+                                     92 	.globl _P0_0
+                                     93 	.globl _B
+                                     94 	.globl _ACC
+                                     95 	.globl _PSW
+                                     96 	.globl _IP
+                                     97 	.globl _P3
+                                     98 	.globl _IE
+                                     99 	.globl _P2
+                                    100 	.globl _SBUF
+                                    101 	.globl _SCON
+                                    102 	.globl _P1
+                                    103 	.globl _TH1
+                                    104 	.globl _TH0
+                                    105 	.globl _TL1
+                                    106 	.globl _TL0
+                                    107 	.globl _TMOD
+                                    108 	.globl _TCON
+                                    109 	.globl _PCON
+                                    110 	.globl _DPH
+                                    111 	.globl _DPL
+                                    112 	.globl _SP
+                                    113 	.globl _P0
+                                    114 	.globl _dig_val
+                                    115 	.globl _mode
+                                    116 	.globl _loop
+                                    117 	.globl _keepsec1
+                                    118 	.globl _keepsec2
+                                    119 	.globl _keepmin1
+                                    120 	.globl _keepmin2
+                                    121 	.globl _alarmsec1
+                                    122 	.globl _alarmsec2
+                                    123 	.globl _alarmmin1
+                                    124 	.globl _alarmmin2
+                                    125 	.globl _secalarm1
+                                    126 	.globl _secalarm2
+                                    127 	.globl _minalarm1
+                                    128 	.globl _minalarm2
+                                    129 	.globl _sec1
+                                    130 	.globl _sec2
+                                    131 	.globl _min1
+                                    132 	.globl _min2
+                                    133 	.globl _dig_disp
+                                    134 	.globl _begin
+                                    135 	.globl _recnt_incr_seg
+                                    136 	.globl _ret_seg_to_incre
+                                    137 	.globl _sel_seg_to_incr
+                                    138 ;--------------------------------------------------------
+                                    139 ; special function registers
+                                    140 ;--------------------------------------------------------
+                                    141 	.area RSEG    (ABS,DATA)
+      000000                        142 	.org 0x0000
+                           000080   143 _P0	=	0x0080
+                           000081   144 _SP	=	0x0081
+                           000082   145 _DPL	=	0x0082
+                           000083   146 _DPH	=	0x0083
+                           000087   147 _PCON	=	0x0087
+                           000088   148 _TCON	=	0x0088
+                           000089   149 _TMOD	=	0x0089
+                           00008A   150 _TL0	=	0x008a
+                           00008B   151 _TL1	=	0x008b
+                           00008C   152 _TH0	=	0x008c
+                           00008D   153 _TH1	=	0x008d
+                           000090   154 _P1	=	0x0090
+                           000098   155 _SCON	=	0x0098
+                           000099   156 _SBUF	=	0x0099
+                           0000A0   157 _P2	=	0x00a0
+                           0000A8   158 _IE	=	0x00a8
+                           0000B0   159 _P3	=	0x00b0
+                           0000B8   160 _IP	=	0x00b8
+                           0000D0   161 _PSW	=	0x00d0
+                           0000E0   162 _ACC	=	0x00e0
+                           0000F0   163 _B	=	0x00f0
+                                    164 ;--------------------------------------------------------
+                                    165 ; special function bits
+                                    166 ;--------------------------------------------------------
+                                    167 	.area RSEG    (ABS,DATA)
+      000000                        168 	.org 0x0000
+                           000080   169 _P0_0	=	0x0080
+                           000081   170 _P0_1	=	0x0081
+                           000082   171 _P0_2	=	0x0082
+                           000083   172 _P0_3	=	0x0083
+                           000084   173 _P0_4	=	0x0084
+                           000085   174 _P0_5	=	0x0085
+                           000086   175 _P0_6	=	0x0086
+                           000087   176 _P0_7	=	0x0087
+                           000088   177 _IT0	=	0x0088
+                           000089   178 _IE0	=	0x0089
+                           00008A   179 _IT1	=	0x008a
+                           00008B   180 _IE1	=	0x008b
+                           00008C   181 _TR0	=	0x008c
+                           00008D   182 _TF0	=	0x008d
+                           00008E   183 _TR1	=	0x008e
+                           00008F   184 _TF1	=	0x008f
+                           000090   185 _P1_0	=	0x0090
+                           000091   186 _P1_1	=	0x0091
+                           000092   187 _P1_2	=	0x0092
+                           000093   188 _P1_3	=	0x0093
+                           000094   189 _P1_4	=	0x0094
+                           000095   190 _P1_5	=	0x0095
+                           000096   191 _P1_6	=	0x0096
+                           000097   192 _P1_7	=	0x0097
+                           000098   193 _RI	=	0x0098
+                           000099   194 _TI	=	0x0099
+                           00009A   195 _RB8	=	0x009a
+                           00009B   196 _TB8	=	0x009b
+                           00009C   197 _REN	=	0x009c
+                           00009D   198 _SM2	=	0x009d
+                           00009E   199 _SM1	=	0x009e
+                           00009F   200 _SM0	=	0x009f
+                           0000A0   201 _P2_0	=	0x00a0
+                           0000A1   202 _P2_1	=	0x00a1
+                           0000A2   203 _P2_2	=	0x00a2
+                           0000A3   204 _P2_3	=	0x00a3
+                           0000A4   205 _P2_4	=	0x00a4
+                           0000A5   206 _P2_5	=	0x00a5
+                           0000A6   207 _P2_6	=	0x00a6
+                           0000A7   208 _P2_7	=	0x00a7
+                           0000A8   209 _EX0	=	0x00a8
+                           0000A9   210 _ET0	=	0x00a9
+                           0000AA   211 _EX1	=	0x00aa
+                           0000AB   212 _ET1	=	0x00ab
+                           0000AC   213 _ES	=	0x00ac
+                           0000AF   214 _EA	=	0x00af
+                           0000B0   215 _P3_0	=	0x00b0
+                           0000B1   216 _P3_1	=	0x00b1
+                           0000B2   217 _P3_2	=	0x00b2
+                           0000B3   218 _P3_3	=	0x00b3
+                           0000B4   219 _P3_4	=	0x00b4
+                           0000B5   220 _P3_5	=	0x00b5
+                           0000B6   221 _P3_6	=	0x00b6
+                           0000B7   222 _P3_7	=	0x00b7
+                           0000B0   223 _RXD	=	0x00b0
+                           0000B1   224 _TXD	=	0x00b1
+                           0000B2   225 _INT0	=	0x00b2
+                           0000B3   226 _INT1	=	0x00b3
+                           0000B4   227 _T0	=	0x00b4
+                           0000B5   228 _T1	=	0x00b5
+                           0000B6   229 _WR	=	0x00b6
+                           0000B7   230 _RD	=	0x00b7
+                           0000B8   231 _PX0	=	0x00b8
+                           0000B9   232 _PT0	=	0x00b9
+                           0000BA   233 _PX1	=	0x00ba
+                           0000BB   234 _PT1	=	0x00bb
+                           0000BC   235 _PS	=	0x00bc
+                           0000D0   236 _P	=	0x00d0
+                           0000D1   237 _F1	=	0x00d1
+                           0000D2   238 _OV	=	0x00d2
+                           0000D3   239 _RS0	=	0x00d3
+                           0000D4   240 _RS1	=	0x00d4
+                           0000D5   241 _F0	=	0x00d5
+                           0000D6   242 _AC	=	0x00d6
+                           0000D7   243 _CY	=	0x00d7
+                                    244 ;--------------------------------------------------------
+                                    245 ; overlayable register banks
+                                    246 ;--------------------------------------------------------
+                                    247 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        248 	.ds 8
+                                    249 ;--------------------------------------------------------
+                                    250 ; internal ram data
+                                    251 ;--------------------------------------------------------
+                                    252 	.area DSEG    (DATA)
+      000000                        253 _sel_seg_to_incr::
+      000000                        254 	.ds 2
+      000002                        255 _ret_seg_to_incre::
+      000002                        256 	.ds 2
+      000004                        257 _recnt_incr_seg::
+      000004                        258 	.ds 2
+      000006                        259 _begin::
+      000006                        260 	.ds 2
+      000008                        261 _dig_disp::
+      000008                        262 	.ds 1
+      000009                        263 _min2::
+      000009                        264 	.ds 2
+      00000B                        265 _min1::
+      00000B                        266 	.ds 2
+      00000D                        267 _sec2::
+      00000D                        268 	.ds 2
+      00000F                        269 _sec1::
+      00000F                        270 	.ds 2
+      000011                        271 _minalarm2::
+      000011                        272 	.ds 2
+      000013                        273 _minalarm1::
+      000013                        274 	.ds 2
+      000015                        275 _secalarm2::
+      000015                        276 	.ds 2
+      000017                        277 _secalarm1::
+      000017                        278 	.ds 2
+      000019                        279 _alarmmin2::
+      000019                        280 	.ds 2
+      00001B                        281 _alarmmin1::
+      00001B                        282 	.ds 2
+      00001D                        283 _alarmsec2::
+      00001D                        284 	.ds 2
+      00001F                        285 _alarmsec1::
+      00001F                        286 	.ds 2
+      000021                        287 _keepmin2::
+      000021                        288 	.ds 2
+      000023                        289 _keepmin1::
+      000023                        290 	.ds 2
+      000025                        291 _keepsec2::
+      000025                        292 	.ds 2
+      000027                        293 _keepsec1::
+      000027                        294 	.ds 2
+      000029                        295 _loop::
+      000029                        296 	.ds 2
+      00002B                        297 _mode::
+      00002B                        298 	.ds 2
+      00002D                        299 _dig_val::
+      00002D                        300 	.ds 10
+                                    301 ;--------------------------------------------------------
+                                    302 ; overlayable items in internal ram 
+                                    303 ;--------------------------------------------------------
+                                    304 	.area	OSEG    (OVR,DATA)
+                                    305 ;--------------------------------------------------------
+                                    306 ; Stack segment in internal ram 
+                                    307 ;--------------------------------------------------------
+                                    308 	.area	SSEG
+      000000                        309 __start__stack:
+      000000                        310 	.ds	1
+                                    311 
+                                    312 ;--------------------------------------------------------
+                                    313 ; indirectly addressable internal ram data
+                                    314 ;--------------------------------------------------------
+                                    315 	.area ISEG    (DATA)
+                                    316 ;--------------------------------------------------------
+                                    317 ; absolute internal ram data
+                                    318 ;--------------------------------------------------------
+                                    319 	.area IABS    (ABS,DATA)
+                                    320 	.area IABS    (ABS,DATA)
+                                    321 ;--------------------------------------------------------
+                                    322 ; bit data
+                                    323 ;--------------------------------------------------------
+                                    324 	.area BSEG    (BIT)
+                                    325 ;--------------------------------------------------------
+                                    326 ; paged external ram data
+                                    327 ;--------------------------------------------------------
+                                    328 	.area PSEG    (PAG,XDATA)
+                                    329 ;--------------------------------------------------------
+                                    330 ; external ram data
+                                    331 ;--------------------------------------------------------
+                                    332 	.area XSEG    (XDATA)
+                                    333 ;--------------------------------------------------------
+                                    334 ; absolute external ram data
+                                    335 ;--------------------------------------------------------
+                                    336 	.area XABS    (ABS,XDATA)
+                                    337 ;--------------------------------------------------------
+                                    338 ; external initialized ram data
+                                    339 ;--------------------------------------------------------
+                                    340 	.area XISEG   (XDATA)
+                                    341 	.area HOME    (CODE)
+                                    342 	.area GSINIT0 (CODE)
+                                    343 	.area GSINIT1 (CODE)
+                                    344 	.area GSINIT2 (CODE)
+                                    345 	.area GSINIT3 (CODE)
+                                    346 	.area GSINIT4 (CODE)
+                                    347 	.area GSINIT5 (CODE)
+                                    348 	.area GSINIT  (CODE)
+                                    349 	.area GSFINAL (CODE)
+                                    350 	.area CSEG    (CODE)
+                                    351 ;--------------------------------------------------------
+                                    352 ; interrupt vector 
+                                    353 ;--------------------------------------------------------
+                                    354 	.area HOME    (CODE)
+      000000                        355 __interrupt_vect:
+      000000 02r00r00         [24]  356 	ljmp	__sdcc_gsinit_startup
+      000003 32               [24]  357 	reti
+      000004                        358 	.ds	7
+      00000B 02r03rD7         [24]  359 	ljmp	_display
+      00000E                        360 	.ds	5
+      000013 32               [24]  361 	reti
+      000014                        362 	.ds	7
+      00001B 02r04r4F         [24]  363 	ljmp	_moveclock
+                                    364 ;--------------------------------------------------------
+                                    365 ; global & static initialisations
+                                    366 ;--------------------------------------------------------
+                                    367 	.area HOME    (CODE)
+                                    368 	.area GSINIT  (CODE)
+                                    369 	.area GSFINAL (CODE)
+                                    370 	.area GSINIT  (CODE)
+                                    371 	.globl __sdcc_gsinit_startup
+                                    372 	.globl __sdcc_program_startup
+                                    373 	.globl __start__stack
+                                    374 	.globl __mcs51_genXINIT
+                                    375 	.globl __mcs51_genXRAMCLEAR
+                                    376 	.globl __mcs51_genRAMCLEAR
+                                    377 ;	main.c:54: int sel_seg_to_incr     =   0;
+      000000 E4               [12]  378 	clr	a
+      000001 F5*00            [12]  379 	mov	_sel_seg_to_incr,a
+      000003 F5*01            [12]  380 	mov	(_sel_seg_to_incr + 1),a
+                                    381 ;	main.c:55: int ret_seg_to_incre    =   0;
+      000005 F5*02            [12]  382 	mov	_ret_seg_to_incre,a
+      000007 F5*03            [12]  383 	mov	(_ret_seg_to_incre + 1),a
+                                    384 ;	main.c:56: int recnt_incr_seg      =   0;
+      000009 F5*04            [12]  385 	mov	_recnt_incr_seg,a
+      00000B F5*05            [12]  386 	mov	(_recnt_incr_seg + 1),a
+                                    387 ;	main.c:57: int begin               =   0;
+      00000D F5*06            [12]  388 	mov	_begin,a
+      00000F F5*07            [12]  389 	mov	(_begin + 1),a
+                                    390 ;	main.c:58: unsigned char dig_disp  =   0;
+                                    391 ;	1-genFromRTrack replaced	mov	_dig_disp,#0x00
+      000011 F5*08            [12]  392 	mov	_dig_disp,a
+                                    393 ;	main.c:59: int min2                =   0;
+      000013 F5*09            [12]  394 	mov	_min2,a
+      000015 F5*0A            [12]  395 	mov	(_min2 + 1),a
+                                    396 ;	main.c:60: int min1                =   0;
+      000017 F5*0B            [12]  397 	mov	_min1,a
+      000019 F5*0C            [12]  398 	mov	(_min1 + 1),a
+                                    399 ;	main.c:61: int sec2                =   0;
+      00001B F5*0D            [12]  400 	mov	_sec2,a
+      00001D F5*0E            [12]  401 	mov	(_sec2 + 1),a
+                                    402 ;	main.c:62: int sec1                =   0;
+      00001F F5*0F            [12]  403 	mov	_sec1,a
+      000021 F5*10            [12]  404 	mov	(_sec1 + 1),a
+                                    405 ;	main.c:63: int minalarm2           =   0;
+      000023 F5*11            [12]  406 	mov	_minalarm2,a
+      000025 F5*12            [12]  407 	mov	(_minalarm2 + 1),a
+                                    408 ;	main.c:64: int minalarm1           =   0;
+      000027 F5*13            [12]  409 	mov	_minalarm1,a
+      000029 F5*14            [12]  410 	mov	(_minalarm1 + 1),a
+                                    411 ;	main.c:65: int secalarm2           =   0;
+      00002B F5*15            [12]  412 	mov	_secalarm2,a
+      00002D F5*16            [12]  413 	mov	(_secalarm2 + 1),a
+                                    414 ;	main.c:66: int secalarm1           =   0;
+      00002F F5*17            [12]  415 	mov	_secalarm1,a
+      000031 F5*18            [12]  416 	mov	(_secalarm1 + 1),a
+                                    417 ;	main.c:67: int alarmmin2           =   0;
+      000033 F5*19            [12]  418 	mov	_alarmmin2,a
+      000035 F5*1A            [12]  419 	mov	(_alarmmin2 + 1),a
+                                    420 ;	main.c:68: int alarmmin1           =   0;
+      000037 F5*1B            [12]  421 	mov	_alarmmin1,a
+      000039 F5*1C            [12]  422 	mov	(_alarmmin1 + 1),a
+                                    423 ;	main.c:69: int alarmsec2           =   0;
+      00003B F5*1D            [12]  424 	mov	_alarmsec2,a
+      00003D F5*1E            [12]  425 	mov	(_alarmsec2 + 1),a
+                                    426 ;	main.c:70: int alarmsec1           =   0;
+      00003F F5*1F            [12]  427 	mov	_alarmsec1,a
+      000041 F5*20            [12]  428 	mov	(_alarmsec1 + 1),a
+                                    429 ;	main.c:71: int keepmin2            =   0;
+      000043 F5*21            [12]  430 	mov	_keepmin2,a
+      000045 F5*22            [12]  431 	mov	(_keepmin2 + 1),a
+                                    432 ;	main.c:72: int keepmin1            =   0;
+      000047 F5*23            [12]  433 	mov	_keepmin1,a
+      000049 F5*24            [12]  434 	mov	(_keepmin1 + 1),a
+                                    435 ;	main.c:73: int keepsec2            =   0;
+      00004B F5*25            [12]  436 	mov	_keepsec2,a
+      00004D F5*26            [12]  437 	mov	(_keepsec2 + 1),a
+                                    438 ;	main.c:74: int keepsec1            =   0;
+      00004F F5*27            [12]  439 	mov	_keepsec1,a
+      000051 F5*28            [12]  440 	mov	(_keepsec1 + 1),a
+                                    441 ;	main.c:75: int loop                =   0;
+      000053 F5*29            [12]  442 	mov	_loop,a
+      000055 F5*2A            [12]  443 	mov	(_loop + 1),a
+                                    444 ;	main.c:76: int mode                =   0;
+      000057 F5*2B            [12]  445 	mov	_mode,a
+      000059 F5*2C            [12]  446 	mov	(_mode + 1),a
+                                    447 ;	main.c:77: char dig_val[10]        =   {0x40,0xF9,0x24,0x30,0x19,0x12,0x02,0xF8,0x00,0x10};  // Hex values corresponding to digits 0 to 9
+      00005B 75*2D 40         [24]  448 	mov	_dig_val,#0x40
+      00005E 75*2E F9         [24]  449 	mov	(_dig_val + 0x0001),#0xf9
+      000061 75*2F 24         [24]  450 	mov	(_dig_val + 0x0002),#0x24
+      000064 75*30 30         [24]  451 	mov	(_dig_val + 0x0003),#0x30
+      000067 75*31 19         [24]  452 	mov	(_dig_val + 0x0004),#0x19
+      00006A 75*32 12         [24]  453 	mov	(_dig_val + 0x0005),#0x12
+      00006D 75*33 02         [24]  454 	mov	(_dig_val + 0x0006),#0x02
+      000070 75*34 F8         [24]  455 	mov	(_dig_val + 0x0007),#0xf8
+                                    456 ;	1-genFromRTrack replaced	mov	(_dig_val + 0x0008),#0x00
+      000073 F5*35            [12]  457 	mov	(_dig_val + 0x0008),a
+      000075 75*36 10         [24]  458 	mov	(_dig_val + 0x0009),#0x10
+                                    459 	.area GSFINAL (CODE)
+      000000 02r00r1E         [24]  460 	ljmp	__sdcc_program_startup
+                                    461 ;--------------------------------------------------------
+                                    462 ; Home
+                                    463 ;--------------------------------------------------------
+                                    464 	.area HOME    (CODE)
+                                    465 	.area HOME    (CODE)
+      00001E                        466 __sdcc_program_startup:
+      00001E 02r04rF0         [24]  467 	ljmp	_main
+                                    468 ;	return from main will return to caller
+                                    469 ;--------------------------------------------------------
+                                    470 ; code
+                                    471 ;--------------------------------------------------------
+                                    472 	.area CSEG    (CODE)
+                                    473 ;------------------------------------------------------------
+                                    474 ;Allocation info for local variables in function 'delay'
+                                    475 ;------------------------------------------------------------
+                                    476 ;time                      Allocated to registers r6 r7 
+                                    477 ;i                         Allocated to registers r4 r5 
+                                    478 ;j                         Allocated to registers r2 r3 
+                                    479 ;------------------------------------------------------------
+                                    480 ;	main.c:79: void delay(int time)  //Function to provide time delay.
+                                    481 ;	-----------------------------------------
+                                    482 ;	 function delay
+                                    483 ;	-----------------------------------------
+      000000                        484 _delay:
+                           000007   485 	ar7 = 0x07
+                           000006   486 	ar6 = 0x06
+                           000005   487 	ar5 = 0x05
+                           000004   488 	ar4 = 0x04
+                           000003   489 	ar3 = 0x03
+                           000002   490 	ar2 = 0x02
+                           000001   491 	ar1 = 0x01
+                           000000   492 	ar0 = 0x00
+      000000 AE 82            [24]  493 	mov	r6,dpl
+      000002 AF 83            [24]  494 	mov	r7,dph
+                                    495 ;	main.c:82: for(i=0;i<time;i++)
+      000004 7C 00            [12]  496 	mov	r4,#0x00
+      000006 7D 00            [12]  497 	mov	r5,#0x00
+      000008                        498 00107$:
+      000008 C3               [12]  499 	clr	c
+      000009 EC               [12]  500 	mov	a,r4
+      00000A 9E               [12]  501 	subb	a,r6
+      00000B ED               [12]  502 	mov	a,r5
+      00000C 64 80            [12]  503 	xrl	a,#0x80
+      00000E 8F F0            [24]  504 	mov	b,r7
+      000010 63 F0 80         [24]  505 	xrl	b,#0x80
+      000013 95 F0            [12]  506 	subb	a,b
+      000015 50 1B            [24]  507 	jnc	00109$
+                                    508 ;	main.c:83: for(j=0;j<1275;j++);
+      000017 7A FB            [12]  509 	mov	r2,#0xfb
+      000019 7B 04            [12]  510 	mov	r3,#0x04
+      00001B                        511 00105$:
+      00001B EA               [12]  512 	mov	a,r2
+      00001C 24 FF            [12]  513 	add	a,#0xff
+      00001E F8               [12]  514 	mov	r0,a
+      00001F EB               [12]  515 	mov	a,r3
+      000020 34 FF            [12]  516 	addc	a,#0xff
+      000022 F9               [12]  517 	mov	r1,a
+      000023 88 02            [24]  518 	mov	ar2,r0
+      000025 89 03            [24]  519 	mov	ar3,r1
+      000027 E8               [12]  520 	mov	a,r0
+      000028 49               [12]  521 	orl	a,r1
+      000029 70 F0            [24]  522 	jnz	00105$
+                                    523 ;	main.c:82: for(i=0;i<time;i++)
+      00002B 0C               [12]  524 	inc	r4
+      00002C BC 00 D9         [24]  525 	cjne	r4,#0x00,00107$
+      00002F 0D               [12]  526 	inc	r5
+      000030 80 D6            [24]  527 	sjmp	00107$
+      000032                        528 00109$:
+      000032 22               [24]  529 	ret
+                                    530 ;------------------------------------------------------------
+                                    531 ;Allocation info for local variables in function 'setfn'
+                                    532 ;------------------------------------------------------------
+                                    533 ;	main.c:86: int setfn(void)  // Function to select miniute and seconds digit set time.
+                                    534 ;	-----------------------------------------
+                                    535 ;	 function setfn
+                                    536 ;	-----------------------------------------
+      000033                        537 _setfn:
+                                    538 ;	main.c:88: while(set==0)
+      000033                        539 00114$:
+      000033 30 96 03         [24]  540 	jnb	_P1_6,00149$
+      000036 02r01r03         [24]  541 	ljmp	00116$
+      000039                        542 00149$:
+                                    543 ;	main.c:90: switch(recnt_incr_seg)
+      000039 74 01            [12]  544 	mov	a,#0x01
+      00003B B5*04 06         [24]  545 	cjne	a,_recnt_incr_seg,00150$
+      00003E 14               [12]  546 	dec	a
+      00003F B5*05 02         [24]  547 	cjne	a,(_recnt_incr_seg + 1),00150$
+      000042 80 23            [24]  548 	sjmp	00101$
+      000044                        549 00150$:
+      000044 74 02            [12]  550 	mov	a,#0x02
+      000046 B5*04 06         [24]  551 	cjne	a,_recnt_incr_seg,00151$
+      000049 E4               [12]  552 	clr	a
+      00004A B5*05 02         [24]  553 	cjne	a,(_recnt_incr_seg + 1),00151$
+      00004D 80 3C            [24]  554 	sjmp	00104$
+      00004F                        555 00151$:
+      00004F 74 03            [12]  556 	mov	a,#0x03
+      000051 B5*04 06         [24]  557 	cjne	a,_recnt_incr_seg,00152$
+      000054 E4               [12]  558 	clr	a
+      000055 B5*05 02         [24]  559 	cjne	a,(_recnt_incr_seg + 1),00152$
+      000058 80 55            [24]  560 	sjmp	00107$
+      00005A                        561 00152$:
+      00005A 74 04            [12]  562 	mov	a,#0x04
+      00005C B5*04 06         [24]  563 	cjne	a,_recnt_incr_seg,00153$
+      00005F E4               [12]  564 	clr	a
+      000060 B5*05 02         [24]  565 	cjne	a,(_recnt_incr_seg + 1),00153$
+      000063 80 6E            [24]  566 	sjmp	00110$
+      000065                        567 00153$:
+                                    568 ;	main.c:92: case 1:
+      000065 80 CC            [24]  569 	sjmp	00114$
+      000067                        570 00101$:
+                                    571 ;	main.c:93: if(set==0)  //Select the min2 digit
+      000067 20 96 21         [24]  572 	jb	_P1_6,00104$
+                                    573 ;	main.c:95: dig_ctrl_4      =   1;
+      00006A D2 90            [12]  574 	setb	_P1_0
+                                    575 ;	main.c:96: dig_ctrl_3      =   0;
+      00006C C2 91            [12]  576 	clr	_P1_1
+                                    577 ;	main.c:97: dig_ctrl_2      =   0;
+      00006E C2 92            [12]  578 	clr	_P1_2
+                                    579 ;	main.c:98: dig_ctrl_1      =   0;
+      000070 C2 93            [12]  580 	clr	_P1_3
+                                    581 ;	main.c:99: recnt_incr_seg  =   1;
+      000072 75*04 01         [24]  582 	mov	_recnt_incr_seg,#0x01
+      000075 75*05 00         [24]  583 	mov	(_recnt_incr_seg + 1),#0x00
+                                    584 ;	main.c:100: ret_seg_to_incre=   1;
+      000078 75*02 01         [24]  585 	mov	_ret_seg_to_incre,#0x01
+      00007B 75*03 00         [24]  586 	mov	(_ret_seg_to_incre + 1),#0x00
+                                    587 ;	main.c:101: P2              =   dig_val[minalarm2];
+      00007E E5*11            [12]  588 	mov	a,_minalarm2
+      000080 24r2D            [12]  589 	add	a,#_dig_val
+      000082 F9               [12]  590 	mov	r1,a
+      000083 87 A0            [24]  591 	mov	_P2,@r1
+                                    592 ;	main.c:102: delay(100);
+      000085 90 00 64         [24]  593 	mov	dptr,#0x0064
+      000088 12r00r00         [24]  594 	lcall	_delay
+                                    595 ;	main.c:104: case 2:
+      00008B                        596 00104$:
+                                    597 ;	main.c:105: if(set==0)  //Select the min1 digit
+      00008B 20 96 21         [24]  598 	jb	_P1_6,00107$
+                                    599 ;	main.c:107: dig_ctrl_4      =   0;
+      00008E C2 90            [12]  600 	clr	_P1_0
+                                    601 ;	main.c:108: dig_ctrl_3      =   1;
+      000090 D2 91            [12]  602 	setb	_P1_1
+                                    603 ;	main.c:109: dig_ctrl_2      =   0;
+      000092 C2 92            [12]  604 	clr	_P1_2
+                                    605 ;	main.c:110: dig_ctrl_1      =   0;
+      000094 C2 93            [12]  606 	clr	_P1_3
+                                    607 ;	main.c:111: recnt_incr_seg  =   2;
+      000096 75*04 02         [24]  608 	mov	_recnt_incr_seg,#0x02
+      000099 75*05 00         [24]  609 	mov	(_recnt_incr_seg + 1),#0x00
+                                    610 ;	main.c:112: ret_seg_to_incre=   2;
+      00009C 75*02 02         [24]  611 	mov	_ret_seg_to_incre,#0x02
+      00009F 75*03 00         [24]  612 	mov	(_ret_seg_to_incre + 1),#0x00
+                                    613 ;	main.c:113: P2              =   dig_val[minalarm1];
+      0000A2 E5*13            [12]  614 	mov	a,_minalarm1
+      0000A4 24r2D            [12]  615 	add	a,#_dig_val
+      0000A6 F9               [12]  616 	mov	r1,a
+      0000A7 87 A0            [24]  617 	mov	_P2,@r1
+                                    618 ;	main.c:114: delay(100);
+      0000A9 90 00 64         [24]  619 	mov	dptr,#0x0064
+      0000AC 12r00r00         [24]  620 	lcall	_delay
+                                    621 ;	main.c:116: case 3:
+      0000AF                        622 00107$:
+                                    623 ;	main.c:117: if(set==0)  //Select the sec 2 digit
+      0000AF 20 96 21         [24]  624 	jb	_P1_6,00110$
+                                    625 ;	main.c:119: dig_ctrl_4      =   0;
+      0000B2 C2 90            [12]  626 	clr	_P1_0
+                                    627 ;	main.c:120: dig_ctrl_3      =   0;
+      0000B4 C2 91            [12]  628 	clr	_P1_1
+                                    629 ;	main.c:121: dig_ctrl_2      =   1;
+      0000B6 D2 92            [12]  630 	setb	_P1_2
+                                    631 ;	main.c:122: dig_ctrl_1      =   0;
+      0000B8 C2 93            [12]  632 	clr	_P1_3
+                                    633 ;	main.c:123: recnt_incr_seg  =   3;
+      0000BA 75*04 03         [24]  634 	mov	_recnt_incr_seg,#0x03
+      0000BD 75*05 00         [24]  635 	mov	(_recnt_incr_seg + 1),#0x00
+                                    636 ;	main.c:124: ret_seg_to_incre=   3;
+      0000C0 75*02 03         [24]  637 	mov	_ret_seg_to_incre,#0x03
+      0000C3 75*03 00         [24]  638 	mov	(_ret_seg_to_incre + 1),#0x00
+                                    639 ;	main.c:125: P2              =   dig_val[secalarm2];
+      0000C6 E5*15            [12]  640 	mov	a,_secalarm2
+      0000C8 24r2D            [12]  641 	add	a,#_dig_val
+      0000CA F9               [12]  642 	mov	r1,a
+      0000CB 87 A0            [24]  643 	mov	_P2,@r1
+                                    644 ;	main.c:126: delay(100);
+      0000CD 90 00 64         [24]  645 	mov	dptr,#0x0064
+      0000D0 12r00r00         [24]  646 	lcall	_delay
+                                    647 ;	main.c:128: case 4:
+      0000D3                        648 00110$:
+                                    649 ;	main.c:129: if(set==0)  //Select the sec1 digit
+      0000D3 30 96 03         [24]  650 	jnb	_P1_6,00157$
+      0000D6 02r00r33         [24]  651 	ljmp	00114$
+      0000D9                        652 00157$:
+                                    653 ;	main.c:131: recnt_incr_seg  =   1;
+      0000D9 75*04 01         [24]  654 	mov	_recnt_incr_seg,#0x01
+      0000DC 75*05 00         [24]  655 	mov	(_recnt_incr_seg + 1),#0x00
+                                    656 ;	main.c:132: dig_ctrl_4      =   0;
+      0000DF C2 90            [12]  657 	clr	_P1_0
+                                    658 ;	main.c:133: dig_ctrl_3      =   0;
+      0000E1 C2 91            [12]  659 	clr	_P1_1
+                                    660 ;	main.c:134: dig_ctrl_2      =   0;
+      0000E3 C2 92            [12]  661 	clr	_P1_2
+                                    662 ;	main.c:135: dig_ctrl_1      =   1;
+      0000E5 D2 93            [12]  663 	setb	_P1_3
+                                    664 ;	main.c:136: ret_seg_to_incre=   4;
+      0000E7 75*02 04         [24]  665 	mov	_ret_seg_to_incre,#0x04
+      0000EA 75*03 00         [24]  666 	mov	(_ret_seg_to_incre + 1),#0x00
+                                    667 ;	main.c:137: P2              =   dig_val[secalarm1];
+      0000ED E5*17            [12]  668 	mov	a,_secalarm1
+      0000EF 24r2D            [12]  669 	add	a,#_dig_val
+      0000F1 F9               [12]  670 	mov	r1,a
+      0000F2 87 A0            [24]  671 	mov	_P2,@r1
+                                    672 ;	main.c:138: delay(100);
+      0000F4 90 00 64         [24]  673 	mov	dptr,#0x0064
+      0000F7 12r00r00         [24]  674 	lcall	_delay
+                                    675 ;	main.c:139: recnt_incr_seg  =   1;
+      0000FA 75*04 01         [24]  676 	mov	_recnt_incr_seg,#0x01
+      0000FD 75*05 00         [24]  677 	mov	(_recnt_incr_seg + 1),#0x00
+                                    678 ;	main.c:141: }
+      000100 02r00r33         [24]  679 	ljmp	00114$
+      000103                        680 00116$:
+                                    681 ;	main.c:143: return(ret_seg_to_incre);
+      000103 85*02 82         [24]  682 	mov	dpl,_ret_seg_to_incre
+      000106 85*03 83         [24]  683 	mov	dph,(_ret_seg_to_incre + 1)
+      000109 22               [24]  684 	ret
+                                    685 ;------------------------------------------------------------
+                                    686 ;Allocation info for local variables in function 'increase'
+                                    687 ;------------------------------------------------------------
+                                    688 ;a                         Allocated to registers r6 r7 
+                                    689 ;------------------------------------------------------------
+                                    690 ;	main.c:146: void increase(int a)  //Function to set the minutes or seconds digit
+                                    691 ;	-----------------------------------------
+                                    692 ;	 function increase
+                                    693 ;	-----------------------------------------
+      00010A                        694 _increase:
+      00010A AE 82            [24]  695 	mov	r6,dpl
+      00010C AF 83            [24]  696 	mov	r7,dph
+                                    697 ;	main.c:148: while(incr==0)
+      00010E BE 01 06         [24]  698 	cjne	r6,#0x01,00149$
+      000111 BF 00 03         [24]  699 	cjne	r7,#0x00,00149$
+      000114 EE               [12]  700 	mov	a,r6
+      000115 80 01            [24]  701 	sjmp	00150$
+      000117                        702 00149$:
+      000117 E4               [12]  703 	clr	a
+      000118                        704 00150$:
+      000118 FD               [12]  705 	mov	r5,a
+      000119 E4               [12]  706 	clr	a
+      00011A BE 02 04         [24]  707 	cjne	r6,#0x02,00151$
+      00011D BF 00 01         [24]  708 	cjne	r7,#0x00,00151$
+      000120 04               [12]  709 	inc	a
+      000121                        710 00151$:
+      000121 FC               [12]  711 	mov	r4,a
+      000122 E4               [12]  712 	clr	a
+      000123 BE 03 04         [24]  713 	cjne	r6,#0x03,00153$
+      000126 BF 00 01         [24]  714 	cjne	r7,#0x00,00153$
+      000129 04               [12]  715 	inc	a
+      00012A                        716 00153$:
+      00012A FB               [12]  717 	mov	r3,a
+      00012B E4               [12]  718 	clr	a
+      00012C BE 04 04         [24]  719 	cjne	r6,#0x04,00155$
+      00012F BF 00 01         [24]  720 	cjne	r7,#0x00,00155$
+      000132 04               [12]  721 	inc	a
+      000133                        722 00155$:
+      000133 FF               [12]  723 	mov	r7,a
+      000134                        724 00114$:
+      000134 30 97 01         [24]  725 	jnb	_P1_7,00157$
+      000137 22               [24]  726 	ret
+      000138                        727 00157$:
+                                    728 ;	main.c:150: switch(a)
+      000138 ED               [12]  729 	mov	a,r5
+      000139 70 0F            [24]  730 	jnz	00101$
+      00013B EC               [12]  731 	mov	a,r4
+      00013C 70 62            [24]  732 	jnz	00104$
+      00013E EB               [12]  733 	mov	a,r3
+      00013F 60 03            [24]  734 	jz	00160$
+      000141 02r01rF7         [24]  735 	ljmp	00107$
+      000144                        736 00160$:
+      000144 EF               [12]  737 	mov	a,r7
+      000145 60 ED            [24]  738 	jz	00114$
+                                    739 ;	main.c:152: case 1:  // Set the min2 digit.
+      000147 02r02r4E         [24]  740 	ljmp	00110$
+      00014A                        741 00101$:
+                                    742 ;	main.c:153: P2 = dig_val[minalarm2];
+      00014A E5*11            [12]  743 	mov	a,_minalarm2
+      00014C 24r2D            [12]  744 	add	a,#_dig_val
+      00014E F9               [12]  745 	mov	r1,a
+      00014F 87 A0            [24]  746 	mov	_P2,@r1
+                                    747 ;	main.c:154: delay(100);
+      000151 90 00 64         [24]  748 	mov	dptr,#0x0064
+      000154 C0 07            [24]  749 	push	ar7
+      000156 C0 05            [24]  750 	push	ar5
+      000158 C0 04            [24]  751 	push	ar4
+      00015A C0 03            [24]  752 	push	ar3
+      00015C 12r00r00         [24]  753 	lcall	_delay
+      00015F D0 03            [24]  754 	pop	ar3
+      000161 D0 04            [24]  755 	pop	ar4
+      000163 D0 05            [24]  756 	pop	ar5
+      000165 D0 07            [24]  757 	pop	ar7
+                                    758 ;	main.c:155: minalarm2++;
+      000167 05*11            [12]  759 	inc	_minalarm2
+      000169 E4               [12]  760 	clr	a
+      00016A B5*11 02         [24]  761 	cjne	a,_minalarm2,00162$
+      00016D 05*12            [12]  762 	inc	(_minalarm2 + 1)
+      00016F                        763 00162$:
+                                    764 ;	main.c:156: if(minalarm2==6) minalarm2 = 0;
+      00016F 74 06            [12]  765 	mov	a,#0x06
+      000171 B5*11 06         [24]  766 	cjne	a,_minalarm2,00163$
+      000174 E4               [12]  767 	clr	a
+      000175 B5*12 02         [24]  768 	cjne	a,(_minalarm2 + 1),00163$
+      000178 80 02            [24]  769 	sjmp	00164$
+      00017A                        770 00163$:
+      00017A 80 05            [24]  771 	sjmp	00103$
+      00017C                        772 00164$:
+      00017C E4               [12]  773 	clr	a
+      00017D F5*11            [12]  774 	mov	_minalarm2,a
+      00017F F5*12            [12]  775 	mov	(_minalarm2 + 1),a
+      000181                        776 00103$:
+                                    777 ;	main.c:157: P2 = dig_val[minalarm2];
+      000181 E5*11            [12]  778 	mov	a,_minalarm2
+      000183 24r2D            [12]  779 	add	a,#_dig_val
+      000185 F9               [12]  780 	mov	r1,a
+      000186 87 A0            [24]  781 	mov	_P2,@r1
+                                    782 ;	main.c:158: delay(20);
+      000188 90 00 14         [24]  783 	mov	dptr,#0x0014
+      00018B C0 07            [24]  784 	push	ar7
+      00018D C0 05            [24]  785 	push	ar5
+      00018F C0 04            [24]  786 	push	ar4
+      000191 C0 03            [24]  787 	push	ar3
+      000193 12r00r00         [24]  788 	lcall	_delay
+      000196 D0 03            [24]  789 	pop	ar3
+      000198 D0 04            [24]  790 	pop	ar4
+      00019A D0 05            [24]  791 	pop	ar5
+      00019C D0 07            [24]  792 	pop	ar7
+                                    793 ;	main.c:159: break;
+                                    794 ;	main.c:160: case 2:  //Set the min1 digit.
+      00019E 80 94            [24]  795 	sjmp	00114$
+      0001A0                        796 00104$:
+                                    797 ;	main.c:161: P2 = dig_val[minalarm1];
+      0001A0 E5*13            [12]  798 	mov	a,_minalarm1
+      0001A2 24r2D            [12]  799 	add	a,#_dig_val
+      0001A4 F9               [12]  800 	mov	r1,a
+      0001A5 87 A0            [24]  801 	mov	_P2,@r1
+                                    802 ;	main.c:162: delay(100);
+      0001A7 90 00 64         [24]  803 	mov	dptr,#0x0064
+      0001AA C0 07            [24]  804 	push	ar7
+      0001AC C0 05            [24]  805 	push	ar5
+      0001AE C0 04            [24]  806 	push	ar4
+      0001B0 C0 03            [24]  807 	push	ar3
+      0001B2 12r00r00         [24]  808 	lcall	_delay
+      0001B5 D0 03            [24]  809 	pop	ar3
+      0001B7 D0 04            [24]  810 	pop	ar4
+      0001B9 D0 05            [24]  811 	pop	ar5
+      0001BB D0 07            [24]  812 	pop	ar7
+                                    813 ;	main.c:163: minalarm1++;
+      0001BD 05*13            [12]  814 	inc	_minalarm1
+      0001BF E4               [12]  815 	clr	a
+      0001C0 B5*13 02         [24]  816 	cjne	a,_minalarm1,00165$
+      0001C3 05*14            [12]  817 	inc	(_minalarm1 + 1)
+      0001C5                        818 00165$:
+                                    819 ;	main.c:164: if(minalarm1==10)
+      0001C5 74 0A            [12]  820 	mov	a,#0x0a
+      0001C7 B5*13 06         [24]  821 	cjne	a,_minalarm1,00166$
+      0001CA E4               [12]  822 	clr	a
+      0001CB B5*14 02         [24]  823 	cjne	a,(_minalarm1 + 1),00166$
+      0001CE 80 02            [24]  824 	sjmp	00167$
+      0001D0                        825 00166$:
+      0001D0 80 05            [24]  826 	sjmp	00106$
+      0001D2                        827 00167$:
+                                    828 ;	main.c:165: minalarm1 = 0;
+      0001D2 E4               [12]  829 	clr	a
+      0001D3 F5*13            [12]  830 	mov	_minalarm1,a
+      0001D5 F5*14            [12]  831 	mov	(_minalarm1 + 1),a
+      0001D7                        832 00106$:
+                                    833 ;	main.c:166: P2 = dig_val[minalarm1];
+      0001D7 E5*13            [12]  834 	mov	a,_minalarm1
+      0001D9 24r2D            [12]  835 	add	a,#_dig_val
+      0001DB F9               [12]  836 	mov	r1,a
+      0001DC 87 A0            [24]  837 	mov	_P2,@r1
+                                    838 ;	main.c:167: delay(20);
+      0001DE 90 00 14         [24]  839 	mov	dptr,#0x0014
+      0001E1 C0 07            [24]  840 	push	ar7
+      0001E3 C0 05            [24]  841 	push	ar5
+      0001E5 C0 04            [24]  842 	push	ar4
+      0001E7 C0 03            [24]  843 	push	ar3
+      0001E9 12r00r00         [24]  844 	lcall	_delay
+      0001EC D0 03            [24]  845 	pop	ar3
+      0001EE D0 04            [24]  846 	pop	ar4
+      0001F0 D0 05            [24]  847 	pop	ar5
+      0001F2 D0 07            [24]  848 	pop	ar7
+                                    849 ;	main.c:168: break;
+      0001F4 02r01r34         [24]  850 	ljmp	00114$
+                                    851 ;	main.c:169: case 3:  // Set the sec2 digit.
+      0001F7                        852 00107$:
+                                    853 ;	main.c:170: P2 = dig_val[secalarm2];
+      0001F7 E5*15            [12]  854 	mov	a,_secalarm2
+      0001F9 24r2D            [12]  855 	add	a,#_dig_val
+      0001FB F9               [12]  856 	mov	r1,a
+      0001FC 87 A0            [24]  857 	mov	_P2,@r1
+                                    858 ;	main.c:171: delay(100);
+      0001FE 90 00 64         [24]  859 	mov	dptr,#0x0064
+      000201 C0 07            [24]  860 	push	ar7
+      000203 C0 05            [24]  861 	push	ar5
+      000205 C0 04            [24]  862 	push	ar4
+      000207 C0 03            [24]  863 	push	ar3
+      000209 12r00r00         [24]  864 	lcall	_delay
+      00020C D0 03            [24]  865 	pop	ar3
+      00020E D0 04            [24]  866 	pop	ar4
+      000210 D0 05            [24]  867 	pop	ar5
+      000212 D0 07            [24]  868 	pop	ar7
+                                    869 ;	main.c:172: secalarm2++;
+      000214 05*15            [12]  870 	inc	_secalarm2
+      000216 E4               [12]  871 	clr	a
+      000217 B5*15 02         [24]  872 	cjne	a,_secalarm2,00168$
+      00021A 05*16            [12]  873 	inc	(_secalarm2 + 1)
+      00021C                        874 00168$:
+                                    875 ;	main.c:173: if(secalarm2==6)
+      00021C 74 06            [12]  876 	mov	a,#0x06
+      00021E B5*15 06         [24]  877 	cjne	a,_secalarm2,00169$
+      000221 E4               [12]  878 	clr	a
+      000222 B5*16 02         [24]  879 	cjne	a,(_secalarm2 + 1),00169$
+      000225 80 02            [24]  880 	sjmp	00170$
+      000227                        881 00169$:
+      000227 80 05            [24]  882 	sjmp	00109$
+      000229                        883 00170$:
+                                    884 ;	main.c:174: secalarm2 = 0;
+      000229 E4               [12]  885 	clr	a
+      00022A F5*15            [12]  886 	mov	_secalarm2,a
+      00022C F5*16            [12]  887 	mov	(_secalarm2 + 1),a
+      00022E                        888 00109$:
+                                    889 ;	main.c:175: P2 = dig_val[secalarm2];
+      00022E E5*15            [12]  890 	mov	a,_secalarm2
+      000230 24r2D            [12]  891 	add	a,#_dig_val
+      000232 F9               [12]  892 	mov	r1,a
+      000233 87 A0            [24]  893 	mov	_P2,@r1
+                                    894 ;	main.c:176: delay(20);
+      000235 90 00 14         [24]  895 	mov	dptr,#0x0014
+      000238 C0 07            [24]  896 	push	ar7
+      00023A C0 05            [24]  897 	push	ar5
+      00023C C0 04            [24]  898 	push	ar4
+      00023E C0 03            [24]  899 	push	ar3
+      000240 12r00r00         [24]  900 	lcall	_delay
+      000243 D0 03            [24]  901 	pop	ar3
+      000245 D0 04            [24]  902 	pop	ar4
+      000247 D0 05            [24]  903 	pop	ar5
+      000249 D0 07            [24]  904 	pop	ar7
+                                    905 ;	main.c:177: break;
+      00024B 02r01r34         [24]  906 	ljmp	00114$
+                                    907 ;	main.c:178: case 4:  //Set the sec1 digit.
+      00024E                        908 00110$:
+                                    909 ;	main.c:180: P2 = dig_val[secalarm1];
+      00024E E5*17            [12]  910 	mov	a,_secalarm1
+      000250 24r2D            [12]  911 	add	a,#_dig_val
+      000252 F9               [12]  912 	mov	r1,a
+      000253 87 A0            [24]  913 	mov	_P2,@r1
+                                    914 ;	main.c:181: delay(100);
+      000255 90 00 64         [24]  915 	mov	dptr,#0x0064
+      000258 C0 07            [24]  916 	push	ar7
+      00025A C0 05            [24]  917 	push	ar5
+      00025C C0 04            [24]  918 	push	ar4
+      00025E C0 03            [24]  919 	push	ar3
+      000260 12r00r00         [24]  920 	lcall	_delay
+      000263 D0 03            [24]  921 	pop	ar3
+      000265 D0 04            [24]  922 	pop	ar4
+      000267 D0 05            [24]  923 	pop	ar5
+      000269 D0 07            [24]  924 	pop	ar7
+                                    925 ;	main.c:182: secalarm1++;
+      00026B 05*17            [12]  926 	inc	_secalarm1
+      00026D E4               [12]  927 	clr	a
+      00026E B5*17 02         [24]  928 	cjne	a,_secalarm1,00171$
+      000271 05*18            [12]  929 	inc	(_secalarm1 + 1)
+      000273                        930 00171$:
+                                    931 ;	main.c:183: if(secalarm1==10)
+      000273 74 0A            [12]  932 	mov	a,#0x0a
+      000275 B5*17 06         [24]  933 	cjne	a,_secalarm1,00172$
+      000278 E4               [12]  934 	clr	a
+      000279 B5*18 02         [24]  935 	cjne	a,(_secalarm1 + 1),00172$
+      00027C 80 02            [24]  936 	sjmp	00173$
+      00027E                        937 00172$:
+      00027E 80 05            [24]  938 	sjmp	00112$
+      000280                        939 00173$:
+                                    940 ;	main.c:184: secalarm1 = 0;
+      000280 E4               [12]  941 	clr	a
+      000281 F5*17            [12]  942 	mov	_secalarm1,a
+      000283 F5*18            [12]  943 	mov	(_secalarm1 + 1),a
+      000285                        944 00112$:
+                                    945 ;	main.c:185: P2 = dig_val[secalarm1];
+      000285 E5*17            [12]  946 	mov	a,_secalarm1
+      000287 24r2D            [12]  947 	add	a,#_dig_val
+      000289 F9               [12]  948 	mov	r1,a
+      00028A 87 A0            [24]  949 	mov	_P2,@r1
+                                    950 ;	main.c:186: delay(20);
+      00028C 90 00 14         [24]  951 	mov	dptr,#0x0014
+      00028F C0 07            [24]  952 	push	ar7
+      000291 C0 05            [24]  953 	push	ar5
+      000293 C0 04            [24]  954 	push	ar4
+      000295 C0 03            [24]  955 	push	ar3
+      000297 12r00r00         [24]  956 	lcall	_delay
+      00029A D0 03            [24]  957 	pop	ar3
+      00029C D0 04            [24]  958 	pop	ar4
+      00029E D0 05            [24]  959 	pop	ar5
+      0002A0 D0 07            [24]  960 	pop	ar7
+                                    961 ;	main.c:188: }
+      0002A2 02r01r34         [24]  962 	ljmp	00114$
+                                    963 ;------------------------------------------------------------
+                                    964 ;Allocation info for local variables in function 'resetfn'
+                                    965 ;------------------------------------------------------------
+                                    966 ;mode                      Allocated to registers r6 r7 
+                                    967 ;------------------------------------------------------------
+                                    968 ;	main.c:192: void resetfn(int mode)  // Function to bring the clock to reset or set mode.
+                                    969 ;	-----------------------------------------
+                                    970 ;	 function resetfn
+                                    971 ;	-----------------------------------------
+      0002A5                        972 _resetfn:
+      0002A5 AE 82            [24]  973 	mov	r6,dpl
+      0002A7 AF 83            [24]  974 	mov	r7,dph
+                                    975 ;	main.c:194: begin       = 1;
+      0002A9 75*06 01         [24]  976 	mov	_begin,#0x01
+      0002AC 75*07 00         [24]  977 	mov	(_begin + 1),#0x00
+                                    978 ;	main.c:195: dig_ctrl_4  = 1;  //Enable the min2 digit and disable others
+      0002AF D2 90            [12]  979 	setb	_P1_0
+                                    980 ;	main.c:196: dig_ctrl_3  = 0;
+      0002B1 C2 91            [12]  981 	clr	_P1_1
+                                    982 ;	main.c:197: dig_ctrl_2  = 0;
+      0002B3 C2 92            [12]  983 	clr	_P1_2
+                                    984 ;	main.c:198: dig_ctrl_1  = 0;
+      0002B5 C2 93            [12]  985 	clr	_P1_3
+                                    986 ;	main.c:200: if(mode==0)  //Check if clock is in set alarm mode
+      0002B7 EE               [12]  987 	mov	a,r6
+      0002B8 4F               [12]  988 	orl	a,r7
+                                    989 ;	main.c:202: IE              =   0x88;  //Disable Timer0 interrupt to stop the display of clock.
+                                    990 ;	main.c:203: sel_seg_to_incr =   1;
+      0002B9 70 3B            [24]  991 	jnz	00102$
+      0002BB 75 A8 88         [24]  992 	mov	_IE,#0x88
+      0002BE 75*00 01         [24]  993 	mov	_sel_seg_to_incr,#0x01
+      0002C1 F5*01            [12]  994 	mov	(_sel_seg_to_incr + 1),a
+                                    995 ;	main.c:204: recnt_incr_seg  =   1;
+      0002C3 75*04 01         [24]  996 	mov	_recnt_incr_seg,#0x01
+      0002C6 75*05 00         [24]  997 	mov	(_recnt_incr_seg + 1),#0x00
+                                    998 ;	main.c:205: P2              =   dig_val[keepmin2];
+      0002C9 E5*21            [12]  999 	mov	a,_keepmin2
+      0002CB 24r2D            [12] 1000 	add	a,#_dig_val
+      0002CD F9               [12] 1001 	mov	r1,a
+      0002CE 87 A0            [24] 1002 	mov	_P2,@r1
+                                   1003 ;	main.c:206: delay(100);
+      0002D0 90 00 64         [24] 1004 	mov	dptr,#0x0064
+      0002D3 C0 07            [24] 1005 	push	ar7
+      0002D5 C0 06            [24] 1006 	push	ar6
+      0002D7 12r00r00         [24] 1007 	lcall	_delay
+      0002DA D0 06            [24] 1008 	pop	ar6
+      0002DC D0 07            [24] 1009 	pop	ar7
+                                   1010 ;	main.c:207: minalarm2       =   keepmin2;
+      0002DE 85*21*11         [24] 1011 	mov	_minalarm2,_keepmin2
+      0002E1 85*22*12         [24] 1012 	mov	(_minalarm2 + 1),(_keepmin2 + 1)
+                                   1013 ;	main.c:208: minalarm1       =   keepmin1;
+      0002E4 85*23*13         [24] 1014 	mov	_minalarm1,_keepmin1
+      0002E7 85*24*14         [24] 1015 	mov	(_minalarm1 + 1),(_keepmin1 + 1)
+                                   1016 ;	main.c:209: secalarm2       =   keepsec2;
+      0002EA 85*25*15         [24] 1017 	mov	_secalarm2,_keepsec2
+      0002ED 85*26*16         [24] 1018 	mov	(_secalarm2 + 1),(_keepsec2 + 1)
+                                   1019 ;	main.c:210: secalarm1       =   keepsec1;
+      0002F0 85*27*17         [24] 1020 	mov	_secalarm1,_keepsec1
+      0002F3 85*28*18         [24] 1021 	mov	(_secalarm1 + 1),(_keepsec1 + 1)
+      0002F6                       1022 00102$:
+                                   1023 ;	main.c:213: if(mode==1)  //Check if clock is in set clock mode
+      0002F6 BE 01 06         [24] 1024 	cjne	r6,#0x01,00145$
+      0002F9 BF 00 03         [24] 1025 	cjne	r7,#0x00,00145$
+      0002FC EE               [12] 1026 	mov	a,r6
+      0002FD 80 01            [24] 1027 	sjmp	00146$
+      0002FF                       1028 00145$:
+      0002FF E4               [12] 1029 	clr	a
+      000300                       1030 00146$:
+      000300 FD               [12] 1031 	mov	r5,a
+      000301 60 40            [24] 1032 	jz	00116$
+                                   1033 ;	main.c:215: IE              =   0x80;  //Disable Timer0 interrupt to stop the clock.
+      000303 75 A8 80         [24] 1034 	mov	_IE,#0x80
+                                   1035 ;	main.c:216: minalarm2       =   min2;
+      000306 85*09*11         [24] 1036 	mov	_minalarm2,_min2
+      000309 85*0A*12         [24] 1037 	mov	(_minalarm2 + 1),(_min2 + 1)
+                                   1038 ;	main.c:217: minalarm1       =   min1;
+      00030C 85*0B*13         [24] 1039 	mov	_minalarm1,_min1
+      00030F 85*0C*14         [24] 1040 	mov	(_minalarm1 + 1),(_min1 + 1)
+                                   1041 ;	main.c:218: secalarm2       =   sec2;
+      000312 85*0D*15         [24] 1042 	mov	_secalarm2,_sec2
+      000315 85*0E*16         [24] 1043 	mov	(_secalarm2 + 1),(_sec2 + 1)
+                                   1044 ;	main.c:219: secalarm1       =   sec1;
+      000318 85*0F*17         [24] 1045 	mov	_secalarm1,_sec1
+      00031B 85*10*18         [24] 1046 	mov	(_secalarm1 + 1),(_sec1 + 1)
+                                   1047 ;	main.c:220: sel_seg_to_incr =   1;
+      00031E 75*00 01         [24] 1048 	mov	_sel_seg_to_incr,#0x01
+      000321 75*01 00         [24] 1049 	mov	(_sel_seg_to_incr + 1),#0x00
+                                   1050 ;	main.c:221: recnt_incr_seg  =   1;
+      000324 75*04 01         [24] 1051 	mov	_recnt_incr_seg,#0x01
+      000327 75*05 00         [24] 1052 	mov	(_recnt_incr_seg + 1),#0x00
+                                   1053 ;	main.c:222: P2              =   dig_val[min2];
+      00032A E5*09            [12] 1054 	mov	a,_min2
+      00032C 24r2D            [12] 1055 	add	a,#_dig_val
+      00032E F9               [12] 1056 	mov	r1,a
+      00032F 87 A0            [24] 1057 	mov	_P2,@r1
+                                   1058 ;	main.c:223: delay(100);
+      000331 90 00 64         [24] 1059 	mov	dptr,#0x0064
+      000334 C0 07            [24] 1060 	push	ar7
+      000336 C0 06            [24] 1061 	push	ar6
+      000338 C0 05            [24] 1062 	push	ar5
+      00033A 12r00r00         [24] 1063 	lcall	_delay
+      00033D D0 05            [24] 1064 	pop	ar5
+      00033F D0 06            [24] 1065 	pop	ar6
+      000341 D0 07            [24] 1066 	pop	ar7
+                                   1067 ;	main.c:226: while(1)
+      000343                       1068 00116$:
+                                   1069 ;	main.c:228: if(start==0)  //Check if start pin is pressed
+      000343 20 B3 5E         [24] 1070 	jb	_P3_3,00110$
+                                   1071 ;	main.c:230: if(mode==0)
+      000346 EE               [12] 1072 	mov	a,r6
+      000347 4F               [12] 1073 	orl	a,r7
+      000348 70 30            [24] 1074 	jnz	00106$
+                                   1075 ;	main.c:232: keepmin2    =   minalarm2;
+      00034A 85*11*21         [24] 1076 	mov	_keepmin2,_minalarm2
+      00034D 85*12*22         [24] 1077 	mov	(_keepmin2 + 1),(_minalarm2 + 1)
+                                   1078 ;	main.c:233: keepmin1    =   minalarm1;
+      000350 85*13*23         [24] 1079 	mov	_keepmin1,_minalarm1
+      000353 85*14*24         [24] 1080 	mov	(_keepmin1 + 1),(_minalarm1 + 1)
+                                   1081 ;	main.c:234: keepsec2    =   secalarm2;
+      000356 85*15*25         [24] 1082 	mov	_keepsec2,_secalarm2
+      000359 85*16*26         [24] 1083 	mov	(_keepsec2 + 1),(_secalarm2 + 1)
+                                   1084 ;	main.c:235: keepsec1    =   secalarm1;
+      00035C 85*17*27         [24] 1085 	mov	_keepsec1,_secalarm1
+      00035F 85*18*28         [24] 1086 	mov	(_keepsec1 + 1),(_secalarm1 + 1)
+                                   1087 ;	main.c:236: alarmmin2   =   minalarm2;
+      000362 85*11*19         [24] 1088 	mov	_alarmmin2,_minalarm2
+      000365 85*12*1A         [24] 1089 	mov	(_alarmmin2 + 1),(_minalarm2 + 1)
+                                   1090 ;	main.c:237: alarmmin1   =   minalarm1;
+      000368 85*13*1B         [24] 1091 	mov	_alarmmin1,_minalarm1
+      00036B 85*14*1C         [24] 1092 	mov	(_alarmmin1 + 1),(_minalarm1 + 1)
+                                   1093 ;	main.c:238: alarmsec2   =   secalarm2;
+      00036E 85*15*1D         [24] 1094 	mov	_alarmsec2,_secalarm2
+      000371 85*16*1E         [24] 1095 	mov	(_alarmsec2 + 1),(_secalarm2 + 1)
+                                   1096 ;	main.c:239: alarmsec1   =   secalarm1;
+      000374 85*17*1F         [24] 1097 	mov	_alarmsec1,_secalarm1
+      000377 85*18*20         [24] 1098 	mov	(_alarmsec1 + 1),(_secalarm1 + 1)
+      00037A                       1099 00106$:
+                                   1100 ;	main.c:242: if(mode==1)
+      00037A ED               [12] 1101 	mov	a,r5
+      00037B 60 18            [24] 1102 	jz	00108$
+                                   1103 ;	main.c:244: min2    =   minalarm2;
+      00037D 85*11*09         [24] 1104 	mov	_min2,_minalarm2
+      000380 85*12*0A         [24] 1105 	mov	(_min2 + 1),(_minalarm2 + 1)
+                                   1106 ;	main.c:245: min1    =   minalarm1;
+      000383 85*13*0B         [24] 1107 	mov	_min1,_minalarm1
+      000386 85*14*0C         [24] 1108 	mov	(_min1 + 1),(_minalarm1 + 1)
+                                   1109 ;	main.c:246: sec2    =   secalarm2;
+      000389 85*15*0D         [24] 1110 	mov	_sec2,_secalarm2
+      00038C 85*16*0E         [24] 1111 	mov	(_sec2 + 1),(_secalarm2 + 1)
+                                   1112 ;	main.c:247: sec1    =   secalarm1;
+      00038F 85*17*0F         [24] 1113 	mov	_sec1,_secalarm1
+      000392 85*18*10         [24] 1114 	mov	(_sec1 + 1),(_secalarm1 + 1)
+      000395                       1115 00108$:
+                                   1116 ;	main.c:250: TMOD    =   0x11;  //Reset the timer0
+      000395 75 89 11         [24] 1117 	mov	_TMOD,#0x11
+                                   1118 ;	main.c:251: TL0     =   0xf6;
+      000398 75 8A F6         [24] 1119 	mov	_TL0,#0xf6
+                                   1120 ;	main.c:252: TH0     =   0xFf;
+      00039B 75 8C FF         [24] 1121 	mov	_TH0,#0xff
+                                   1122 ;	main.c:253: IE      =   0x8A;  //Enabling Timer0 interrupt to start the display of clock
+      00039E 75 A8 8A         [24] 1123 	mov	_IE,#0x8a
+                                   1124 ;	main.c:254: TR0     =   1;
+      0003A1 D2 8C            [12] 1125 	setb	_TR0
+                                   1126 ;	main.c:255: break;
+      0003A3 22               [24] 1127 	ret
+      0003A4                       1128 00110$:
+                                   1129 ;	main.c:258: if(set==0)  //Check if set pin is pressed
+      0003A4 20 96 15         [24] 1130 	jb	_P1_6,00112$
+                                   1131 ;	main.c:259: sel_seg_to_incr =   setfn();
+      0003A7 C0 07            [24] 1132 	push	ar7
+      0003A9 C0 06            [24] 1133 	push	ar6
+      0003AB C0 05            [24] 1134 	push	ar5
+      0003AD 12r00r33         [24] 1135 	lcall	_setfn
+      0003B0 85 82*00         [24] 1136 	mov	_sel_seg_to_incr,dpl
+      0003B3 85 83*01         [24] 1137 	mov	(_sel_seg_to_incr + 1),dph
+      0003B6 D0 05            [24] 1138 	pop	ar5
+      0003B8 D0 06            [24] 1139 	pop	ar6
+      0003BA D0 07            [24] 1140 	pop	ar7
+      0003BC                       1141 00112$:
+                                   1142 ;	main.c:261: if(incr==0)  //Check if incr pin is pressed
+      0003BC 20 97 84         [24] 1143 	jb	_P1_7,00116$
+                                   1144 ;	main.c:262: increase(sel_seg_to_incr);
+      0003BF 85*00 82         [24] 1145 	mov	dpl,_sel_seg_to_incr
+      0003C2 85*01 83         [24] 1146 	mov	dph,(_sel_seg_to_incr + 1)
+      0003C5 C0 07            [24] 1147 	push	ar7
+      0003C7 C0 06            [24] 1148 	push	ar6
+      0003C9 C0 05            [24] 1149 	push	ar5
+      0003CB 12r01r0A         [24] 1150 	lcall	_increase
+      0003CE D0 05            [24] 1151 	pop	ar5
+      0003D0 D0 06            [24] 1152 	pop	ar6
+      0003D2 D0 07            [24] 1153 	pop	ar7
+      0003D4 02r03r43         [24] 1154 	ljmp	00116$
+                                   1155 ;------------------------------------------------------------
+                                   1156 ;Allocation info for local variables in function 'display'
+                                   1157 ;------------------------------------------------------------
+                                   1158 ;	main.c:266: void display(void) __interrupt (1)  // Function to display the digits on seven segment using the concept of seven segment multiplexing.
+                                   1159 ;	-----------------------------------------
+                                   1160 ;	 function display
+                                   1161 ;	-----------------------------------------
+      0003D7                       1162 _display:
+      0003D7 C0 E0            [24] 1163 	push	acc
+      0003D9 C0 F0            [24] 1164 	push	b
+      0003DB C0 82            [24] 1165 	push	dpl
+      0003DD C0 83            [24] 1166 	push	dph
+      0003DF C0 01            [24] 1167 	push	ar1
+      0003E1 C0 D0            [24] 1168 	push	psw
+      0003E3 75 D0 00         [24] 1169 	mov	psw,#0x00
+                                   1170 ;	main.c:268: TL0         =   0x36;  //Reload Timer0
+      0003E6 75 8A 36         [24] 1171 	mov	_TL0,#0x36
+                                   1172 ;	main.c:269: TH0         =   0xf6;
+      0003E9 75 8C F6         [24] 1173 	mov	_TH0,#0xf6
+                                   1174 ;	main.c:270: P2          =   0xFF;
+      0003EC 75 A0 FF         [24] 1175 	mov	_P2,#0xff
+                                   1176 ;	main.c:271: dig_ctrl_1  =   0;
+      0003EF C2 93            [12] 1177 	clr	_P1_3
+                                   1178 ;	main.c:272: dig_ctrl_3  =   0;
+      0003F1 C2 91            [12] 1179 	clr	_P1_1
+                                   1180 ;	main.c:273: dig_ctrl_2  =   0;
+      0003F3 C2 92            [12] 1181 	clr	_P1_2
+                                   1182 ;	main.c:274: dig_ctrl_4  =   0;
+      0003F5 C2 90            [12] 1183 	clr	_P1_0
+                                   1184 ;	main.c:276: dig_disp++;
+      0003F7 05*08            [12] 1185 	inc	_dig_disp
+                                   1186 ;	main.c:277: dig_disp=dig_disp%4;
+      0003F9 53*08 03         [24] 1187 	anl	_dig_disp,#0x03
+                                   1188 ;	main.c:279: switch(dig_disp)
+      0003FC E5*08            [12] 1189 	mov	a,_dig_disp
+      0003FE 24 FC            [12] 1190 	add	a,#0xff - 0x03
+      000400 40 40            [24] 1191 	jc	00106$
+      000402 E5*08            [12] 1192 	mov	a,_dig_disp
+      000404 75 F0 03         [24] 1193 	mov	b,#0x03
+      000407 A4               [48] 1194 	mul	ab
+      000408 90r04r0C         [24] 1195 	mov	dptr,#00112$
+      00040B 73               [24] 1196 	jmp	@a+dptr
+      00040C                       1197 00112$:
+      00040C 02r04r18         [24] 1198 	ljmp	00101$
+      00040F 02r04r23         [24] 1199 	ljmp	00102$
+      000412 02r04r2E         [24] 1200 	ljmp	00103$
+      000415 02r04r39         [24] 1201 	ljmp	00104$
+                                   1202 ;	main.c:281: case 0:
+      000418                       1203 00101$:
+                                   1204 ;	main.c:282: P2=dig_val[sec1];
+      000418 E5*0F            [12] 1205 	mov	a,_sec1
+      00041A 24r2D            [12] 1206 	add	a,#_dig_val
+      00041C F9               [12] 1207 	mov	r1,a
+      00041D 87 A0            [24] 1208 	mov	_P2,@r1
+                                   1209 ;	main.c:283: dig_ctrl_1 = 1;
+      00041F D2 93            [12] 1210 	setb	_P1_3
+                                   1211 ;	main.c:284: break;
+                                   1212 ;	main.c:286: case 1:
+      000421 80 1F            [24] 1213 	sjmp	00106$
+      000423                       1214 00102$:
+                                   1215 ;	main.c:287: P2= dig_val[sec2];
+      000423 E5*0D            [12] 1216 	mov	a,_sec2
+      000425 24r2D            [12] 1217 	add	a,#_dig_val
+      000427 F9               [12] 1218 	mov	r1,a
+      000428 87 A0            [24] 1219 	mov	_P2,@r1
+                                   1220 ;	main.c:288: dig_ctrl_2 = 1;
+      00042A D2 92            [12] 1221 	setb	_P1_2
+                                   1222 ;	main.c:289: break;
+                                   1223 ;	main.c:291: case 2:
+      00042C 80 14            [24] 1224 	sjmp	00106$
+      00042E                       1225 00103$:
+                                   1226 ;	main.c:292: P2= dig_val[min1];
+      00042E E5*0B            [12] 1227 	mov	a,_min1
+      000430 24r2D            [12] 1228 	add	a,#_dig_val
+      000432 F9               [12] 1229 	mov	r1,a
+      000433 87 A0            [24] 1230 	mov	_P2,@r1
+                                   1231 ;	main.c:293: dig_ctrl_3 = 1;
+      000435 D2 91            [12] 1232 	setb	_P1_1
+                                   1233 ;	main.c:294: break;
+                                   1234 ;	main.c:296: case 3:
+      000437 80 09            [24] 1235 	sjmp	00106$
+      000439                       1236 00104$:
+                                   1237 ;	main.c:297: P2= dig_val[min2];
+      000439 E5*09            [12] 1238 	mov	a,_min2
+      00043B 24r2D            [12] 1239 	add	a,#_dig_val
+      00043D F9               [12] 1240 	mov	r1,a
+      00043E 87 A0            [24] 1241 	mov	_P2,@r1
+                                   1242 ;	main.c:298: dig_ctrl_4 = 1;
+      000440 D2 90            [12] 1243 	setb	_P1_0
+                                   1244 ;	main.c:300: }
+      000442                       1245 00106$:
+      000442 D0 D0            [24] 1246 	pop	psw
+      000444 D0 01            [24] 1247 	pop	ar1
+      000446 D0 83            [24] 1248 	pop	dph
+      000448 D0 82            [24] 1249 	pop	dpl
+      00044A D0 F0            [24] 1250 	pop	b
+      00044C D0 E0            [24] 1251 	pop	acc
+      00044E 32               [24] 1252 	reti
+                                   1253 ;	eliminated unneeded push/pop ar0
+                                   1254 ;------------------------------------------------------------
+                                   1255 ;Allocation info for local variables in function 'moveclock'
+                                   1256 ;------------------------------------------------------------
+                                   1257 ;	main.c:303: void moveclock(void) __interrupt 3  // Function to increment clock digits
+                                   1258 ;	-----------------------------------------
+                                   1259 ;	 function moveclock
+                                   1260 ;	-----------------------------------------
+      00044F                       1261 _moveclock:
+      00044F C0 E0            [24] 1262 	push	acc
+      000451 C0 D0            [24] 1263 	push	psw
+                                   1264 ;	main.c:305: loop++;
+      000453 05*29            [12] 1265 	inc	_loop
+      000455 E4               [12] 1266 	clr	a
+      000456 B5*29 02         [24] 1267 	cjne	a,_loop,00128$
+      000459 05*2A            [12] 1268 	inc	(_loop + 1)
+      00045B                       1269 00128$:
+                                   1270 ;	main.c:306: if(loop==20)
+      00045B 74 14            [12] 1271 	mov	a,#0x14
+      00045D B5*29 06         [24] 1272 	cjne	a,_loop,00129$
+      000460 E4               [12] 1273 	clr	a
+      000461 B5*2A 02         [24] 1274 	cjne	a,(_loop + 1),00129$
+      000464 80 03            [24] 1275 	sjmp	00130$
+      000466                       1276 00129$:
+      000466 02r04rEB         [24] 1277 	ljmp	00111$
+      000469                       1278 00130$:
+                                   1279 ;	main.c:308: sec1++;
+      000469 05*0F            [12] 1280 	inc	_sec1
+      00046B E4               [12] 1281 	clr	a
+      00046C B5*0F 02         [24] 1282 	cjne	a,_sec1,00131$
+      00046F 05*10            [12] 1283 	inc	(_sec1 + 1)
+      000471                       1284 00131$:
+                                   1285 ;	main.c:309: if(sec1==10)
+      000471 74 0A            [12] 1286 	mov	a,#0x0a
+      000473 B5*0F 06         [24] 1287 	cjne	a,_sec1,00132$
+      000476 E4               [12] 1288 	clr	a
+      000477 B5*10 02         [24] 1289 	cjne	a,(_sec1 + 1),00132$
+      00047A 80 02            [24] 1290 	sjmp	00133$
+      00047C                       1291 00132$:
+      00047C 80 68            [24] 1292 	sjmp	00108$
+      00047E                       1293 00133$:
+                                   1294 ;	main.c:311: sec1=0;
+      00047E E4               [12] 1295 	clr	a
+      00047F F5*0F            [12] 1296 	mov	_sec1,a
+      000481 F5*10            [12] 1297 	mov	(_sec1 + 1),a
+                                   1298 ;	main.c:312: sec2++;
+      000483 05*0D            [12] 1299 	inc	_sec2
+                                   1300 ;	genFromRTrack removed	clr	a
+      000485 B5*0D 02         [24] 1301 	cjne	a,_sec2,00134$
+      000488 05*0E            [12] 1302 	inc	(_sec2 + 1)
+      00048A                       1303 00134$:
+                                   1304 ;	main.c:313: if(sec2==6)
+      00048A 74 06            [12] 1305 	mov	a,#0x06
+      00048C B5*0D 06         [24] 1306 	cjne	a,_sec2,00135$
+      00048F E4               [12] 1307 	clr	a
+      000490 B5*0E 02         [24] 1308 	cjne	a,(_sec2 + 1),00135$
+      000493 80 02            [24] 1309 	sjmp	00136$
+      000495                       1310 00135$:
+      000495 80 4F            [24] 1311 	sjmp	00108$
+      000497                       1312 00136$:
+                                   1313 ;	main.c:315: sec1=0;
+      000497 E4               [12] 1314 	clr	a
+      000498 F5*0F            [12] 1315 	mov	_sec1,a
+      00049A F5*10            [12] 1316 	mov	(_sec1 + 1),a
+                                   1317 ;	main.c:316: sec2=0;
+      00049C F5*0D            [12] 1318 	mov	_sec2,a
+      00049E F5*0E            [12] 1319 	mov	(_sec2 + 1),a
+                                   1320 ;	main.c:317: min1++;
+      0004A0 05*0B            [12] 1321 	inc	_min1
+                                   1322 ;	genFromRTrack removed	clr	a
+      0004A2 B5*0B 02         [24] 1323 	cjne	a,_min1,00137$
+      0004A5 05*0C            [12] 1324 	inc	(_min1 + 1)
+      0004A7                       1325 00137$:
+                                   1326 ;	main.c:318: if(min1==10)
+      0004A7 74 0A            [12] 1327 	mov	a,#0x0a
+      0004A9 B5*0B 06         [24] 1328 	cjne	a,_min1,00138$
+      0004AC E4               [12] 1329 	clr	a
+      0004AD B5*0C 02         [24] 1330 	cjne	a,(_min1 + 1),00138$
+      0004B0 80 02            [24] 1331 	sjmp	00139$
+      0004B2                       1332 00138$:
+      0004B2 80 32            [24] 1333 	sjmp	00108$
+      0004B4                       1334 00139$:
+                                   1335 ;	main.c:320: sec1=0;
+      0004B4 E4               [12] 1336 	clr	a
+      0004B5 F5*0F            [12] 1337 	mov	_sec1,a
+      0004B7 F5*10            [12] 1338 	mov	(_sec1 + 1),a
+                                   1339 ;	main.c:321: sec2=0;
+      0004B9 F5*0D            [12] 1340 	mov	_sec2,a
+      0004BB F5*0E            [12] 1341 	mov	(_sec2 + 1),a
+                                   1342 ;	main.c:322: min1=0;
+      0004BD F5*0B            [12] 1343 	mov	_min1,a
+      0004BF F5*0C            [12] 1344 	mov	(_min1 + 1),a
+                                   1345 ;	main.c:323: min2++;
+      0004C1 05*09            [12] 1346 	inc	_min2
+                                   1347 ;	genFromRTrack removed	clr	a
+      0004C3 B5*09 02         [24] 1348 	cjne	a,_min2,00140$
+      0004C6 05*0A            [12] 1349 	inc	(_min2 + 1)
+      0004C8                       1350 00140$:
+                                   1351 ;	main.c:324: if(min2==6)
+      0004C8 74 06            [12] 1352 	mov	a,#0x06
+      0004CA B5*09 06         [24] 1353 	cjne	a,_min2,00141$
+      0004CD E4               [12] 1354 	clr	a
+      0004CE B5*0A 02         [24] 1355 	cjne	a,(_min2 + 1),00141$
+      0004D1 80 02            [24] 1356 	sjmp	00142$
+      0004D3                       1357 00141$:
+      0004D3 80 11            [24] 1358 	sjmp	00108$
+      0004D5                       1359 00142$:
+                                   1360 ;	main.c:326: sec1=0;
+      0004D5 E4               [12] 1361 	clr	a
+      0004D6 F5*0F            [12] 1362 	mov	_sec1,a
+      0004D8 F5*10            [12] 1363 	mov	(_sec1 + 1),a
+                                   1364 ;	main.c:327: sec2=0;
+      0004DA F5*0D            [12] 1365 	mov	_sec2,a
+      0004DC F5*0E            [12] 1366 	mov	(_sec2 + 1),a
+                                   1367 ;	main.c:328: min1=0;
+      0004DE F5*0B            [12] 1368 	mov	_min1,a
+      0004E0 F5*0C            [12] 1369 	mov	(_min1 + 1),a
+                                   1370 ;	main.c:329: min2=0;
+      0004E2 F5*09            [12] 1371 	mov	_min2,a
+      0004E4 F5*0A            [12] 1372 	mov	(_min2 + 1),a
+      0004E6                       1373 00108$:
+                                   1374 ;	main.c:334: loop=0;
+      0004E6 E4               [12] 1375 	clr	a
+      0004E7 F5*29            [12] 1376 	mov	_loop,a
+      0004E9 F5*2A            [12] 1377 	mov	(_loop + 1),a
+      0004EB                       1378 00111$:
+      0004EB D0 D0            [24] 1379 	pop	psw
+      0004ED D0 E0            [24] 1380 	pop	acc
+      0004EF 32               [24] 1381 	reti
+                                   1382 ;	eliminated unneeded mov psw,# (no regs used in bank)
+                                   1383 ;	eliminated unneeded push/pop dpl
+                                   1384 ;	eliminated unneeded push/pop dph
+                                   1385 ;	eliminated unneeded push/pop b
+                                   1386 ;------------------------------------------------------------
+                                   1387 ;Allocation info for local variables in function 'main'
+                                   1388 ;------------------------------------------------------------
+                                   1389 ;	main.c:338: void main()
+                                   1390 ;	-----------------------------------------
+                                   1391 ;	 function main
+                                   1392 ;	-----------------------------------------
+      0004F0                       1393 _main:
+                                   1394 ;	main.c:340: mode        =   0;
+      0004F0 E4               [12] 1395 	clr	a
+      0004F1 F5*2B            [12] 1396 	mov	_mode,a
+      0004F3 F5*2C            [12] 1397 	mov	(_mode + 1),a
+                                   1398 ;	main.c:341: set         =   1;          //Initialize set, reset, start and incr pins as input
+      0004F5 D2 96            [12] 1399 	setb	_P1_6
+                                   1400 ;	main.c:342: resetalarm  =   1;
+      0004F7 D2 95            [12] 1401 	setb	_P1_5
+                                   1402 ;	main.c:343: resetclock  =   1;
+      0004F9 D2 94            [12] 1403 	setb	_P1_4
+                                   1404 ;	main.c:344: start       =   1;
+      0004FB D2 B3            [12] 1405 	setb	_P3_3
+                                   1406 ;	main.c:345: incr        =   1;
+      0004FD D2 97            [12] 1407 	setb	_P1_7
+                                   1408 ;	main.c:346: begin       =   0;
+      0004FF E4               [12] 1409 	clr	a
+      000500 F5*06            [12] 1410 	mov	_begin,a
+      000502 F5*07            [12] 1411 	mov	(_begin + 1),a
+                                   1412 ;	main.c:347: TMOD        =   0x11;       //Intialize Timer 0
+      000504 75 89 11         [24] 1413 	mov	_TMOD,#0x11
+                                   1414 ;	main.c:348: TL0         =   0xf6;       //Load timer0
+      000507 75 8A F6         [24] 1415 	mov	_TL0,#0xf6
+                                   1416 ;	main.c:349: TH0         =   0xFf;
+      00050A 75 8C FF         [24] 1417 	mov	_TH0,#0xff
+                                   1418 ;	main.c:350: IE          =   0x8A;       //Enable Timer0 interrupt
+      00050D 75 A8 8A         [24] 1419 	mov	_IE,#0x8a
+                                   1420 ;	main.c:351: TR0         =   1;          //Start Timer0
+      000510 D2 8C            [12] 1421 	setb	_TR0
+                                   1422 ;	main.c:352: TL1         =   0xFD;
+      000512 75 8B FD         [24] 1423 	mov	_TL1,#0xfd
+                                   1424 ;	main.c:353: TH1         =   0x4B;
+      000515 75 8D 4B         [24] 1425 	mov	_TH1,#0x4b
+                                   1426 ;	main.c:354: TR1         =   1;          // Start Timer1
+      000518 D2 8E            [12] 1427 	setb	_TR1
+                                   1428 ;	main.c:356: while(1)
+      00051A                       1429 00112$:
+                                   1430 ;	main.c:358: if(resetalarm==0)     //Check if reset alarm pin is pressed
+      00051A 20 95 06         [24] 1431 	jb	_P1_5,00102$
+                                   1432 ;	main.c:360: resetfn(0);
+      00051D 90 00 00         [24] 1433 	mov	dptr,#0x0000
+      000520 12r02rA5         [24] 1434 	lcall	_resetfn
+      000523                       1435 00102$:
+                                   1436 ;	main.c:362: if(resetclock==0)     //Check if reset clock pin is pressed
+      000523 20 94 06         [24] 1437 	jb	_P1_4,00104$
+                                   1438 ;	main.c:364: resetfn(1);
+      000526 90 00 01         [24] 1439 	mov	dptr,#0x0001
+      000529 12r02rA5         [24] 1440 	lcall	_resetfn
+      00052C                       1441 00104$:
+                                   1442 ;	main.c:366: if(min2==alarmmin2&&min1==alarmmin1&&sec2==alarmsec2&&sec1==alarmsec1&&begin==1)  // Check for Alarm condition
+      00052C E5*19            [12] 1443 	mov	a,_alarmmin2
+      00052E B5*09 E9         [24] 1444 	cjne	a,_min2,00112$
+      000531 E5*1A            [12] 1445 	mov	a,(_alarmmin2 + 1)
+      000533 B5*0A E4         [24] 1446 	cjne	a,(_min2 + 1),00112$
+      000536 E5*1B            [12] 1447 	mov	a,_alarmmin1
+      000538 B5*0B DF         [24] 1448 	cjne	a,_min1,00112$
+      00053B E5*1C            [12] 1449 	mov	a,(_alarmmin1 + 1)
+      00053D B5*0C DA         [24] 1450 	cjne	a,(_min1 + 1),00112$
+      000540 E5*1D            [12] 1451 	mov	a,_alarmsec2
+      000542 B5*0D D5         [24] 1452 	cjne	a,_sec2,00112$
+      000545 E5*1E            [12] 1453 	mov	a,(_alarmsec2 + 1)
+      000547 B5*0E D0         [24] 1454 	cjne	a,(_sec2 + 1),00112$
+      00054A E5*1F            [12] 1455 	mov	a,_alarmsec1
+      00054C B5*0F CB         [24] 1456 	cjne	a,_sec1,00112$
+      00054F E5*20            [12] 1457 	mov	a,(_alarmsec1 + 1)
+      000551 B5*10 C6         [24] 1458 	cjne	a,(_sec1 + 1),00112$
+      000554 74 01            [12] 1459 	mov	a,#0x01
+      000556 B5*06 06         [24] 1460 	cjne	a,_begin,00150$
+      000559 14               [12] 1461 	dec	a
+      00055A B5*07 02         [24] 1462 	cjne	a,(_begin + 1),00150$
+      00055D 80 02            [24] 1463 	sjmp	00151$
+      00055F                       1464 00150$:
+      00055F 80 B9            [24] 1465 	sjmp	00112$
+      000561                       1466 00151$:
+                                   1467 ;	main.c:368: buzzer=0;
+      000561 C2 B7            [12] 1468 	clr	_P3_7
+                                   1469 ;	main.c:369: delay(500);
+      000563 90 01 F4         [24] 1470 	mov	dptr,#0x01f4
+      000566 12r00r00         [24] 1471 	lcall	_delay
+                                   1472 ;	main.c:370: buzzer=1;
+      000569 D2 B7            [12] 1473 	setb	_P3_7
+      00056B 80 AD            [24] 1474 	sjmp	00112$
+                                   1475 	.area CSEG    (CODE)
+                                   1476 	.area CONST   (CODE)
+                                   1477 	.area XINIT   (CODE)
+                                   1478 	.area CABS    (ABS,CODE)
