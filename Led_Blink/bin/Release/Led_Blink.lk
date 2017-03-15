@@ -1,0 +1,22 @@
+-muwx
+-i bin\Release\Led_Blink.ihx
+-M
+-Y
+-I 0x0100
+-X 0x0000
+-C 0x1f40
+-b HOME = 0x0000
+-b XSEG = 0x0001
+-b PSEG = 0x0001
+-b ISEG = 0x0000
+-b BSEG = 0x0000
+-k D:\Program Files\SDCC\lib
+-k D:\Program Files\SDCC\bin\..\lib\small
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+obj\Release\main.rel
+
+-e
