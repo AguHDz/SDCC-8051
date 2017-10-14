@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1507416374 source:o:\github\sdcc-8051\delay\main.c
+	<mcs51/8052.h>
+	<stdint.h>
+	"delay_lib.h"
+
+1507417188 o:\github\sdcc-8051\delay\delay_lib.h
+	<mcs51/8052.h>
+	<stdint.h>
+
