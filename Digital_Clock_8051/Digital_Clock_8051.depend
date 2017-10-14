@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1505655789 source:z:\ficheros_programas\8051_sdcc\digital_clock_8051\main.c
+	<mcs51/8052.h>
+	<stdio.h>
+	<stdint.h>
+
+1507947402 source:o:\github\sdcc-8051\digital_clock_8051\main.c
+	<mcs51/8052.h>
+	<stdio.h>
+	<stdint.h>
+	"delay_Lib.h"
+	"I2C_Lib.h"
+	"DS1307_LIB.h"
+	"LCD_LIB.H"
+
+1507020880 o:\github\sdcc-8051\digital_clock_8051\common.h
+	<stdint.h>
+	<mcs51/8052.h>
+
+1507945696 o:\github\sdcc-8051\digital_clock_8051\delay_lib.h
+	<mcs51/8052.h>
+	<stdint.h>
+
+1507938856 o:\github\sdcc-8051\digital_clock_8051\i2c_lib.h
+
+1507947402 o:\github\sdcc-8051\digital_clock_8051\lcd_lib.h
+	"delay_Lib.h"
+
+1507947578 o:\github\sdcc-8051\digital_clock_8051\ds1307_lib.h
+	"MATH_LIB.H"
+
+1507947402 o:\github\sdcc-8051\digital_clock_8051\math_lib.h
+

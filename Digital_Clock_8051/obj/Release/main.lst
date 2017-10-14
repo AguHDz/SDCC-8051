@@ -1,0 +1,2217 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.6.0 #9615 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _setup
+                                     13 	.globl _timeSet
+                                     14 	.globl _cicloTimeSet
+                                     15 	.globl _timeShow
+                                     16 	.globl _LCDPrintNumero
+                                     17 	.globl _diasDelMes
+                                     18 	.globl _bisiesto
+                                     19 	.globl _LCDPrintDiaSemana
+                                     20 	.globl _LCD_init
+                                     21 	.globl _LCD_print
+                                     22 	.globl _LCD_createChar
+                                     23 	.globl _LCD_displayCursorLeft
+                                     24 	.globl _LCD_displayCursorRight
+                                     25 	.globl _LCD_displayShiftLeft
+                                     26 	.globl _LCD_displayShiftRight
+                                     27 	.globl _LCD_displayOff
+                                     28 	.globl _LCD_displayOn
+                                     29 	.globl _LCD_cursorOff
+                                     30 	.globl _LCD_cursorUnderlineBlink
+                                     31 	.globl _LCD_cursorBlink
+                                     32 	.globl _LCD_cursorUnderline
+                                     33 	.globl _LCD_clear
+                                     34 	.globl _LCD_cursorHome
+                                     35 	.globl _LCD_gotoXY
+                                     36 	.globl _LCD_putChar
+                                     37 	.globl _LCD_command
+                                     38 	.globl _LCD_send
+                                     39 	.globl _LCD_send4Bits
+                                     40 	.globl _DS1307_timeWrite
+                                     41 	.globl _DS1307_timeRead
+                                     42 	.globl _decimalToBCD
+                                     43 	.globl _BCDToDecimal
+                                     44 	.globl _I2C_read
+                                     45 	.globl _I2C_send
+                                     46 	.globl _I2C_stop
+                                     47 	.globl _I2C_start
+                                     48 	.globl _TF2
+                                     49 	.globl _EXF2
+                                     50 	.globl _RCLK
+                                     51 	.globl _TCLK
+                                     52 	.globl _EXEN2
+                                     53 	.globl _TR2
+                                     54 	.globl _C_T2
+                                     55 	.globl _CP_RL2
+                                     56 	.globl _T2CON_7
+                                     57 	.globl _T2CON_6
+                                     58 	.globl _T2CON_5
+                                     59 	.globl _T2CON_4
+                                     60 	.globl _T2CON_3
+                                     61 	.globl _T2CON_2
+                                     62 	.globl _T2CON_1
+                                     63 	.globl _T2CON_0
+                                     64 	.globl _PT2
+                                     65 	.globl _ET2
+                                     66 	.globl _CY
+                                     67 	.globl _AC
+                                     68 	.globl _F0
+                                     69 	.globl _RS1
+                                     70 	.globl _RS0
+                                     71 	.globl _OV
+                                     72 	.globl _F1
+                                     73 	.globl _P
+                                     74 	.globl _PS
+                                     75 	.globl _PT1
+                                     76 	.globl _PX1
+                                     77 	.globl _PT0
+                                     78 	.globl _PX0
+                                     79 	.globl _RD
+                                     80 	.globl _WR
+                                     81 	.globl _T1
+                                     82 	.globl _T0
+                                     83 	.globl _INT1
+                                     84 	.globl _INT0
+                                     85 	.globl _TXD
+                                     86 	.globl _RXD
+                                     87 	.globl _P3_7
+                                     88 	.globl _P3_6
+                                     89 	.globl _P3_5
+                                     90 	.globl _P3_4
+                                     91 	.globl _P3_3
+                                     92 	.globl _P3_2
+                                     93 	.globl _P3_1
+                                     94 	.globl _P3_0
+                                     95 	.globl _EA
+                                     96 	.globl _ES
+                                     97 	.globl _ET1
+                                     98 	.globl _EX1
+                                     99 	.globl _ET0
+                                    100 	.globl _EX0
+                                    101 	.globl _P2_7
+                                    102 	.globl _P2_6
+                                    103 	.globl _P2_5
+                                    104 	.globl _P2_4
+                                    105 	.globl _P2_3
+                                    106 	.globl _P2_2
+                                    107 	.globl _P2_1
+                                    108 	.globl _P2_0
+                                    109 	.globl _SM0
+                                    110 	.globl _SM1
+                                    111 	.globl _SM2
+                                    112 	.globl _REN
+                                    113 	.globl _TB8
+                                    114 	.globl _RB8
+                                    115 	.globl _TI
+                                    116 	.globl _RI
+                                    117 	.globl _P1_7
+                                    118 	.globl _P1_6
+                                    119 	.globl _P1_5
+                                    120 	.globl _P1_4
+                                    121 	.globl _P1_3
+                                    122 	.globl _P1_2
+                                    123 	.globl _P1_1
+                                    124 	.globl _P1_0
+                                    125 	.globl _TF1
+                                    126 	.globl _TR1
+                                    127 	.globl _TF0
+                                    128 	.globl _TR0
+                                    129 	.globl _IE1
+                                    130 	.globl _IT1
+                                    131 	.globl _IE0
+                                    132 	.globl _IT0
+                                    133 	.globl _P0_7
+                                    134 	.globl _P0_6
+                                    135 	.globl _P0_5
+                                    136 	.globl _P0_4
+                                    137 	.globl _P0_3
+                                    138 	.globl _P0_2
+                                    139 	.globl _P0_1
+                                    140 	.globl _P0_0
+                                    141 	.globl _TH2
+                                    142 	.globl _TL2
+                                    143 	.globl _RCAP2H
+                                    144 	.globl _RCAP2L
+                                    145 	.globl _T2CON
+                                    146 	.globl _B
+                                    147 	.globl _ACC
+                                    148 	.globl _PSW
+                                    149 	.globl _IP
+                                    150 	.globl _P3
+                                    151 	.globl _IE
+                                    152 	.globl _P2
+                                    153 	.globl _SBUF
+                                    154 	.globl _SCON
+                                    155 	.globl _P1
+                                    156 	.globl _TH1
+                                    157 	.globl _TH0
+                                    158 	.globl _TL1
+                                    159 	.globl _TL0
+                                    160 	.globl _TMOD
+                                    161 	.globl _TCON
+                                    162 	.globl _PCON
+                                    163 	.globl _DPH
+                                    164 	.globl _DPL
+                                    165 	.globl _SP
+                                    166 	.globl _P0
+                                    167 	.globl _ack
+                                    168 	.globl _cicloTimeSet_PARM_5
+                                    169 	.globl _cicloTimeSet_PARM_4
+                                    170 	.globl _cicloTimeSet_PARM_3
+                                    171 	.globl _cicloTimeSet_PARM_2
+                                    172 	.globl _refresco
+                                    173 	.globl _timeSec_old
+                                    174 	.globl _k
+                                    175 	.globl _LCD_createChar_PARM_9
+                                    176 	.globl _LCD_createChar_PARM_8
+                                    177 	.globl _LCD_createChar_PARM_7
+                                    178 	.globl _LCD_createChar_PARM_6
+                                    179 	.globl _LCD_createChar_PARM_5
+                                    180 	.globl _LCD_createChar_PARM_4
+                                    181 	.globl _LCD_createChar_PARM_3
+                                    182 	.globl _LCD_createChar_PARM_2
+                                    183 	.globl _LCD_gotoXY_PARM_2
+                                    184 	.globl _ahora
+                                    185 	.globl _delay_x10_cycles
+                                    186 	.globl _delay_x100_cycles
+                                    187 	.globl _delay_ms
+                                    188 ;--------------------------------------------------------
+                                    189 ; special function registers
+                                    190 ;--------------------------------------------------------
+                                    191 	.area RSEG    (ABS,DATA)
+      000000                        192 	.org 0x0000
+                           000080   193 _P0	=	0x0080
+                           000081   194 _SP	=	0x0081
+                           000082   195 _DPL	=	0x0082
+                           000083   196 _DPH	=	0x0083
+                           000087   197 _PCON	=	0x0087
+                           000088   198 _TCON	=	0x0088
+                           000089   199 _TMOD	=	0x0089
+                           00008A   200 _TL0	=	0x008a
+                           00008B   201 _TL1	=	0x008b
+                           00008C   202 _TH0	=	0x008c
+                           00008D   203 _TH1	=	0x008d
+                           000090   204 _P1	=	0x0090
+                           000098   205 _SCON	=	0x0098
+                           000099   206 _SBUF	=	0x0099
+                           0000A0   207 _P2	=	0x00a0
+                           0000A8   208 _IE	=	0x00a8
+                           0000B0   209 _P3	=	0x00b0
+                           0000B8   210 _IP	=	0x00b8
+                           0000D0   211 _PSW	=	0x00d0
+                           0000E0   212 _ACC	=	0x00e0
+                           0000F0   213 _B	=	0x00f0
+                           0000C8   214 _T2CON	=	0x00c8
+                           0000CA   215 _RCAP2L	=	0x00ca
+                           0000CB   216 _RCAP2H	=	0x00cb
+                           0000CC   217 _TL2	=	0x00cc
+                           0000CD   218 _TH2	=	0x00cd
+                                    219 ;--------------------------------------------------------
+                                    220 ; special function bits
+                                    221 ;--------------------------------------------------------
+                                    222 	.area RSEG    (ABS,DATA)
+      000000                        223 	.org 0x0000
+                           000080   224 _P0_0	=	0x0080
+                           000081   225 _P0_1	=	0x0081
+                           000082   226 _P0_2	=	0x0082
+                           000083   227 _P0_3	=	0x0083
+                           000084   228 _P0_4	=	0x0084
+                           000085   229 _P0_5	=	0x0085
+                           000086   230 _P0_6	=	0x0086
+                           000087   231 _P0_7	=	0x0087
+                           000088   232 _IT0	=	0x0088
+                           000089   233 _IE0	=	0x0089
+                           00008A   234 _IT1	=	0x008a
+                           00008B   235 _IE1	=	0x008b
+                           00008C   236 _TR0	=	0x008c
+                           00008D   237 _TF0	=	0x008d
+                           00008E   238 _TR1	=	0x008e
+                           00008F   239 _TF1	=	0x008f
+                           000090   240 _P1_0	=	0x0090
+                           000091   241 _P1_1	=	0x0091
+                           000092   242 _P1_2	=	0x0092
+                           000093   243 _P1_3	=	0x0093
+                           000094   244 _P1_4	=	0x0094
+                           000095   245 _P1_5	=	0x0095
+                           000096   246 _P1_6	=	0x0096
+                           000097   247 _P1_7	=	0x0097
+                           000098   248 _RI	=	0x0098
+                           000099   249 _TI	=	0x0099
+                           00009A   250 _RB8	=	0x009a
+                           00009B   251 _TB8	=	0x009b
+                           00009C   252 _REN	=	0x009c
+                           00009D   253 _SM2	=	0x009d
+                           00009E   254 _SM1	=	0x009e
+                           00009F   255 _SM0	=	0x009f
+                           0000A0   256 _P2_0	=	0x00a0
+                           0000A1   257 _P2_1	=	0x00a1
+                           0000A2   258 _P2_2	=	0x00a2
+                           0000A3   259 _P2_3	=	0x00a3
+                           0000A4   260 _P2_4	=	0x00a4
+                           0000A5   261 _P2_5	=	0x00a5
+                           0000A6   262 _P2_6	=	0x00a6
+                           0000A7   263 _P2_7	=	0x00a7
+                           0000A8   264 _EX0	=	0x00a8
+                           0000A9   265 _ET0	=	0x00a9
+                           0000AA   266 _EX1	=	0x00aa
+                           0000AB   267 _ET1	=	0x00ab
+                           0000AC   268 _ES	=	0x00ac
+                           0000AF   269 _EA	=	0x00af
+                           0000B0   270 _P3_0	=	0x00b0
+                           0000B1   271 _P3_1	=	0x00b1
+                           0000B2   272 _P3_2	=	0x00b2
+                           0000B3   273 _P3_3	=	0x00b3
+                           0000B4   274 _P3_4	=	0x00b4
+                           0000B5   275 _P3_5	=	0x00b5
+                           0000B6   276 _P3_6	=	0x00b6
+                           0000B7   277 _P3_7	=	0x00b7
+                           0000B0   278 _RXD	=	0x00b0
+                           0000B1   279 _TXD	=	0x00b1
+                           0000B2   280 _INT0	=	0x00b2
+                           0000B3   281 _INT1	=	0x00b3
+                           0000B4   282 _T0	=	0x00b4
+                           0000B5   283 _T1	=	0x00b5
+                           0000B6   284 _WR	=	0x00b6
+                           0000B7   285 _RD	=	0x00b7
+                           0000B8   286 _PX0	=	0x00b8
+                           0000B9   287 _PT0	=	0x00b9
+                           0000BA   288 _PX1	=	0x00ba
+                           0000BB   289 _PT1	=	0x00bb
+                           0000BC   290 _PS	=	0x00bc
+                           0000D0   291 _P	=	0x00d0
+                           0000D1   292 _F1	=	0x00d1
+                           0000D2   293 _OV	=	0x00d2
+                           0000D3   294 _RS0	=	0x00d3
+                           0000D4   295 _RS1	=	0x00d4
+                           0000D5   296 _F0	=	0x00d5
+                           0000D6   297 _AC	=	0x00d6
+                           0000D7   298 _CY	=	0x00d7
+                           0000AD   299 _ET2	=	0x00ad
+                           0000BD   300 _PT2	=	0x00bd
+                           0000C8   301 _T2CON_0	=	0x00c8
+                           0000C9   302 _T2CON_1	=	0x00c9
+                           0000CA   303 _T2CON_2	=	0x00ca
+                           0000CB   304 _T2CON_3	=	0x00cb
+                           0000CC   305 _T2CON_4	=	0x00cc
+                           0000CD   306 _T2CON_5	=	0x00cd
+                           0000CE   307 _T2CON_6	=	0x00ce
+                           0000CF   308 _T2CON_7	=	0x00cf
+                           0000C8   309 _CP_RL2	=	0x00c8
+                           0000C9   310 _C_T2	=	0x00c9
+                           0000CA   311 _TR2	=	0x00ca
+                           0000CB   312 _EXEN2	=	0x00cb
+                           0000CC   313 _TCLK	=	0x00cc
+                           0000CD   314 _RCLK	=	0x00cd
+                           0000CE   315 _EXF2	=	0x00ce
+                           0000CF   316 _TF2	=	0x00cf
+                                    317 ;--------------------------------------------------------
+                                    318 ; overlayable register banks
+                                    319 ;--------------------------------------------------------
+                                    320 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        321 	.ds 8
+                                    322 ;--------------------------------------------------------
+                                    323 ; internal ram data
+                                    324 ;--------------------------------------------------------
+                                    325 	.area DSEG    (DATA)
+      000000                        326 _ahora::
+      000000                        327 	.ds 7
+      000007                        328 _LCD_gotoXY_PARM_2:
+      000007                        329 	.ds 1
+      000008                        330 _LCD_createChar_PARM_2:
+      000008                        331 	.ds 1
+      000009                        332 _LCD_createChar_PARM_3:
+      000009                        333 	.ds 1
+      00000A                        334 _LCD_createChar_PARM_4:
+      00000A                        335 	.ds 1
+      00000B                        336 _LCD_createChar_PARM_5:
+      00000B                        337 	.ds 1
+      00000C                        338 _LCD_createChar_PARM_6:
+      00000C                        339 	.ds 1
+      00000D                        340 _LCD_createChar_PARM_7:
+      00000D                        341 	.ds 1
+      00000E                        342 _LCD_createChar_PARM_8:
+      00000E                        343 	.ds 1
+      00000F                        344 _LCD_createChar_PARM_9:
+      00000F                        345 	.ds 1
+      000010                        346 _k::
+      000010                        347 	.ds 1
+      000011                        348 _timeSec_old::
+      000011                        349 	.ds 1
+      000012                        350 _refresco::
+      000012                        351 	.ds 2
+      000014                        352 _cicloTimeSet_PARM_2:
+      000014                        353 	.ds 1
+      000015                        354 _cicloTimeSet_PARM_3:
+      000015                        355 	.ds 1
+      000016                        356 _cicloTimeSet_PARM_4:
+      000016                        357 	.ds 1
+      000017                        358 _cicloTimeSet_PARM_5:
+      000017                        359 	.ds 3
+                                    360 ;--------------------------------------------------------
+                                    361 ; overlayable items in internal ram 
+                                    362 ;--------------------------------------------------------
+                                    363 	.area	OSEG    (OVR,DATA)
+                                    364 	.area	OSEG    (OVR,DATA)
+                                    365 	.area	OSEG    (OVR,DATA)
+                                    366 	.area	OSEG    (OVR,DATA)
+                                    367 	.area	OSEG    (OVR,DATA)
+                                    368 	.area	OSEG    (OVR,DATA)
+                                    369 ;--------------------------------------------------------
+                                    370 ; Stack segment in internal ram 
+                                    371 ;--------------------------------------------------------
+                                    372 	.area	SSEG
+      000000                        373 __start__stack:
+      000000                        374 	.ds	1
+                                    375 
+                                    376 ;--------------------------------------------------------
+                                    377 ; indirectly addressable internal ram data
+                                    378 ;--------------------------------------------------------
+                                    379 	.area ISEG    (DATA)
+                                    380 ;--------------------------------------------------------
+                                    381 ; absolute internal ram data
+                                    382 ;--------------------------------------------------------
+                                    383 	.area IABS    (ABS,DATA)
+                                    384 	.area IABS    (ABS,DATA)
+                                    385 ;--------------------------------------------------------
+                                    386 ; bit data
+                                    387 ;--------------------------------------------------------
+                                    388 	.area BSEG    (BIT)
+      000000                        389 _LCD_send4Bits_sloc0_1_0:
+      000000                        390 	.ds 1
+      000001                        391 _ack::
+      000001                        392 	.ds 1
+                                    393 ;--------------------------------------------------------
+                                    394 ; paged external ram data
+                                    395 ;--------------------------------------------------------
+                                    396 	.area PSEG    (PAG,XDATA)
+                                    397 ;--------------------------------------------------------
+                                    398 ; external ram data
+                                    399 ;--------------------------------------------------------
+                                    400 	.area XSEG    (XDATA)
+                                    401 ;--------------------------------------------------------
+                                    402 ; absolute external ram data
+                                    403 ;--------------------------------------------------------
+                                    404 	.area XABS    (ABS,XDATA)
+                                    405 ;--------------------------------------------------------
+                                    406 ; external initialized ram data
+                                    407 ;--------------------------------------------------------
+                                    408 	.area XISEG   (XDATA)
+                                    409 	.area HOME    (CODE)
+                                    410 	.area GSINIT0 (CODE)
+                                    411 	.area GSINIT1 (CODE)
+                                    412 	.area GSINIT2 (CODE)
+                                    413 	.area GSINIT3 (CODE)
+                                    414 	.area GSINIT4 (CODE)
+                                    415 	.area GSINIT5 (CODE)
+                                    416 	.area GSINIT  (CODE)
+                                    417 	.area GSFINAL (CODE)
+                                    418 	.area CSEG    (CODE)
+                                    419 ;--------------------------------------------------------
+                                    420 ; interrupt vector 
+                                    421 ;--------------------------------------------------------
+                                    422 	.area HOME    (CODE)
+      000000                        423 __interrupt_vect:
+      000000 02r00r00         [24]  424 	ljmp	__sdcc_gsinit_startup
+                                    425 ;--------------------------------------------------------
+                                    426 ; global & static initialisations
+                                    427 ;--------------------------------------------------------
+                                    428 	.area HOME    (CODE)
+                                    429 	.area GSINIT  (CODE)
+                                    430 	.area GSFINAL (CODE)
+                                    431 	.area GSINIT  (CODE)
+                                    432 	.globl __sdcc_gsinit_startup
+                                    433 	.globl __sdcc_program_startup
+                                    434 	.globl __start__stack
+                                    435 	.globl __mcs51_genXINIT
+                                    436 	.globl __mcs51_genXRAMCLEAR
+                                    437 	.globl __mcs51_genRAMCLEAR
+                                    438 	.area GSFINAL (CODE)
+      000000 02r00r03         [24]  439 	ljmp	__sdcc_program_startup
+                                    440 ;--------------------------------------------------------
+                                    441 ; Home
+                                    442 ;--------------------------------------------------------
+                                    443 	.area HOME    (CODE)
+                                    444 	.area HOME    (CODE)
+      000003                        445 __sdcc_program_startup:
+      000003 02r08r51         [24]  446 	ljmp	_main
+                                    447 ;	return from main will return to caller
+                                    448 ;--------------------------------------------------------
+                                    449 ; code
+                                    450 ;--------------------------------------------------------
+                                    451 	.area CSEG    (CODE)
+                                    452 ;------------------------------------------------------------
+                                    453 ;Allocation info for local variables in function 'delay_x10_cycles'
+                                    454 ;------------------------------------------------------------
+                                    455 ;x10cycles                 Allocated to registers 
+                                    456 ;------------------------------------------------------------
+                                    457 ;	delay_Lib.h:45: void delay_x10_cycles(uint8_t x10cycles)
+                                    458 ;	-----------------------------------------
+                                    459 ;	 function delay_x10_cycles
+                                    460 ;	-----------------------------------------
+      000000                        461 _delay_x10_cycles:
+                           000007   462 	ar7 = 0x07
+                           000006   463 	ar6 = 0x06
+                           000005   464 	ar5 = 0x05
+                           000004   465 	ar4 = 0x04
+                           000003   466 	ar3 = 0x03
+                           000002   467 	ar2 = 0x02
+                           000001   468 	ar1 = 0x01
+                           000000   469 	ar0 = 0x00
+                                    470 ;	delay_Lib.h:63: __endasm;
+      000000 AF 82            [24]  471 	mov	r7,dpl
+      000002 1F               [12]  472 	dec	r7
+      000003 EF               [12]  473 	mov	a, r7
+      000004 60 07            [24]  474 	jz	end_delay_x10_cycles
+      000006                        475 	    loop_delay_x10_cycles:
+      000006 7E 03            [12]  476 	mov	r6,#3
+      000008                        477 	    loop_delay_10_cycles:
+      000008 DE FE            [24]  478 	djnz	r6,loop_delay_10_cycles
+      00000A 00               [12]  479 	nop
+      00000B DF F9            [24]  480 	djnz	r7,loop_delay_x10_cycles
+      00000D                        481 	    end_delay_x10_cycles:
+      00000D 22               [24]  482 	ret
+                                    483 ;------------------------------------------------------------
+                                    484 ;Allocation info for local variables in function 'delay_x100_cycles'
+                                    485 ;------------------------------------------------------------
+                                    486 ;x100cycles                Allocated to registers 
+                                    487 ;------------------------------------------------------------
+                                    488 ;	delay_Lib.h:68: void delay_x100_cycles(uint8_t x100cycles)
+                                    489 ;	-----------------------------------------
+                                    490 ;	 function delay_x100_cycles
+                                    491 ;	-----------------------------------------
+      00000E                        492 _delay_x100_cycles:
+                                    493 ;	delay_Lib.h:87: __endasm;
+      00000E AF 82            [24]  494 	mov	r7,dpl
+      000010 1F               [12]  495 	dec	r7
+      000011 EF               [12]  496 	mov	a, r7
+      000012 7E 2C            [12]  497 	mov	r6,#44
+      000014                        498 	    loop_delay_x100_cycles_init:
+      000014 DE FE            [24]  499 	djnz	r6,loop_delay_x100_cycles_init
+      000016 00               [12]  500 	nop
+      000017 60 07            [24]  501 	jz	end_delay_x100_cycles
+      000019                        502 	    loop_delay_x100_cycles:
+      000019 7D 30            [12]  503 	mov	r5,#48
+      00001B                        504 	    loop_delay_100_cycles:
+      00001B DD FE            [24]  505 	djnz	r5,loop_delay_100_cycles
+      00001D 00               [12]  506 	nop
+      00001E DF F9            [24]  507 	djnz	r7,loop_delay_x100_cycles
+      000020                        508 	    end_delay_x100_cycles:
+      000020 22               [24]  509 	ret
+                                    510 ;------------------------------------------------------------
+                                    511 ;Allocation info for local variables in function 'delay_ms'
+                                    512 ;------------------------------------------------------------
+                                    513 ;delayTimeMS               Allocated to registers 
+                                    514 ;------------------------------------------------------------
+                                    515 ;	delay_Lib.h:92: void delay_ms(uint16_t delayTimeMS)
+                                    516 ;	-----------------------------------------
+                                    517 ;	 function delay_ms
+                                    518 ;	-----------------------------------------
+      000021                        519 _delay_ms:
+                                    520 ;	delay_Lib.h:110: __endasm;
+      000021 AB 82            [24]  521 	mov	r3,dpl
+      000023 AC 83            [24]  522 	mov	r4,dph
+      000025                        523 	    delay_ms_lib_loop:
+      000025 1B               [12]  524 	dec	r3
+      000026 BB FF 01         [24]  525 	cjne	r3,#0xff,delay_ms_lib_seguir
+      000029 1C               [12]  526 	dec	r4
+      00002A                        527 	    delay_ms_lib_seguir:
+      00002A EB               [12]  528 	mov	a,r3
+      00002B 4C               [12]  529 	orl	a,r4
+      00002C 60 08            [24]  530 	jz	delay_ms_lib_fin
+                                    531 ;	delay_Lib.h:112: CALL_DELAY_MS;
+      00002E 75 82 42         [24]  532 	mov	dpl,#0x42
+      000031 12r00r00         [24]  533 	lcall	_delay_x10_cycles
+                                    534 ;	delay_Lib.h:117: __endasm;
+      000034 80 EF            [24]  535 	sjmp	delay_ms_lib_loop
+      000036                        536 	    delay_ms_lib_fin:
+      000036 22               [24]  537 	ret
+                                    538 ;------------------------------------------------------------
+                                    539 ;Allocation info for local variables in function 'I2C_start'
+                                    540 ;------------------------------------------------------------
+                                    541 ;	I2C_Lib.h:4: void I2C_start(void)
+                                    542 ;	-----------------------------------------
+                                    543 ;	 function I2C_start
+                                    544 ;	-----------------------------------------
+      000037                        545 _I2C_start:
+                                    546 ;	I2C_Lib.h:6: SDA=1;    //"start" function for communicate I2C
+      000037 D2 A1            [12]  547 	setb	_P2_1
+                                    548 ;	I2C_Lib.h:7: SCL=1;
+      000039 D2 A0            [12]  549 	setb	_P2_0
+                                    550 ;	I2C_Lib.h:8: SDA=0;
+      00003B C2 A1            [12]  551 	clr	_P2_1
+                                    552 ;	I2C_Lib.h:9: SCL=0;
+      00003D C2 A0            [12]  553 	clr	_P2_0
+      00003F 22               [24]  554 	ret
+                                    555 ;------------------------------------------------------------
+                                    556 ;Allocation info for local variables in function 'I2C_stop'
+                                    557 ;------------------------------------------------------------
+                                    558 ;	I2C_Lib.h:12: void I2C_stop(void)
+                                    559 ;	-----------------------------------------
+                                    560 ;	 function I2C_stop
+                                    561 ;	-----------------------------------------
+      000040                        562 _I2C_stop:
+                                    563 ;	I2C_Lib.h:14: SDA=0;
+      000040 C2 A1            [12]  564 	clr	_P2_1
+                                    565 ;	I2C_Lib.h:15: SCL=1;
+      000042 D2 A0            [12]  566 	setb	_P2_0
+                                    567 ;	I2C_Lib.h:16: SDA=1;   //"stop" function for communicate I2C
+      000044 D2 A1            [12]  568 	setb	_P2_1
+      000046 22               [24]  569 	ret
+                                    570 ;------------------------------------------------------------
+                                    571 ;Allocation info for local variables in function 'I2C_send'
+                                    572 ;------------------------------------------------------------
+                                    573 ;Data                      Allocated to registers r7 
+                                    574 ;i                         Allocated to registers r6 
+                                    575 ;ack_bit                   Allocated to registers 
+                                    576 ;------------------------------------------------------------
+                                    577 ;	I2C_Lib.h:19: unsigned char I2C_send(unsigned char Data)             //send data to I2C
+                                    578 ;	-----------------------------------------
+                                    579 ;	 function I2C_send
+                                    580 ;	-----------------------------------------
+      000047                        581 _I2C_send:
+      000047 AF 82            [24]  582 	mov	r7,dpl
+                                    583 ;	I2C_Lib.h:23: for(i=0; i<8; i++)
+      000049 7E 00            [12]  584 	mov	r6,#0x00
+      00004B                        585 00105$:
+                                    586 ;	I2C_Lib.h:25: if(Data & 0x80) SDA=1;
+      00004B EF               [12]  587 	mov	a,r7
+      00004C 30 E7 04         [24]  588 	jnb	acc.7,00102$
+      00004F D2 A1            [12]  589 	setb	_P2_1
+      000051 80 02            [24]  590 	sjmp	00103$
+      000053                        591 00102$:
+                                    592 ;	I2C_Lib.h:26: else SDA=0;
+      000053 C2 A1            [12]  593 	clr	_P2_1
+      000055                        594 00103$:
+                                    595 ;	I2C_Lib.h:27: SCL=1;
+      000055 D2 A0            [12]  596 	setb	_P2_0
+                                    597 ;	I2C_Lib.h:28: Data<<=1;
+      000057 EF               [12]  598 	mov	a,r7
+      000058 2F               [12]  599 	add	a,r7
+      000059 FF               [12]  600 	mov	r7,a
+                                    601 ;	I2C_Lib.h:29: SCL=0;
+      00005A C2 A0            [12]  602 	clr	_P2_0
+                                    603 ;	I2C_Lib.h:23: for(i=0; i<8; i++)
+      00005C 0E               [12]  604 	inc	r6
+      00005D BE 08 00         [24]  605 	cjne	r6,#0x08,00120$
+      000060                        606 00120$:
+      000060 40 E9            [24]  607 	jc	00105$
+                                    608 ;	I2C_Lib.h:31: SDA=1,SCL=1;
+      000062 D2 A1            [12]  609 	setb	_P2_1
+      000064 D2 A0            [12]  610 	setb	_P2_0
+                                    611 ;	I2C_Lib.h:32: ack_bit=SDA;
+      000066 A2 A1            [12]  612 	mov	c,_P2_1
+      000068 E4               [12]  613 	clr	a
+      000069 33               [12]  614 	rlc	a
+      00006A F5 82            [12]  615 	mov	dpl,a
+                                    616 ;	I2C_Lib.h:33: SCL=0;
+      00006C C2 A0            [12]  617 	clr	_P2_0
+                                    618 ;	I2C_Lib.h:34: return ack_bit;
+      00006E 22               [24]  619 	ret
+                                    620 ;------------------------------------------------------------
+                                    621 ;Allocation info for local variables in function 'I2C_read'
+                                    622 ;------------------------------------------------------------
+                                    623 ;ack                       Allocated to registers r7 
+                                    624 ;i                         Allocated to registers r5 
+                                    625 ;Data                      Allocated to registers r6 
+                                    626 ;------------------------------------------------------------
+                                    627 ;	I2C_Lib.h:37: unsigned char I2C_read(char ack)                      //receive data from I2C
+                                    628 ;	-----------------------------------------
+                                    629 ;	 function I2C_read
+                                    630 ;	-----------------------------------------
+      00006F                        631 _I2C_read:
+      00006F AF 82            [24]  632 	mov	r7,dpl
+                                    633 ;	I2C_Lib.h:39: unsigned char i, Data=0;
+      000071 7E 00            [12]  634 	mov	r6,#0x00
+                                    635 ;	I2C_Lib.h:40: SDA=1;
+      000073 D2 A1            [12]  636 	setb	_P2_1
+                                    637 ;	I2C_Lib.h:41: for(i=0; i<8; i++)
+      000075 7D 00            [12]  638 	mov	r5,#0x00
+      000077                        639 00110$:
+                                    640 ;	I2C_Lib.h:43: Data<<=1;
+      000077 EE               [12]  641 	mov	a,r6
+      000078 2E               [12]  642 	add	a,r6
+      000079 FE               [12]  643 	mov	r6,a
+                                    644 ;	I2C_Lib.h:44: do
+      00007A                        645 00101$:
+                                    646 ;	I2C_Lib.h:46: SCL=1;
+      00007A D2 A0            [12]  647 	setb	_P2_0
+      00007C 30 A0 FB         [24]  648 	jnb	_P2_0,00101$
+                                    649 ;	I2C_Lib.h:49: if(SDA) Data|=1;
+      00007F 30 A1 03         [24]  650 	jnb	_P2_1,00105$
+      000082 43 06 01         [24]  651 	orl	ar6,#0x01
+      000085                        652 00105$:
+                                    653 ;	I2C_Lib.h:50: SCL=0;
+      000085 C2 A0            [12]  654 	clr	_P2_0
+                                    655 ;	I2C_Lib.h:41: for(i=0; i<8; i++)
+      000087 0D               [12]  656 	inc	r5
+      000088 BD 08 00         [24]  657 	cjne	r5,#0x08,00135$
+      00008B                        658 00135$:
+      00008B 40 EA            [24]  659 	jc	00110$
+                                    660 ;	I2C_Lib.h:52: if(ack)SDA=0;
+      00008D EF               [12]  661 	mov	a,r7
+      00008E 60 04            [24]  662 	jz	00108$
+      000090 C2 A1            [12]  663 	clr	_P2_1
+      000092 80 02            [24]  664 	sjmp	00109$
+      000094                        665 00108$:
+                                    666 ;	I2C_Lib.h:53: else SDA=1;
+      000094 D2 A1            [12]  667 	setb	_P2_1
+      000096                        668 00109$:
+                                    669 ;	I2C_Lib.h:54: SCL=1;
+      000096 D2 A0            [12]  670 	setb	_P2_0
+                                    671 ;	I2C_Lib.h:55: SCL=0;
+      000098 C2 A0            [12]  672 	clr	_P2_0
+                                    673 ;	I2C_Lib.h:56: SDA=1;
+      00009A D2 A1            [12]  674 	setb	_P2_1
+                                    675 ;	I2C_Lib.h:57: return Data;
+      00009C 8E 82            [24]  676 	mov	dpl,r6
+      00009E 22               [24]  677 	ret
+                                    678 ;------------------------------------------------------------
+                                    679 ;Allocation info for local variables in function 'BCDToDecimal'
+                                    680 ;------------------------------------------------------------
+                                    681 ;bcdByte                   Allocated to registers r7 
+                                    682 ;a                         Allocated to registers r6 
+                                    683 ;b                         Allocated to registers 
+                                    684 ;dec                       Allocated to registers 
+                                    685 ;------------------------------------------------------------
+                                    686 ;	MATH_LIB.H:14: uint8_t BCDToDecimal(uint8_t bcdByte)
+                                    687 ;	-----------------------------------------
+                                    688 ;	 function BCDToDecimal
+                                    689 ;	-----------------------------------------
+      00009F                        690 _BCDToDecimal:
+      00009F AF 82            [24]  691 	mov	r7,dpl
+                                    692 ;	MATH_LIB.H:17: a=(((bcdByte & 0xF0) >> 4) * 10);
+      0000A1 74 F0            [12]  693 	mov	a,#0xf0
+      0000A3 5F               [12]  694 	anl	a,r7
+      0000A4 C4               [12]  695 	swap	a
+      0000A5 54 0F            [12]  696 	anl	a,#0x0f
+      0000A7 75 F0 0A         [24]  697 	mov	b,#0x0a
+      0000AA A4               [48]  698 	mul	ab
+      0000AB FE               [12]  699 	mov	r6,a
+                                    700 ;	MATH_LIB.H:18: b=(bcdByte & 0x0F);
+      0000AC 74 0F            [12]  701 	mov	a,#0x0f
+      0000AE 5F               [12]  702 	anl	a,r7
+                                    703 ;	MATH_LIB.H:19: dec=a+b;
+      0000AF 2E               [12]  704 	add	a,r6
+      0000B0 F5 82            [12]  705 	mov	dpl,a
+                                    706 ;	MATH_LIB.H:20: return dec;
+      0000B2 22               [24]  707 	ret
+                                    708 ;------------------------------------------------------------
+                                    709 ;Allocation info for local variables in function 'decimalToBCD'
+                                    710 ;------------------------------------------------------------
+                                    711 ;decimalByte               Allocated to registers r7 
+                                    712 ;a                         Allocated to registers r6 
+                                    713 ;b                         Allocated to registers r7 
+                                    714 ;bcd                       Allocated to registers 
+                                    715 ;------------------------------------------------------------
+                                    716 ;	MATH_LIB.H:31: uint8_t decimalToBCD (uint8_t decimalByte)
+                                    717 ;	-----------------------------------------
+                                    718 ;	 function decimalToBCD
+                                    719 ;	-----------------------------------------
+      0000B3                        720 _decimalToBCD:
+      0000B3 AF 82            [24]  721 	mov	r7,dpl
+                                    722 ;	MATH_LIB.H:34: a=((decimalByte / 10) << 4);
+      0000B5 75 F0 0A         [24]  723 	mov	b,#0x0a
+      0000B8 EF               [12]  724 	mov	a,r7
+      0000B9 84               [48]  725 	div	ab
+      0000BA C4               [12]  726 	swap	a
+      0000BB 54 F0            [12]  727 	anl	a,#0xf0
+      0000BD FE               [12]  728 	mov	r6,a
+                                    729 ;	MATH_LIB.H:35: b= (decimalByte % 10);
+      0000BE 75 F0 0A         [24]  730 	mov	b,#0x0a
+      0000C1 EF               [12]  731 	mov	a,r7
+      0000C2 84               [48]  732 	div	ab
+                                    733 ;	MATH_LIB.H:36: bcd=a|b;
+      0000C3 E5 F0            [12]  734 	mov	a,b
+      0000C5 4E               [12]  735 	orl	a,r6
+      0000C6 F5 82            [12]  736 	mov	dpl,a
+                                    737 ;	MATH_LIB.H:37: return bcd;
+      0000C8 22               [24]  738 	ret
+                                    739 ;------------------------------------------------------------
+                                    740 ;Allocation info for local variables in function 'DS1307_timeRead'
+                                    741 ;------------------------------------------------------------
+                                    742 ;time                      Allocated to registers r5 r6 r7 
+                                    743 ;------------------------------------------------------------
+                                    744 ;	DS1307_LIB.h:30: void DS1307_timeRead(struct stime *time)
+                                    745 ;	-----------------------------------------
+                                    746 ;	 function DS1307_timeRead
+                                    747 ;	-----------------------------------------
+      0000C9                        748 _DS1307_timeRead:
+      0000C9 AD 82            [24]  749 	mov	r5,dpl
+      0000CB AE 83            [24]  750 	mov	r6,dph
+      0000CD AF F0            [24]  751 	mov	r7,b
+                                    752 ;	DS1307_LIB.h:32: I2C_start();     // Inicia comunicaci�n I2C.
+      0000CF C0 07            [24]  753 	push	ar7
+      0000D1 C0 06            [24]  754 	push	ar6
+      0000D3 C0 05            [24]  755 	push	ar5
+      0000D5 12r00r37         [24]  756 	lcall	_I2C_start
+                                    757 ;	DS1307_LIB.h:33: I2C_send(0xD0);  // Direcci�n I2C del DS1307.
+      0000D8 75 82 D0         [24]  758 	mov	dpl,#0xd0
+      0000DB 12r00r47         [24]  759 	lcall	_I2C_send
+                                    760 ;	DS1307_LIB.h:34: I2C_send(0x00);  // Primera direcci�n a leer/escribir.
+      0000DE 75 82 00         [24]  761 	mov	dpl,#0x00
+      0000E1 12r00r47         [24]  762 	lcall	_I2C_send
+                                    763 ;	DS1307_LIB.h:35: I2C_start();     // Reinicia comunicaci�n I2C.
+      0000E4 12r00r37         [24]  764 	lcall	_I2C_start
+                                    765 ;	DS1307_LIB.h:36: I2C_send(0xD1);  // DS1307 en Modo Escritura.
+      0000E7 75 82 D1         [24]  766 	mov	dpl,#0xd1
+      0000EA 12r00r47         [24]  767 	lcall	_I2C_send
+      0000ED D0 05            [24]  768 	pop	ar5
+      0000EF D0 06            [24]  769 	pop	ar6
+      0000F1 D0 07            [24]  770 	pop	ar7
+                                    771 ;	DS1307_LIB.h:37: time->Segundo   = BCDToDecimal(I2C_read(1)); // ASK = 1
+      0000F3 74 06            [12]  772 	mov	a,#0x06
+      0000F5 2D               [12]  773 	add	a,r5
+      0000F6 FA               [12]  774 	mov	r2,a
+      0000F7 E4               [12]  775 	clr	a
+      0000F8 3E               [12]  776 	addc	a,r6
+      0000F9 FB               [12]  777 	mov	r3,a
+      0000FA 8F 04            [24]  778 	mov	ar4,r7
+      0000FC 75 82 01         [24]  779 	mov	dpl,#0x01
+      0000FF C0 07            [24]  780 	push	ar7
+      000101 C0 06            [24]  781 	push	ar6
+      000103 C0 05            [24]  782 	push	ar5
+      000105 C0 04            [24]  783 	push	ar4
+      000107 C0 03            [24]  784 	push	ar3
+      000109 C0 02            [24]  785 	push	ar2
+      00010B 12r00r6F         [24]  786 	lcall	_I2C_read
+      00010E 12r00r9F         [24]  787 	lcall	_BCDToDecimal
+      000111 A9 82            [24]  788 	mov	r1,dpl
+      000113 D0 02            [24]  789 	pop	ar2
+      000115 D0 03            [24]  790 	pop	ar3
+      000117 D0 04            [24]  791 	pop	ar4
+      000119 D0 05            [24]  792 	pop	ar5
+      00011B D0 06            [24]  793 	pop	ar6
+      00011D D0 07            [24]  794 	pop	ar7
+      00011F 8A 82            [24]  795 	mov	dpl,r2
+      000121 8B 83            [24]  796 	mov	dph,r3
+      000123 8C F0            [24]  797 	mov	b,r4
+      000125 E9               [12]  798 	mov	a,r1
+      000126 12r00r00         [24]  799 	lcall	__gptrput
+                                    800 ;	DS1307_LIB.h:38: time->Minuto    = BCDToDecimal(I2C_read(1));
+      000129 74 05            [12]  801 	mov	a,#0x05
+      00012B 2D               [12]  802 	add	a,r5
+      00012C FA               [12]  803 	mov	r2,a
+      00012D E4               [12]  804 	clr	a
+      00012E 3E               [12]  805 	addc	a,r6
+      00012F FB               [12]  806 	mov	r3,a
+      000130 8F 04            [24]  807 	mov	ar4,r7
+      000132 75 82 01         [24]  808 	mov	dpl,#0x01
+      000135 C0 07            [24]  809 	push	ar7
+      000137 C0 06            [24]  810 	push	ar6
+      000139 C0 05            [24]  811 	push	ar5
+      00013B C0 04            [24]  812 	push	ar4
+      00013D C0 03            [24]  813 	push	ar3
+      00013F C0 02            [24]  814 	push	ar2
+      000141 12r00r6F         [24]  815 	lcall	_I2C_read
+      000144 12r00r9F         [24]  816 	lcall	_BCDToDecimal
+      000147 A9 82            [24]  817 	mov	r1,dpl
+      000149 D0 02            [24]  818 	pop	ar2
+      00014B D0 03            [24]  819 	pop	ar3
+      00014D D0 04            [24]  820 	pop	ar4
+      00014F D0 05            [24]  821 	pop	ar5
+      000151 D0 06            [24]  822 	pop	ar6
+      000153 D0 07            [24]  823 	pop	ar7
+      000155 8A 82            [24]  824 	mov	dpl,r2
+      000157 8B 83            [24]  825 	mov	dph,r3
+      000159 8C F0            [24]  826 	mov	b,r4
+      00015B E9               [12]  827 	mov	a,r1
+      00015C 12r00r00         [24]  828 	lcall	__gptrput
+                                    829 ;	DS1307_LIB.h:39: time->Hora      = BCDToDecimal(I2C_read(1));
+      00015F 74 04            [12]  830 	mov	a,#0x04
+      000161 2D               [12]  831 	add	a,r5
+      000162 FA               [12]  832 	mov	r2,a
+      000163 E4               [12]  833 	clr	a
+      000164 3E               [12]  834 	addc	a,r6
+      000165 FB               [12]  835 	mov	r3,a
+      000166 8F 04            [24]  836 	mov	ar4,r7
+      000168 75 82 01         [24]  837 	mov	dpl,#0x01
+      00016B C0 07            [24]  838 	push	ar7
+      00016D C0 06            [24]  839 	push	ar6
+      00016F C0 05            [24]  840 	push	ar5
+      000171 C0 04            [24]  841 	push	ar4
+      000173 C0 03            [24]  842 	push	ar3
+      000175 C0 02            [24]  843 	push	ar2
+      000177 12r00r6F         [24]  844 	lcall	_I2C_read
+      00017A 12r00r9F         [24]  845 	lcall	_BCDToDecimal
+      00017D A9 82            [24]  846 	mov	r1,dpl
+      00017F D0 02            [24]  847 	pop	ar2
+      000181 D0 03            [24]  848 	pop	ar3
+      000183 D0 04            [24]  849 	pop	ar4
+      000185 8A 82            [24]  850 	mov	dpl,r2
+      000187 8B 83            [24]  851 	mov	dph,r3
+      000189 8C F0            [24]  852 	mov	b,r4
+      00018B E9               [12]  853 	mov	a,r1
+      00018C 12r00r00         [24]  854 	lcall	__gptrput
+                                    855 ;	DS1307_LIB.h:40: time->DiaSemana = BCDToDecimal(I2C_read(1));
+      00018F 75 82 01         [24]  856 	mov	dpl,#0x01
+      000192 12r00r6F         [24]  857 	lcall	_I2C_read
+      000195 12r00r9F         [24]  858 	lcall	_BCDToDecimal
+      000198 AC 82            [24]  859 	mov	r4,dpl
+      00019A D0 05            [24]  860 	pop	ar5
+      00019C D0 06            [24]  861 	pop	ar6
+      00019E D0 07            [24]  862 	pop	ar7
+      0001A0 8D 82            [24]  863 	mov	dpl,r5
+      0001A2 8E 83            [24]  864 	mov	dph,r6
+      0001A4 8F F0            [24]  865 	mov	b,r7
+      0001A6 EC               [12]  866 	mov	a,r4
+      0001A7 12r00r00         [24]  867 	lcall	__gptrput
+                                    868 ;	DS1307_LIB.h:41: time->Dia       = BCDToDecimal(I2C_read(1));
+      0001AA 74 01            [12]  869 	mov	a,#0x01
+      0001AC 2D               [12]  870 	add	a,r5
+      0001AD FA               [12]  871 	mov	r2,a
+      0001AE E4               [12]  872 	clr	a
+      0001AF 3E               [12]  873 	addc	a,r6
+      0001B0 FB               [12]  874 	mov	r3,a
+      0001B1 8F 04            [24]  875 	mov	ar4,r7
+      0001B3 75 82 01         [24]  876 	mov	dpl,#0x01
+      0001B6 C0 07            [24]  877 	push	ar7
+      0001B8 C0 06            [24]  878 	push	ar6
+      0001BA C0 05            [24]  879 	push	ar5
+      0001BC C0 04            [24]  880 	push	ar4
+      0001BE C0 03            [24]  881 	push	ar3
+      0001C0 C0 02            [24]  882 	push	ar2
+      0001C2 12r00r6F         [24]  883 	lcall	_I2C_read
+      0001C5 12r00r9F         [24]  884 	lcall	_BCDToDecimal
+      0001C8 A9 82            [24]  885 	mov	r1,dpl
+      0001CA D0 02            [24]  886 	pop	ar2
+      0001CC D0 03            [24]  887 	pop	ar3
+      0001CE D0 04            [24]  888 	pop	ar4
+      0001D0 D0 05            [24]  889 	pop	ar5
+      0001D2 D0 06            [24]  890 	pop	ar6
+      0001D4 D0 07            [24]  891 	pop	ar7
+      0001D6 8A 82            [24]  892 	mov	dpl,r2
+      0001D8 8B 83            [24]  893 	mov	dph,r3
+      0001DA 8C F0            [24]  894 	mov	b,r4
+      0001DC E9               [12]  895 	mov	a,r1
+      0001DD 12r00r00         [24]  896 	lcall	__gptrput
+                                    897 ;	DS1307_LIB.h:42: time->Mes       = BCDToDecimal(I2C_read(1));
+      0001E0 74 02            [12]  898 	mov	a,#0x02
+      0001E2 2D               [12]  899 	add	a,r5
+      0001E3 FA               [12]  900 	mov	r2,a
+      0001E4 E4               [12]  901 	clr	a
+      0001E5 3E               [12]  902 	addc	a,r6
+      0001E6 FB               [12]  903 	mov	r3,a
+      0001E7 8F 04            [24]  904 	mov	ar4,r7
+      0001E9 75 82 01         [24]  905 	mov	dpl,#0x01
+      0001EC C0 07            [24]  906 	push	ar7
+      0001EE C0 06            [24]  907 	push	ar6
+      0001F0 C0 05            [24]  908 	push	ar5
+      0001F2 C0 04            [24]  909 	push	ar4
+      0001F4 C0 03            [24]  910 	push	ar3
+      0001F6 C0 02            [24]  911 	push	ar2
+      0001F8 12r00r6F         [24]  912 	lcall	_I2C_read
+      0001FB 12r00r9F         [24]  913 	lcall	_BCDToDecimal
+      0001FE A9 82            [24]  914 	mov	r1,dpl
+      000200 D0 02            [24]  915 	pop	ar2
+      000202 D0 03            [24]  916 	pop	ar3
+      000204 D0 04            [24]  917 	pop	ar4
+      000206 D0 05            [24]  918 	pop	ar5
+      000208 D0 06            [24]  919 	pop	ar6
+      00020A 8A 82            [24]  920 	mov	dpl,r2
+      00020C 8B 83            [24]  921 	mov	dph,r3
+      00020E 8C F0            [24]  922 	mov	b,r4
+      000210 E9               [12]  923 	mov	a,r1
+      000211 12r00r00         [24]  924 	lcall	__gptrput
+                                    925 ;	DS1307_LIB.h:43: time->Ano       = BCDToDecimal(I2C_read(0)); // ASK = 0
+      000214 74 03            [12]  926 	mov	a,#0x03
+      000216 2D               [12]  927 	add	a,r5
+      000217 FD               [12]  928 	mov	r5,a
+      000218 E4               [12]  929 	clr	a
+      000219 3E               [12]  930 	addc	a,r6
+      00021A FE               [12]  931 	mov	r6,a
+      00021B 75 82 00         [24]  932 	mov	dpl,#0x00
+      00021E C0 06            [24]  933 	push	ar6
+      000220 C0 05            [24]  934 	push	ar5
+      000222 12r00r6F         [24]  935 	lcall	_I2C_read
+      000225 12r00r9F         [24]  936 	lcall	_BCDToDecimal
+      000228 AC 82            [24]  937 	mov	r4,dpl
+      00022A D0 05            [24]  938 	pop	ar5
+      00022C D0 06            [24]  939 	pop	ar6
+      00022E D0 07            [24]  940 	pop	ar7
+      000230 8D 82            [24]  941 	mov	dpl,r5
+      000232 8E 83            [24]  942 	mov	dph,r6
+      000234 8F F0            [24]  943 	mov	b,r7
+      000236 EC               [12]  944 	mov	a,r4
+      000237 12r00r00         [24]  945 	lcall	__gptrput
+                                    946 ;	DS1307_LIB.h:47: I2C_stop();
+      00023A 02r00r40         [24]  947 	ljmp	_I2C_stop
+                                    948 ;------------------------------------------------------------
+                                    949 ;Allocation info for local variables in function 'DS1307_timeWrite'
+                                    950 ;------------------------------------------------------------
+                                    951 ;time                      Allocated to registers r5 r6 r7 
+                                    952 ;------------------------------------------------------------
+                                    953 ;	DS1307_LIB.h:56: void DS1307_timeWrite(struct stime *time)
+                                    954 ;	-----------------------------------------
+                                    955 ;	 function DS1307_timeWrite
+                                    956 ;	-----------------------------------------
+      00023D                        957 _DS1307_timeWrite:
+      00023D AD 82            [24]  958 	mov	r5,dpl
+      00023F AE 83            [24]  959 	mov	r6,dph
+      000241 AF F0            [24]  960 	mov	r7,b
+                                    961 ;	DS1307_LIB.h:58: I2C_start();     // Inicia comunicaci�n I2C
+      000243 C0 07            [24]  962 	push	ar7
+      000245 C0 06            [24]  963 	push	ar6
+      000247 C0 05            [24]  964 	push	ar5
+      000249 12r00r37         [24]  965 	lcall	_I2C_start
+                                    966 ;	DS1307_LIB.h:59: I2C_send(0xD0);  // Direcci�n I2C del DS1307.
+      00024C 75 82 D0         [24]  967 	mov	dpl,#0xd0
+      00024F 12r00r47         [24]  968 	lcall	_I2C_send
+                                    969 ;	DS1307_LIB.h:60: I2C_send(0x00);  // Primera direcci�n a leer/escribir.
+      000252 75 82 00         [24]  970 	mov	dpl,#0x00
+      000255 12r00r47         [24]  971 	lcall	_I2C_send
+      000258 D0 05            [24]  972 	pop	ar5
+      00025A D0 06            [24]  973 	pop	ar6
+      00025C D0 07            [24]  974 	pop	ar7
+                                    975 ;	DS1307_LIB.h:61: I2C_send(decimalToBCD(time->Segundo));
+      00025E 74 06            [12]  976 	mov	a,#0x06
+      000260 2D               [12]  977 	add	a,r5
+      000261 FA               [12]  978 	mov	r2,a
+      000262 E4               [12]  979 	clr	a
+      000263 3E               [12]  980 	addc	a,r6
+      000264 FB               [12]  981 	mov	r3,a
+      000265 8F 04            [24]  982 	mov	ar4,r7
+      000267 8A 82            [24]  983 	mov	dpl,r2
+      000269 8B 83            [24]  984 	mov	dph,r3
+      00026B 8C F0            [24]  985 	mov	b,r4
+      00026D 12r00r00         [24]  986 	lcall	__gptrget
+      000270 F5 82            [12]  987 	mov	dpl,a
+      000272 C0 07            [24]  988 	push	ar7
+      000274 C0 06            [24]  989 	push	ar6
+      000276 C0 05            [24]  990 	push	ar5
+      000278 12r00rB3         [24]  991 	lcall	_decimalToBCD
+      00027B 12r00r47         [24]  992 	lcall	_I2C_send
+      00027E D0 05            [24]  993 	pop	ar5
+      000280 D0 06            [24]  994 	pop	ar6
+      000282 D0 07            [24]  995 	pop	ar7
+                                    996 ;	DS1307_LIB.h:62: I2C_send(decimalToBCD(time->Minuto));
+      000284 74 05            [12]  997 	mov	a,#0x05
+      000286 2D               [12]  998 	add	a,r5
+      000287 FA               [12]  999 	mov	r2,a
+      000288 E4               [12] 1000 	clr	a
+      000289 3E               [12] 1001 	addc	a,r6
+      00028A FB               [12] 1002 	mov	r3,a
+      00028B 8F 04            [24] 1003 	mov	ar4,r7
+      00028D 8A 82            [24] 1004 	mov	dpl,r2
+      00028F 8B 83            [24] 1005 	mov	dph,r3
+      000291 8C F0            [24] 1006 	mov	b,r4
+      000293 12r00r00         [24] 1007 	lcall	__gptrget
+      000296 F5 82            [12] 1008 	mov	dpl,a
+      000298 C0 07            [24] 1009 	push	ar7
+      00029A C0 06            [24] 1010 	push	ar6
+      00029C C0 05            [24] 1011 	push	ar5
+      00029E 12r00rB3         [24] 1012 	lcall	_decimalToBCD
+      0002A1 12r00r47         [24] 1013 	lcall	_I2C_send
+      0002A4 D0 05            [24] 1014 	pop	ar5
+      0002A6 D0 06            [24] 1015 	pop	ar6
+      0002A8 D0 07            [24] 1016 	pop	ar7
+                                   1017 ;	DS1307_LIB.h:63: I2C_send(decimalToBCD(time->Hora));
+      0002AA 74 04            [12] 1018 	mov	a,#0x04
+      0002AC 2D               [12] 1019 	add	a,r5
+      0002AD FA               [12] 1020 	mov	r2,a
+      0002AE E4               [12] 1021 	clr	a
+      0002AF 3E               [12] 1022 	addc	a,r6
+      0002B0 FB               [12] 1023 	mov	r3,a
+      0002B1 8F 04            [24] 1024 	mov	ar4,r7
+      0002B3 8A 82            [24] 1025 	mov	dpl,r2
+      0002B5 8B 83            [24] 1026 	mov	dph,r3
+      0002B7 8C F0            [24] 1027 	mov	b,r4
+      0002B9 12r00r00         [24] 1028 	lcall	__gptrget
+      0002BC F5 82            [12] 1029 	mov	dpl,a
+      0002BE C0 07            [24] 1030 	push	ar7
+      0002C0 C0 06            [24] 1031 	push	ar6
+      0002C2 C0 05            [24] 1032 	push	ar5
+      0002C4 12r00rB3         [24] 1033 	lcall	_decimalToBCD
+      0002C7 12r00r47         [24] 1034 	lcall	_I2C_send
+      0002CA D0 05            [24] 1035 	pop	ar5
+      0002CC D0 06            [24] 1036 	pop	ar6
+      0002CE D0 07            [24] 1037 	pop	ar7
+                                   1038 ;	DS1307_LIB.h:64: I2C_send(decimalToBCD(time->DiaSemana));
+      0002D0 8D 82            [24] 1039 	mov	dpl,r5
+      0002D2 8E 83            [24] 1040 	mov	dph,r6
+      0002D4 8F F0            [24] 1041 	mov	b,r7
+      0002D6 12r00r00         [24] 1042 	lcall	__gptrget
+      0002D9 F5 82            [12] 1043 	mov	dpl,a
+      0002DB C0 07            [24] 1044 	push	ar7
+      0002DD C0 06            [24] 1045 	push	ar6
+      0002DF C0 05            [24] 1046 	push	ar5
+      0002E1 12r00rB3         [24] 1047 	lcall	_decimalToBCD
+      0002E4 12r00r47         [24] 1048 	lcall	_I2C_send
+      0002E7 D0 05            [24] 1049 	pop	ar5
+      0002E9 D0 06            [24] 1050 	pop	ar6
+      0002EB D0 07            [24] 1051 	pop	ar7
+                                   1052 ;	DS1307_LIB.h:65: I2C_send(decimalToBCD(time->Dia));
+      0002ED 74 01            [12] 1053 	mov	a,#0x01
+      0002EF 2D               [12] 1054 	add	a,r5
+      0002F0 FA               [12] 1055 	mov	r2,a
+      0002F1 E4               [12] 1056 	clr	a
+      0002F2 3E               [12] 1057 	addc	a,r6
+      0002F3 FB               [12] 1058 	mov	r3,a
+      0002F4 8F 04            [24] 1059 	mov	ar4,r7
+      0002F6 8A 82            [24] 1060 	mov	dpl,r2
+      0002F8 8B 83            [24] 1061 	mov	dph,r3
+      0002FA 8C F0            [24] 1062 	mov	b,r4
+      0002FC 12r00r00         [24] 1063 	lcall	__gptrget
+      0002FF F5 82            [12] 1064 	mov	dpl,a
+      000301 C0 07            [24] 1065 	push	ar7
+      000303 C0 06            [24] 1066 	push	ar6
+      000305 C0 05            [24] 1067 	push	ar5
+      000307 12r00rB3         [24] 1068 	lcall	_decimalToBCD
+      00030A 12r00r47         [24] 1069 	lcall	_I2C_send
+      00030D D0 05            [24] 1070 	pop	ar5
+      00030F D0 06            [24] 1071 	pop	ar6
+      000311 D0 07            [24] 1072 	pop	ar7
+                                   1073 ;	DS1307_LIB.h:66: I2C_send(decimalToBCD(time->Mes));
+      000313 74 02            [12] 1074 	mov	a,#0x02
+      000315 2D               [12] 1075 	add	a,r5
+      000316 FA               [12] 1076 	mov	r2,a
+      000317 E4               [12] 1077 	clr	a
+      000318 3E               [12] 1078 	addc	a,r6
+      000319 FB               [12] 1079 	mov	r3,a
+      00031A 8F 04            [24] 1080 	mov	ar4,r7
+      00031C 8A 82            [24] 1081 	mov	dpl,r2
+      00031E 8B 83            [24] 1082 	mov	dph,r3
+      000320 8C F0            [24] 1083 	mov	b,r4
+      000322 12r00r00         [24] 1084 	lcall	__gptrget
+      000325 F5 82            [12] 1085 	mov	dpl,a
+      000327 C0 07            [24] 1086 	push	ar7
+      000329 C0 06            [24] 1087 	push	ar6
+      00032B C0 05            [24] 1088 	push	ar5
+      00032D 12r00rB3         [24] 1089 	lcall	_decimalToBCD
+      000330 12r00r47         [24] 1090 	lcall	_I2C_send
+      000333 D0 05            [24] 1091 	pop	ar5
+      000335 D0 06            [24] 1092 	pop	ar6
+      000337 D0 07            [24] 1093 	pop	ar7
+                                   1094 ;	DS1307_LIB.h:67: I2C_send(decimalToBCD(time->Ano));
+      000339 74 03            [12] 1095 	mov	a,#0x03
+      00033B 2D               [12] 1096 	add	a,r5
+      00033C FD               [12] 1097 	mov	r5,a
+      00033D E4               [12] 1098 	clr	a
+      00033E 3E               [12] 1099 	addc	a,r6
+      00033F FE               [12] 1100 	mov	r6,a
+      000340 8D 82            [24] 1101 	mov	dpl,r5
+      000342 8E 83            [24] 1102 	mov	dph,r6
+      000344 8F F0            [24] 1103 	mov	b,r7
+      000346 12r00r00         [24] 1104 	lcall	__gptrget
+      000349 F5 82            [12] 1105 	mov	dpl,a
+      00034B 12r00rB3         [24] 1106 	lcall	_decimalToBCD
+      00034E 12r00r47         [24] 1107 	lcall	_I2C_send
+                                   1108 ;	DS1307_LIB.h:68: I2C_send(DS1307_CONF);
+      000351 75 82 80         [24] 1109 	mov	dpl,#0x80
+      000354 12r00r47         [24] 1110 	lcall	_I2C_send
+                                   1111 ;	DS1307_LIB.h:69: I2C_stop();
+      000357 02r00r40         [24] 1112 	ljmp	_I2C_stop
+                                   1113 ;------------------------------------------------------------
+                                   1114 ;Allocation info for local variables in function 'LCD_send4Bits'
+                                   1115 ;------------------------------------------------------------
+                                   1116 ;date                      Allocated to registers r7 
+                                   1117 ;------------------------------------------------------------
+                                   1118 ;	LCD_LIB.H:94: void LCD_send4Bits(char date)
+                                   1119 ;	-----------------------------------------
+                                   1120 ;	 function LCD_send4Bits
+                                   1121 ;	-----------------------------------------
+      00035A                       1122 _LCD_send4Bits:
+                                   1123 ;	LCD_LIB.H:96: LCD_DATA_4 = (date & 0x10);
+      00035A E5 82            [12] 1124 	mov	a,dpl
+      00035C FF               [12] 1125 	mov	r7,a
+      00035D A2 E4            [12] 1126 	mov	c,acc[4]
+      00035F 92*00            [24] 1127 	mov  _LCD_send4Bits_sloc0_1_0,c
+      000361 92 94            [24] 1128 	mov	_P1_4,c
+                                   1129 ;	LCD_LIB.H:97: LCD_DATA_5 = (date & 0x20);
+      000363 EF               [12] 1130 	mov	a,r7
+      000364 A2 E5            [12] 1131 	mov	c,acc[5]
+      000366 92*00            [24] 1132 	mov  _LCD_send4Bits_sloc0_1_0,c
+      000368 92 95            [24] 1133 	mov	_P1_5,c
+                                   1134 ;	LCD_LIB.H:98: LCD_DATA_6 = (date & 0x40);
+      00036A EF               [12] 1135 	mov	a,r7
+      00036B A2 E6            [12] 1136 	mov	c,acc[6]
+      00036D 92*00            [24] 1137 	mov  _LCD_send4Bits_sloc0_1_0,c
+      00036F 92 96            [24] 1138 	mov	_P1_6,c
+                                   1139 ;	LCD_LIB.H:99: LCD_DATA_7 = (date & 0x80);
+      000371 EF               [12] 1140 	mov	a,r7
+      000372 33               [12] 1141 	rlc	a
+      000373 92*00            [24] 1142 	mov  _LCD_send4Bits_sloc0_1_0,c
+      000375 92 97            [24] 1143 	mov	_P1_7,c
+                                   1144 ;	LCD_LIB.H:100: LCD_EN     = 1;
+      000377 D2 91            [12] 1145 	setb	_P1_1
+                                   1146 ;	LCD_LIB.H:101: delay_ms(1);
+      000379 90 00 01         [24] 1147 	mov	dptr,#0x0001
+      00037C 12r00r21         [24] 1148 	lcall	_delay_ms
+                                   1149 ;	LCD_LIB.H:102: LCD_EN     = 0;
+      00037F C2 91            [12] 1150 	clr	_P1_1
+                                   1151 ;	LCD_LIB.H:103: delay_ms(1);
+      000381 90 00 01         [24] 1152 	mov	dptr,#0x0001
+      000384 02r00r21         [24] 1153 	ljmp	_delay_ms
+                                   1154 ;------------------------------------------------------------
+                                   1155 ;Allocation info for local variables in function 'LCD_send'
+                                   1156 ;------------------------------------------------------------
+                                   1157 ;date                      Allocated to registers r7 
+                                   1158 ;------------------------------------------------------------
+                                   1159 ;	LCD_LIB.H:106: void LCD_send(char date)
+                                   1160 ;	-----------------------------------------
+                                   1161 ;	 function LCD_send
+                                   1162 ;	-----------------------------------------
+      000387                       1163 _LCD_send:
+                                   1164 ;	LCD_LIB.H:108: LCD_send4Bits(date);
+      000387 AF 82            [24] 1165 	mov  r7,dpl
+      000389 C0 07            [24] 1166 	push	ar7
+      00038B 12r03r5A         [24] 1167 	lcall	_LCD_send4Bits
+      00038E D0 07            [24] 1168 	pop	ar7
+                                   1169 ;	LCD_LIB.H:109: LCD_send4Bits(date<<4);
+      000390 EF               [12] 1170 	mov	a,r7
+      000391 C4               [12] 1171 	swap	a
+      000392 54 F0            [12] 1172 	anl	a,#0xf0
+      000394 F5 82            [12] 1173 	mov	dpl,a
+      000396 02r03r5A         [24] 1174 	ljmp	_LCD_send4Bits
+                                   1175 ;------------------------------------------------------------
+                                   1176 ;Allocation info for local variables in function 'LCD_command'
+                                   1177 ;------------------------------------------------------------
+                                   1178 ;comm                      Allocated to registers r7 
+                                   1179 ;------------------------------------------------------------
+                                   1180 ;	LCD_LIB.H:122: void LCD_command(char comm)
+                                   1181 ;	-----------------------------------------
+                                   1182 ;	 function LCD_command
+                                   1183 ;	-----------------------------------------
+      000399                       1184 _LCD_command:
+      000399 AF 82            [24] 1185 	mov	r7,dpl
+                                   1186 ;	LCD_LIB.H:124: LCD_RS = LCD_CmdMode;
+      00039B C2 90            [12] 1187 	clr	_P1_0
+                                   1188 ;	LCD_LIB.H:125: LCD_send(comm);
+      00039D 8F 82            [24] 1189 	mov	dpl,r7
+      00039F 02r03r87         [24] 1190 	ljmp	_LCD_send
+                                   1191 ;------------------------------------------------------------
+                                   1192 ;Allocation info for local variables in function 'LCD_putChar'
+                                   1193 ;------------------------------------------------------------
+                                   1194 ;chr                       Allocated to registers r7 
+                                   1195 ;------------------------------------------------------------
+                                   1196 ;	LCD_LIB.H:128: void LCD_putChar(char chr)
+                                   1197 ;	-----------------------------------------
+                                   1198 ;	 function LCD_putChar
+                                   1199 ;	-----------------------------------------
+      0003A2                       1200 _LCD_putChar:
+      0003A2 AF 82            [24] 1201 	mov	r7,dpl
+                                   1202 ;	LCD_LIB.H:130: LCD_RS = LCD_CharMode;
+      0003A4 D2 90            [12] 1203 	setb	_P1_0
+                                   1204 ;	LCD_LIB.H:131: LCD_send(chr);
+      0003A6 8F 82            [24] 1205 	mov	dpl,r7
+      0003A8 02r03r87         [24] 1206 	ljmp	_LCD_send
+                                   1207 ;------------------------------------------------------------
+                                   1208 ;Allocation info for local variables in function 'LCD_gotoXY'
+                                   1209 ;------------------------------------------------------------
+                                   1210 ;fila                      Allocated with name '_LCD_gotoXY_PARM_2'
+                                   1211 ;columna                   Allocated to registers r7 
+                                   1212 ;------------------------------------------------------------
+                                   1213 ;	LCD_LIB.H:135: void LCD_gotoXY(char columna, char fila)
+                                   1214 ;	-----------------------------------------
+                                   1215 ;	 function LCD_gotoXY
+                                   1216 ;	-----------------------------------------
+      0003AB                       1217 _LCD_gotoXY:
+      0003AB AF 82            [24] 1218 	mov	r7,dpl
+                                   1219 ;	LCD_LIB.H:137: if(fila == 0)
+      0003AD E5*07            [12] 1220 	mov	a,_LCD_gotoXY_PARM_2
+      0003AF 70 08            [24] 1221 	jnz	00110$
+                                   1222 ;	LCD_LIB.H:138: LCD_command(LCD_SET_DISPLAY_ADDRESS + columna + LCD_ROW_0);
+      0003B1 74 80            [12] 1223 	mov	a,#0x80
+      0003B3 2F               [12] 1224 	add	a,r7
+      0003B4 F5 82            [12] 1225 	mov	dpl,a
+      0003B6 02r03r99         [24] 1226 	ljmp	_LCD_command
+      0003B9                       1227 00110$:
+                                   1228 ;	LCD_LIB.H:139: else if (fila == 1)
+      0003B9 74 01            [12] 1229 	mov	a,#0x01
+      0003BB B5*07 08         [24] 1230 	cjne	a,_LCD_gotoXY_PARM_2,00107$
+                                   1231 ;	LCD_LIB.H:140: LCD_command(LCD_SET_DISPLAY_ADDRESS + columna + LCD_ROW_1);
+      0003BE 74 C0            [12] 1232 	mov	a,#0xc0
+      0003C0 2F               [12] 1233 	add	a,r7
+      0003C1 F5 82            [12] 1234 	mov	dpl,a
+      0003C3 02r03r99         [24] 1235 	ljmp	_LCD_command
+      0003C6                       1236 00107$:
+                                   1237 ;	LCD_LIB.H:141: else if (fila == 2)
+      0003C6 74 02            [12] 1238 	mov	a,#0x02
+      0003C8 B5*07 08         [24] 1239 	cjne	a,_LCD_gotoXY_PARM_2,00104$
+                                   1240 ;	LCD_LIB.H:142: LCD_command(LCD_SET_DISPLAY_ADDRESS + columna + LCD_ROW_2);
+      0003CB 74 94            [12] 1241 	mov	a,#0x94
+      0003CD 2F               [12] 1242 	add	a,r7
+      0003CE F5 82            [12] 1243 	mov	dpl,a
+      0003D0 02r03r99         [24] 1244 	ljmp	_LCD_command
+      0003D3                       1245 00104$:
+                                   1246 ;	LCD_LIB.H:143: else if (fila == 3)
+      0003D3 74 03            [12] 1247 	mov	a,#0x03
+      0003D5 B5*07 08         [24] 1248 	cjne	a,_LCD_gotoXY_PARM_2,00112$
+                                   1249 ;	LCD_LIB.H:144: LCD_command(LCD_SET_DISPLAY_ADDRESS + columna + LCD_ROW_3);
+      0003D8 74 D4            [12] 1250 	mov	a,#0xd4
+      0003DA 2F               [12] 1251 	add	a,r7
+      0003DB F5 82            [12] 1252 	mov	dpl,a
+      0003DD 02r03r99         [24] 1253 	ljmp	_LCD_command
+      0003E0                       1254 00112$:
+      0003E0 22               [24] 1255 	ret
+                                   1256 ;------------------------------------------------------------
+                                   1257 ;Allocation info for local variables in function 'LCD_cursorHome'
+                                   1258 ;------------------------------------------------------------
+                                   1259 ;	LCD_LIB.H:147: void LCD_cursorHome(void)
+                                   1260 ;	-----------------------------------------
+                                   1261 ;	 function LCD_cursorHome
+                                   1262 ;	-----------------------------------------
+      0003E1                       1263 _LCD_cursorHome:
+                                   1264 ;	LCD_LIB.H:149: LCD_command(LCD_DISPLAY_AND_CURSOR_HOME);
+      0003E1 75 82 02         [24] 1265 	mov	dpl,#0x02
+      0003E4 02r03r99         [24] 1266 	ljmp	_LCD_command
+                                   1267 ;------------------------------------------------------------
+                                   1268 ;Allocation info for local variables in function 'LCD_clear'
+                                   1269 ;------------------------------------------------------------
+                                   1270 ;	LCD_LIB.H:152: void LCD_clear(void)
+                                   1271 ;	-----------------------------------------
+                                   1272 ;	 function LCD_clear
+                                   1273 ;	-----------------------------------------
+      0003E7                       1274 _LCD_clear:
+                                   1275 ;	LCD_LIB.H:154: LCD_command(LCD_CLEAR_DISPLAY);
+      0003E7 75 82 01         [24] 1276 	mov	dpl,#0x01
+      0003EA 02r03r99         [24] 1277 	ljmp	_LCD_command
+                                   1278 ;------------------------------------------------------------
+                                   1279 ;Allocation info for local variables in function 'LCD_cursorUnderline'
+                                   1280 ;------------------------------------------------------------
+                                   1281 ;	LCD_LIB.H:157: void LCD_cursorUnderline(void)
+                                   1282 ;	-----------------------------------------
+                                   1283 ;	 function LCD_cursorUnderline
+                                   1284 ;	-----------------------------------------
+      0003ED                       1285 _LCD_cursorUnderline:
+                                   1286 ;	LCD_LIB.H:159: LCD_command(LCD_DISPLAY_ON_OFF_AND_CURSOR + LCD_DISPLAY_ON + LCD_CURSOR_UNDERLINE_ON);
+      0003ED 75 82 0E         [24] 1287 	mov	dpl,#0x0e
+      0003F0 02r03r99         [24] 1288 	ljmp	_LCD_command
+                                   1289 ;------------------------------------------------------------
+                                   1290 ;Allocation info for local variables in function 'LCD_cursorBlink'
+                                   1291 ;------------------------------------------------------------
+                                   1292 ;	LCD_LIB.H:162: void LCD_cursorBlink(void)
+                                   1293 ;	-----------------------------------------
+                                   1294 ;	 function LCD_cursorBlink
+                                   1295 ;	-----------------------------------------
+      0003F3                       1296 _LCD_cursorBlink:
+                                   1297 ;	LCD_LIB.H:164: LCD_command(LCD_DISPLAY_ON_OFF_AND_CURSOR + LCD_DISPLAY_ON + LCD_CURSOR_BLINK_ON);
+      0003F3 75 82 0D         [24] 1298 	mov	dpl,#0x0d
+      0003F6 02r03r99         [24] 1299 	ljmp	_LCD_command
+                                   1300 ;------------------------------------------------------------
+                                   1301 ;Allocation info for local variables in function 'LCD_cursorUnderlineBlink'
+                                   1302 ;------------------------------------------------------------
+                                   1303 ;	LCD_LIB.H:167: void LCD_cursorUnderlineBlink(void)
+                                   1304 ;	-----------------------------------------
+                                   1305 ;	 function LCD_cursorUnderlineBlink
+                                   1306 ;	-----------------------------------------
+      0003F9                       1307 _LCD_cursorUnderlineBlink:
+                                   1308 ;	LCD_LIB.H:169: LCD_command(LCD_DISPLAY_ON_OFF_AND_CURSOR + LCD_DISPLAY_ON + LCD_CURSOR_UNDERLINE_ON + LCD_CURSOR_BLINK_ON);
+      0003F9 75 82 0F         [24] 1309 	mov	dpl,#0x0f
+      0003FC 02r03r99         [24] 1310 	ljmp	_LCD_command
+                                   1311 ;------------------------------------------------------------
+                                   1312 ;Allocation info for local variables in function 'LCD_cursorOff'
+                                   1313 ;------------------------------------------------------------
+                                   1314 ;	LCD_LIB.H:172: void LCD_cursorOff(void)
+                                   1315 ;	-----------------------------------------
+                                   1316 ;	 function LCD_cursorOff
+                                   1317 ;	-----------------------------------------
+      0003FF                       1318 _LCD_cursorOff:
+                                   1319 ;	LCD_LIB.H:174: LCD_command(LCD_DISPLAY_ON_OFF_AND_CURSOR + LCD_DISPLAY_ON + LCD_CURSOR_UNDERLINE_OFF + LCD_CURSOR_BLINK_OFF);
+      0003FF 75 82 0C         [24] 1320 	mov	dpl,#0x0c
+      000402 02r03r99         [24] 1321 	ljmp	_LCD_command
+                                   1322 ;------------------------------------------------------------
+                                   1323 ;Allocation info for local variables in function 'LCD_displayOn'
+                                   1324 ;------------------------------------------------------------
+                                   1325 ;	LCD_LIB.H:177: void LCD_displayOn(void)
+                                   1326 ;	-----------------------------------------
+                                   1327 ;	 function LCD_displayOn
+                                   1328 ;	-----------------------------------------
+      000405                       1329 _LCD_displayOn:
+                                   1330 ;	LCD_LIB.H:179: LCD_command(LCD_DISPLAY_ON_OFF_AND_CURSOR + LCD_DISPLAY_ON);
+      000405 75 82 0C         [24] 1331 	mov	dpl,#0x0c
+      000408 02r03r99         [24] 1332 	ljmp	_LCD_command
+                                   1333 ;------------------------------------------------------------
+                                   1334 ;Allocation info for local variables in function 'LCD_displayOff'
+                                   1335 ;------------------------------------------------------------
+                                   1336 ;	LCD_LIB.H:182: void LCD_displayOff(void)
+                                   1337 ;	-----------------------------------------
+                                   1338 ;	 function LCD_displayOff
+                                   1339 ;	-----------------------------------------
+      00040B                       1340 _LCD_displayOff:
+                                   1341 ;	LCD_LIB.H:184: LCD_command(LCD_DISPLAY_ON_OFF_AND_CURSOR + LCD_DISPLAY_OFF);
+      00040B 75 82 08         [24] 1342 	mov	dpl,#0x08
+      00040E 02r03r99         [24] 1343 	ljmp	_LCD_command
+                                   1344 ;------------------------------------------------------------
+                                   1345 ;Allocation info for local variables in function 'LCD_displayShiftRight'
+                                   1346 ;------------------------------------------------------------
+                                   1347 ;	LCD_LIB.H:198: void LCD_displayShiftRight(void)
+                                   1348 ;	-----------------------------------------
+                                   1349 ;	 function LCD_displayShiftRight
+                                   1350 ;	-----------------------------------------
+      000411                       1351 _LCD_displayShiftRight:
+                                   1352 ;	LCD_LIB.H:200: LCD_command(LCD_DISPLAY_AND_CURSOR_SHIFT + LCD_DISPLAY_SHIFT + LCD_RIGHT);
+      000411 75 82 1C         [24] 1353 	mov	dpl,#0x1c
+      000414 02r03r99         [24] 1354 	ljmp	_LCD_command
+                                   1355 ;------------------------------------------------------------
+                                   1356 ;Allocation info for local variables in function 'LCD_displayShiftLeft'
+                                   1357 ;------------------------------------------------------------
+                                   1358 ;	LCD_LIB.H:203: void LCD_displayShiftLeft(void)
+                                   1359 ;	-----------------------------------------
+                                   1360 ;	 function LCD_displayShiftLeft
+                                   1361 ;	-----------------------------------------
+      000417                       1362 _LCD_displayShiftLeft:
+                                   1363 ;	LCD_LIB.H:205: LCD_command(LCD_DISPLAY_AND_CURSOR_SHIFT + LCD_DISPLAY_SHIFT + LCD_LEFT);
+      000417 75 82 18         [24] 1364 	mov	dpl,#0x18
+      00041A 02r03r99         [24] 1365 	ljmp	_LCD_command
+                                   1366 ;------------------------------------------------------------
+                                   1367 ;Allocation info for local variables in function 'LCD_displayCursorRight'
+                                   1368 ;------------------------------------------------------------
+                                   1369 ;	LCD_LIB.H:208: void LCD_displayCursorRight(void)
+                                   1370 ;	-----------------------------------------
+                                   1371 ;	 function LCD_displayCursorRight
+                                   1372 ;	-----------------------------------------
+      00041D                       1373 _LCD_displayCursorRight:
+                                   1374 ;	LCD_LIB.H:210: LCD_command(LCD_DISPLAY_AND_CURSOR_SHIFT + LCD_CURSOR_MOVE + LCD_RIGHT);
+      00041D 75 82 14         [24] 1375 	mov	dpl,#0x14
+      000420 02r03r99         [24] 1376 	ljmp	_LCD_command
+                                   1377 ;------------------------------------------------------------
+                                   1378 ;Allocation info for local variables in function 'LCD_displayCursorLeft'
+                                   1379 ;------------------------------------------------------------
+                                   1380 ;	LCD_LIB.H:213: void LCD_displayCursorLeft(void)
+                                   1381 ;	-----------------------------------------
+                                   1382 ;	 function LCD_displayCursorLeft
+                                   1383 ;	-----------------------------------------
+      000423                       1384 _LCD_displayCursorLeft:
+                                   1385 ;	LCD_LIB.H:215: LCD_command(LCD_DISPLAY_AND_CURSOR_SHIFT + LCD_CURSOR_MOVE + LCD_LEFT);
+      000423 75 82 10         [24] 1386 	mov	dpl,#0x10
+      000426 02r03r99         [24] 1387 	ljmp	_LCD_command
+                                   1388 ;------------------------------------------------------------
+                                   1389 ;Allocation info for local variables in function 'LCD_createChar'
+                                   1390 ;------------------------------------------------------------
+                                   1391 ;chardata0                 Allocated with name '_LCD_createChar_PARM_2'
+                                   1392 ;chardata1                 Allocated with name '_LCD_createChar_PARM_3'
+                                   1393 ;chardata2                 Allocated with name '_LCD_createChar_PARM_4'
+                                   1394 ;chardata3                 Allocated with name '_LCD_createChar_PARM_5'
+                                   1395 ;chardata4                 Allocated with name '_LCD_createChar_PARM_6'
+                                   1396 ;chardata5                 Allocated with name '_LCD_createChar_PARM_7'
+                                   1397 ;chardata6                 Allocated with name '_LCD_createChar_PARM_8'
+                                   1398 ;chardata7                 Allocated with name '_LCD_createChar_PARM_9'
+                                   1399 ;charnum                   Allocated to registers r7 
+                                   1400 ;------------------------------------------------------------
+                                   1401 ;	LCD_LIB.H:218: void LCD_createChar(char charnum,
+                                   1402 ;	-----------------------------------------
+                                   1403 ;	 function LCD_createChar
+                                   1404 ;	-----------------------------------------
+      000429                       1405 _LCD_createChar:
+                                   1406 ;	LCD_LIB.H:228: charnum = charnum & 0x07;  // Previene errores sin charnum > 7;
+                                   1407 ;	LCD_LIB.H:229: charnum = charnum << 3;
+      000429 E5 82            [12] 1408 	mov	a,dpl
+      00042B 54 07            [12] 1409 	anl	a,#0x07
+      00042D C4               [12] 1410 	swap	a
+      00042E 03               [12] 1411 	rr	a
+      00042F 54 F8            [12] 1412 	anl	a,#0xf8
+                                   1413 ;	LCD_LIB.H:230: LCD_command(LCD_SET_CGRAM_ADDRESS + charnum);
+      000431 24 40            [12] 1414 	add	a,#0x40
+      000433 F5 82            [12] 1415 	mov	dpl,a
+      000435 12r03r99         [24] 1416 	lcall	_LCD_command
+                                   1417 ;	LCD_LIB.H:231: LCD_putChar(chardata0);
+      000438 85*08 82         [24] 1418 	mov	dpl,_LCD_createChar_PARM_2
+      00043B 12r03rA2         [24] 1419 	lcall	_LCD_putChar
+                                   1420 ;	LCD_LIB.H:232: LCD_putChar(chardata1);
+      00043E 85*09 82         [24] 1421 	mov	dpl,_LCD_createChar_PARM_3
+      000441 12r03rA2         [24] 1422 	lcall	_LCD_putChar
+                                   1423 ;	LCD_LIB.H:233: LCD_putChar(chardata2);
+      000444 85*0A 82         [24] 1424 	mov	dpl,_LCD_createChar_PARM_4
+      000447 12r03rA2         [24] 1425 	lcall	_LCD_putChar
+                                   1426 ;	LCD_LIB.H:234: LCD_putChar(chardata3);
+      00044A 85*0B 82         [24] 1427 	mov	dpl,_LCD_createChar_PARM_5
+      00044D 12r03rA2         [24] 1428 	lcall	_LCD_putChar
+                                   1429 ;	LCD_LIB.H:235: LCD_putChar(chardata4);
+      000450 85*0C 82         [24] 1430 	mov	dpl,_LCD_createChar_PARM_6
+      000453 12r03rA2         [24] 1431 	lcall	_LCD_putChar
+                                   1432 ;	LCD_LIB.H:236: LCD_putChar(chardata5);
+      000456 85*0D 82         [24] 1433 	mov	dpl,_LCD_createChar_PARM_7
+      000459 12r03rA2         [24] 1434 	lcall	_LCD_putChar
+                                   1435 ;	LCD_LIB.H:237: LCD_putChar(chardata6);
+      00045C 85*0E 82         [24] 1436 	mov	dpl,_LCD_createChar_PARM_8
+      00045F 12r03rA2         [24] 1437 	lcall	_LCD_putChar
+                                   1438 ;	LCD_LIB.H:238: LCD_putChar(chardata7);
+      000462 85*0F 82         [24] 1439 	mov	dpl,_LCD_createChar_PARM_9
+                                   1440 ;	LCD_LIB.H:239: LCD_clear;    // Necesario para finalizar la creacion de Custom Character.
+      000465 02r03rA2         [24] 1441 	ljmp	_LCD_putChar
+                                   1442 ;------------------------------------------------------------
+                                   1443 ;Allocation info for local variables in function 'LCD_print'
+                                   1444 ;------------------------------------------------------------
+                                   1445 ;str                       Allocated to registers 
+                                   1446 ;------------------------------------------------------------
+                                   1447 ;	LCD_LIB.H:243: void LCD_print(char *str)
+                                   1448 ;	-----------------------------------------
+                                   1449 ;	 function LCD_print
+                                   1450 ;	-----------------------------------------
+      000468                       1451 _LCD_print:
+      000468 AD 82            [24] 1452 	mov	r5,dpl
+      00046A AE 83            [24] 1453 	mov	r6,dph
+      00046C AF F0            [24] 1454 	mov	r7,b
+                                   1455 ;	LCD_LIB.H:245: while(*str)
+      00046E                       1456 00101$:
+      00046E 8D 82            [24] 1457 	mov	dpl,r5
+      000470 8E 83            [24] 1458 	mov	dph,r6
+      000472 8F F0            [24] 1459 	mov	b,r7
+      000474 12r00r00         [24] 1460 	lcall	__gptrget
+      000477 FC               [12] 1461 	mov	r4,a
+      000478 60 18            [24] 1462 	jz	00104$
+                                   1463 ;	LCD_LIB.H:247: LCD_putChar(*str);
+      00047A 8C 82            [24] 1464 	mov	dpl,r4
+      00047C C0 07            [24] 1465 	push	ar7
+      00047E C0 06            [24] 1466 	push	ar6
+      000480 C0 05            [24] 1467 	push	ar5
+      000482 12r03rA2         [24] 1468 	lcall	_LCD_putChar
+      000485 D0 05            [24] 1469 	pop	ar5
+      000487 D0 06            [24] 1470 	pop	ar6
+      000489 D0 07            [24] 1471 	pop	ar7
+                                   1472 ;	LCD_LIB.H:248: str++;
+      00048B 0D               [12] 1473 	inc	r5
+      00048C BD 00 DF         [24] 1474 	cjne	r5,#0x00,00101$
+      00048F 0E               [12] 1475 	inc	r6
+      000490 80 DC            [24] 1476 	sjmp	00101$
+      000492                       1477 00104$:
+      000492 22               [24] 1478 	ret
+                                   1479 ;------------------------------------------------------------
+                                   1480 ;Allocation info for local variables in function 'LCD_init'
+                                   1481 ;------------------------------------------------------------
+                                   1482 ;	LCD_LIB.H:252: void LCD_init(void)
+                                   1483 ;	-----------------------------------------
+                                   1484 ;	 function LCD_init
+                                   1485 ;	-----------------------------------------
+      000493                       1486 _LCD_init:
+                                   1487 ;	LCD_LIB.H:255: LCD_DATA_4 = 0;              // Pines iniciados como salida.
+      000493 C2 94            [12] 1488 	clr	_P1_4
+                                   1489 ;	LCD_LIB.H:256: LCD_DATA_5 = 0;
+      000495 C2 95            [12] 1490 	clr	_P1_5
+                                   1491 ;	LCD_LIB.H:257: LCD_DATA_6 = 0;
+      000497 C2 96            [12] 1492 	clr	_P1_6
+                                   1493 ;	LCD_LIB.H:258: LCD_DATA_7 = 0;
+      000499 C2 97            [12] 1494 	clr	_P1_7
+                                   1495 ;	LCD_LIB.H:259: LCD_RS     = 0;
+      00049B C2 90            [12] 1496 	clr	_P1_0
+                                   1497 ;	LCD_LIB.H:260: LCD_EN     = 0;
+      00049D C2 91            [12] 1498 	clr	_P1_1
+                                   1499 ;	LCD_LIB.H:268: delay_ms(30);    // Espera 15 ms o más.
+      00049F 90 00 1E         [24] 1500 	mov	dptr,#0x001e
+      0004A2 12r00r21         [24] 1501 	lcall	_delay_ms
+                                   1502 ;	LCD_LIB.H:272: LCD_send4Bits(0b00110000);
+      0004A5 75 82 30         [24] 1503 	mov	dpl,#0x30
+      0004A8 12r03r5A         [24] 1504 	lcall	_LCD_send4Bits
+                                   1505 ;	LCD_LIB.H:273: delay_ms(5);  // Espera > 4.1 ms
+      0004AB 90 00 05         [24] 1506 	mov	dptr,#0x0005
+      0004AE 12r00r21         [24] 1507 	lcall	_delay_ms
+                                   1508 ;	LCD_LIB.H:274: LCD_send4Bits(0b00110000);
+      0004B1 75 82 30         [24] 1509 	mov	dpl,#0x30
+      0004B4 12r03r5A         [24] 1510 	lcall	_LCD_send4Bits
+                                   1511 ;	LCD_LIB.H:275: delay_ms(1);  // Espera > 100 us
+      0004B7 90 00 01         [24] 1512 	mov	dptr,#0x0001
+      0004BA 12r00r21         [24] 1513 	lcall	_delay_ms
+                                   1514 ;	LCD_LIB.H:276: LCD_send4Bits(0b00110000);
+      0004BD 75 82 30         [24] 1515 	mov	dpl,#0x30
+      0004C0 12r03r5A         [24] 1516 	lcall	_LCD_send4Bits
+                                   1517 ;	LCD_LIB.H:277: LCD_send4Bits(0b00100000);
+      0004C3 75 82 20         [24] 1518 	mov	dpl,#0x20
+      0004C6 12r03r5A         [24] 1519 	lcall	_LCD_send4Bits
+                                   1520 ;	LCD_LIB.H:278: LCD_command(LCD_FUNCTION_SET + LCD_4BIT_INTERFACE + LCD_2LINES + LCD_F_FONT_5_8);
+      0004C9 75 82 28         [24] 1521 	mov	dpl,#0x28
+      0004CC 12r03r99         [24] 1522 	lcall	_LCD_command
+                                   1523 ;	LCD_LIB.H:290: LCD_command(LCD_DISPLAY_ON_OFF_AND_CURSOR + LCD_DISPLAY_OFF);
+      0004CF 75 82 08         [24] 1524 	mov	dpl,#0x08
+      0004D2 12r03r99         [24] 1525 	lcall	_LCD_command
+                                   1526 ;	LCD_LIB.H:291: LCD_command(LCD_CHARACTER_ENTRY_MODE + LCD_INCREMENT + LCD_DISPLAY_SHIFT_OFF);
+      0004D5 75 82 06         [24] 1527 	mov	dpl,#0x06
+      0004D8 12r03r99         [24] 1528 	lcall	_LCD_command
+                                   1529 ;	LCD_LIB.H:292: LCD_command(LCD_DISPLAY_ON_OFF_AND_CURSOR + LCD_DISPLAY_ON);
+      0004DB 75 82 0C         [24] 1530 	mov	dpl,#0x0c
+      0004DE 12r03r99         [24] 1531 	lcall	_LCD_command
+                                   1532 ;	LCD_LIB.H:293: LCD_command(LCD_CLEAR_DISPLAY);
+      0004E1 75 82 01         [24] 1533 	mov	dpl,#0x01
+      0004E4 02r03r99         [24] 1534 	ljmp	_LCD_command
+                                   1535 ;------------------------------------------------------------
+                                   1536 ;Allocation info for local variables in function 'LCDPrintDiaSemana'
+                                   1537 ;------------------------------------------------------------
+                                   1538 ;	main.c:57: void LCDPrintDiaSemana(void)
+                                   1539 ;	-----------------------------------------
+                                   1540 ;	 function LCDPrintDiaSemana
+                                   1541 ;	-----------------------------------------
+      0004E7                       1542 _LCDPrintDiaSemana:
+                                   1543 ;	main.c:59: switch(ahora.DiaSemana)
+      0004E7 E5*00            [12] 1544 	mov	a,_ahora
+      0004E9 FF               [12] 1545 	mov	r7,a
+      0004EA 24 F8            [12] 1546 	add	a,#0xff - 0x07
+      0004EC 50 01            [24] 1547 	jnc	00114$
+      0004EE 22               [24] 1548 	ret
+      0004EF                       1549 00114$:
+      0004EF EF               [12] 1550 	mov	a,r7
+      0004F0 24 0A            [12] 1551 	add	a,#(00115$-3-.)
+      0004F2 83               [24] 1552 	movc	a,@a+pc
+      0004F3 F5 82            [12] 1553 	mov	dpl,a
+      0004F5 EF               [12] 1554 	mov	a,r7
+      0004F6 24 0C            [12] 1555 	add	a,#(00116$-3-.)
+      0004F8 83               [24] 1556 	movc	a,@a+pc
+      0004F9 F5 83            [12] 1557 	mov	dph,a
+      0004FB E4               [12] 1558 	clr	a
+      0004FC 73               [24] 1559 	jmp	@a+dptr
+      0004FD                       1560 00115$:
+      0004FDr4C                    1561 	.db	00108$
+      0004FEr0D                    1562 	.db	00101$
+      0004FFr16                    1563 	.db	00102$
+      000500r1F                    1564 	.db	00103$
+      000501r28                    1565 	.db	00104$
+      000502r31                    1566 	.db	00105$
+      000503r3A                    1567 	.db	00106$
+      000504r43                    1568 	.db	00107$
+      000505                       1569 00116$:
+      000505s05                    1570 	.db	00108$>>8
+      000506s05                    1571 	.db	00101$>>8
+      000507s05                    1572 	.db	00102$>>8
+      000508s05                    1573 	.db	00103$>>8
+      000509s05                    1574 	.db	00104$>>8
+      00050As05                    1575 	.db	00105$>>8
+      00050Bs05                    1576 	.db	00106$>>8
+      00050Cs05                    1577 	.db	00107$>>8
+                                   1578 ;	main.c:61: case 1:
+      00050D                       1579 00101$:
+                                   1580 ;	main.c:62: LCD_print("DOM");
+      00050D 90r00r00         [24] 1581 	mov	dptr,#___str_0
+      000510 75 F0 80         [24] 1582 	mov	b,#0x80
+                                   1583 ;	main.c:63: break;
+                                   1584 ;	main.c:64: case 2:
+      000513 02r04r68         [24] 1585 	ljmp	_LCD_print
+      000516                       1586 00102$:
+                                   1587 ;	main.c:65: LCD_print("LUN");
+      000516 90r00r04         [24] 1588 	mov	dptr,#___str_1
+      000519 75 F0 80         [24] 1589 	mov	b,#0x80
+                                   1590 ;	main.c:66: break;
+                                   1591 ;	main.c:67: case 3:
+      00051C 02r04r68         [24] 1592 	ljmp	_LCD_print
+      00051F                       1593 00103$:
+                                   1594 ;	main.c:68: LCD_print("MAR");
+      00051F 90r00r08         [24] 1595 	mov	dptr,#___str_2
+      000522 75 F0 80         [24] 1596 	mov	b,#0x80
+                                   1597 ;	main.c:69: break;
+                                   1598 ;	main.c:70: case 4:
+      000525 02r04r68         [24] 1599 	ljmp	_LCD_print
+      000528                       1600 00104$:
+                                   1601 ;	main.c:71: LCD_print("MIE");
+      000528 90r00r0C         [24] 1602 	mov	dptr,#___str_3
+      00052B 75 F0 80         [24] 1603 	mov	b,#0x80
+                                   1604 ;	main.c:72: break;
+                                   1605 ;	main.c:73: case 5:
+      00052E 02r04r68         [24] 1606 	ljmp	_LCD_print
+      000531                       1607 00105$:
+                                   1608 ;	main.c:74: LCD_print("JUE");
+      000531 90r00r10         [24] 1609 	mov	dptr,#___str_4
+      000534 75 F0 80         [24] 1610 	mov	b,#0x80
+                                   1611 ;	main.c:75: break;
+                                   1612 ;	main.c:76: case 6:
+      000537 02r04r68         [24] 1613 	ljmp	_LCD_print
+      00053A                       1614 00106$:
+                                   1615 ;	main.c:77: LCD_print("VIE");
+      00053A 90r00r14         [24] 1616 	mov	dptr,#___str_5
+      00053D 75 F0 80         [24] 1617 	mov	b,#0x80
+                                   1618 ;	main.c:78: break;
+                                   1619 ;	main.c:79: case 7:
+      000540 02r04r68         [24] 1620 	ljmp	_LCD_print
+      000543                       1621 00107$:
+                                   1622 ;	main.c:80: LCD_print("SAB");
+      000543 90r00r18         [24] 1623 	mov	dptr,#___str_6
+      000546 75 F0 80         [24] 1624 	mov	b,#0x80
+      000549 12r04r68         [24] 1625 	lcall	_LCD_print
+                                   1626 ;	main.c:82: }
+      00054C                       1627 00108$:
+      00054C 22               [24] 1628 	ret
+                                   1629 ;------------------------------------------------------------
+                                   1630 ;Allocation info for local variables in function 'bisiesto'
+                                   1631 ;------------------------------------------------------------
+                                   1632 ;	main.c:101: bool bisiesto(void)
+                                   1633 ;	-----------------------------------------
+                                   1634 ;	 function bisiesto
+                                   1635 ;	-----------------------------------------
+      00054D                       1636 _bisiesto:
+                                   1637 ;	main.c:104: return !(ahora.Ano%4);
+      00054D 74 03            [12] 1638 	mov	a,#0x03
+      00054F 55*03            [12] 1639 	anl	a,(_ahora + 0x0003)
+      000551 FF               [12] 1640 	mov	r7,a
+      000552 B4 01 00         [24] 1641 	cjne	a,#0x01,00103$
+      000555                       1642 00103$:
+      000555 22               [24] 1643 	ret
+                                   1644 ;------------------------------------------------------------
+                                   1645 ;Allocation info for local variables in function 'diasDelMes'
+                                   1646 ;------------------------------------------------------------
+                                   1647 ;	main.c:114: uint8_t diasDelMes(void)
+                                   1648 ;	-----------------------------------------
+                                   1649 ;	 function diasDelMes
+                                   1650 ;	-----------------------------------------
+      000556                       1651 _diasDelMes:
+                                   1652 ;	main.c:116: if(ahora.Mes==2)                        // Mes = febrero
+      000556 AF*02            [24] 1653 	mov	r7,(_ahora + 0x0002)
+      000558 BF 02 0E         [24] 1654 	cjne	r7,#0x02,00102$
+                                   1655 ;	main.c:118: return bisiesto() ? 29 : 28;  // Bisiesto: 29 días / No bisiesto: 28 días.
+      00055B 12r05r4D         [24] 1656 	lcall	_bisiesto
+      00055E 50 04            [24] 1657 	jnc	00110$
+      000560 7E 1D            [12] 1658 	mov	r6,#0x1d
+      000562 80 02            [24] 1659 	sjmp	00111$
+      000564                       1660 00110$:
+      000564 7E 1C            [12] 1661 	mov	r6,#0x1c
+      000566                       1662 00111$:
+      000566 8E 82            [24] 1663 	mov	dpl,r6
+      000568 22               [24] 1664 	ret
+      000569                       1665 00102$:
+                                   1666 ;	main.c:120: if((ahora.Mes==4) || (ahora.Mes==6) || (ahora.Mes==9) || (ahora.Mes==11))
+      000569 BF 04 02         [24] 1667 	cjne	r7,#0x04,00130$
+      00056C 80 0D            [24] 1668 	sjmp	00103$
+      00056E                       1669 00130$:
+      00056E BF 06 02         [24] 1670 	cjne	r7,#0x06,00131$
+      000571 80 08            [24] 1671 	sjmp	00103$
+      000573                       1672 00131$:
+      000573 BF 09 02         [24] 1673 	cjne	r7,#0x09,00132$
+      000576 80 03            [24] 1674 	sjmp	00103$
+      000578                       1675 00132$:
+      000578 BF 0B 04         [24] 1676 	cjne	r7,#0x0b,00104$
+      00057B                       1677 00103$:
+                                   1678 ;	main.c:122: return 30;                    // Meses de 30 días.
+      00057B 75 82 1E         [24] 1679 	mov	dpl,#0x1e
+      00057E 22               [24] 1680 	ret
+      00057F                       1681 00104$:
+                                   1682 ;	main.c:124: return 31;                        // Meses de 31 días.
+      00057F 75 82 1F         [24] 1683 	mov	dpl,#0x1f
+      000582 22               [24] 1684 	ret
+                                   1685 ;------------------------------------------------------------
+                                   1686 ;Allocation info for local variables in function 'LCDPrintNumero'
+                                   1687 ;------------------------------------------------------------
+                                   1688 ;numero                    Allocated to registers r7 
+                                   1689 ;------------------------------------------------------------
+                                   1690 ;	main.c:127: void LCDPrintNumero(uint8_t numero)
+                                   1691 ;	-----------------------------------------
+                                   1692 ;	 function LCDPrintNumero
+                                   1693 ;	-----------------------------------------
+      000583                       1694 _LCDPrintNumero:
+      000583 AF 82            [24] 1695 	mov	r7,dpl
+                                   1696 ;	main.c:129: LCD_putChar((numero/10)+48);
+      000585 75 F0 0A         [24] 1697 	mov	b,#0x0a
+      000588 EF               [12] 1698 	mov	a,r7
+      000589 84               [48] 1699 	div	ab
+      00058A 24 30            [12] 1700 	add	a,#0x30
+      00058C F5 82            [12] 1701 	mov	dpl,a
+      00058E C0 07            [24] 1702 	push	ar7
+      000590 12r03rA2         [24] 1703 	lcall	_LCD_putChar
+      000593 D0 07            [24] 1704 	pop	ar7
+                                   1705 ;	main.c:130: LCD_putChar((numero%10)+48);
+      000595 75 F0 0A         [24] 1706 	mov	b,#0x0a
+      000598 EF               [12] 1707 	mov	a,r7
+      000599 84               [48] 1708 	div	ab
+      00059A E5 F0            [12] 1709 	mov	a,b
+      00059C 24 30            [12] 1710 	add	a,#0x30
+      00059E F5 82            [12] 1711 	mov	dpl,a
+      0005A0 02r03rA2         [24] 1712 	ljmp	_LCD_putChar
+                                   1713 ;------------------------------------------------------------
+                                   1714 ;Allocation info for local variables in function 'timeShow'
+                                   1715 ;------------------------------------------------------------
+                                   1716 ;	main.c:143: void timeShow(void)
+                                   1717 ;	-----------------------------------------
+                                   1718 ;	 function timeShow
+                                   1719 ;	-----------------------------------------
+      0005A3                       1720 _timeShow:
+                                   1721 ;	main.c:145: LCD_gotoXY(1,0);
+      0005A3 75*07 00         [24] 1722 	mov	_LCD_gotoXY_PARM_2,#0x00
+      0005A6 75 82 01         [24] 1723 	mov	dpl,#0x01
+      0005A9 12r03rAB         [24] 1724 	lcall	_LCD_gotoXY
+                                   1725 ;	main.c:146: LCDPrintNumero(ahora.Dia);
+      0005AC 85*01 82         [24] 1726 	mov	dpl,(_ahora + 0x0001)
+      0005AF 12r05r83         [24] 1727 	lcall	_LCDPrintNumero
+                                   1728 ;	main.c:147: LCD_putChar('/');
+      0005B2 75 82 2F         [24] 1729 	mov	dpl,#0x2f
+      0005B5 12r03rA2         [24] 1730 	lcall	_LCD_putChar
+                                   1731 ;	main.c:148: LCDPrintNumero(ahora.Mes);
+      0005B8 85*02 82         [24] 1732 	mov	dpl,(_ahora + 0x0002)
+      0005BB 12r05r83         [24] 1733 	lcall	_LCDPrintNumero
+                                   1734 ;	main.c:149: LCD_putChar('/');
+      0005BE 75 82 2F         [24] 1735 	mov	dpl,#0x2f
+      0005C1 12r03rA2         [24] 1736 	lcall	_LCD_putChar
+                                   1737 ;	main.c:150: LCDPrintNumero(ahora.Ano);
+      0005C4 85*03 82         [24] 1738 	mov	dpl,(_ahora + 0x0003)
+      0005C7 12r05r83         [24] 1739 	lcall	_LCDPrintNumero
+                                   1740 ;	main.c:151: LCD_print("   ");
+      0005CA 90r00r1C         [24] 1741 	mov	dptr,#___str_7
+      0005CD 75 F0 80         [24] 1742 	mov	b,#0x80
+      0005D0 12r04r68         [24] 1743 	lcall	_LCD_print
+                                   1744 ;	main.c:152: LCDPrintDiaSemana();
+      0005D3 12r04rE7         [24] 1745 	lcall	_LCDPrintDiaSemana
+                                   1746 ;	main.c:153: LCD_print(" ");
+      0005D6 90r00r20         [24] 1747 	mov	dptr,#___str_8
+      0005D9 75 F0 80         [24] 1748 	mov	b,#0x80
+      0005DC 12r04r68         [24] 1749 	lcall	_LCD_print
+                                   1750 ;	main.c:154: LCD_gotoXY(1,1);
+      0005DF 75*07 01         [24] 1751 	mov	_LCD_gotoXY_PARM_2,#0x01
+      0005E2 75 82 01         [24] 1752 	mov	dpl,#0x01
+      0005E5 12r03rAB         [24] 1753 	lcall	_LCD_gotoXY
+                                   1754 ;	main.c:155: LCDPrintNumero(ahora.Hora);
+      0005E8 85*04 82         [24] 1755 	mov	dpl,(_ahora + 0x0004)
+      0005EB 12r05r83         [24] 1756 	lcall	_LCDPrintNumero
+                                   1757 ;	main.c:156: LCD_putChar(':');
+      0005EE 75 82 3A         [24] 1758 	mov	dpl,#0x3a
+      0005F1 12r03rA2         [24] 1759 	lcall	_LCD_putChar
+                                   1760 ;	main.c:157: LCDPrintNumero(ahora.Minuto);
+      0005F4 85*05 82         [24] 1761 	mov	dpl,(_ahora + 0x0005)
+      0005F7 12r05r83         [24] 1762 	lcall	_LCDPrintNumero
+                                   1763 ;	main.c:158: LCD_putChar(':');
+      0005FA 75 82 3A         [24] 1764 	mov	dpl,#0x3a
+      0005FD 12r03rA2         [24] 1765 	lcall	_LCD_putChar
+                                   1766 ;	main.c:159: LCDPrintNumero(ahora.Segundo);
+      000600 85*06 82         [24] 1767 	mov	dpl,(_ahora + 0x0006)
+      000603 12r05r83         [24] 1768 	lcall	_LCDPrintNumero
+                                   1769 ;	main.c:160: LCD_print("       ");
+      000606 90r00r22         [24] 1770 	mov	dptr,#___str_9
+      000609 75 F0 80         [24] 1771 	mov	b,#0x80
+      00060C 02r04r68         [24] 1772 	ljmp	_LCD_print
+                                   1773 ;------------------------------------------------------------
+                                   1774 ;Allocation info for local variables in function 'cicloTimeSet'
+                                   1775 ;------------------------------------------------------------
+                                   1776 ;limSup                    Allocated with name '_cicloTimeSet_PARM_2'
+                                   1777 ;lcdX                      Allocated with name '_cicloTimeSet_PARM_3'
+                                   1778 ;lcdY                      Allocated with name '_cicloTimeSet_PARM_4'
+                                   1779 ;dato                      Allocated with name '_cicloTimeSet_PARM_5'
+                                   1780 ;limInf                    Allocated to registers r7 
+                                   1781 ;------------------------------------------------------------
+                                   1782 ;	main.c:163: void cicloTimeSet(uint8_t limInf, uint8_t limSup, uint8_t lcdX, uint8_t lcdY, uint8_t* dato)
+                                   1783 ;	-----------------------------------------
+                                   1784 ;	 function cicloTimeSet
+                                   1785 ;	-----------------------------------------
+      00060F                       1786 _cicloTimeSet:
+      00060F AF 82            [24] 1787 	mov	r7,dpl
+                                   1788 ;	main.c:165: while((P_INC && P_DEC)==0)  // Si se pulsa INC o DEC
+      000611 AC*17            [24] 1789 	mov	r4,_cicloTimeSet_PARM_5
+      000613 AD*18            [24] 1790 	mov	r5,(_cicloTimeSet_PARM_5 + 1)
+      000615 AE*19            [24] 1791 	mov	r6,(_cicloTimeSet_PARM_5 + 2)
+      000617                       1792 00109$:
+      000617 30 A2 06         [24] 1793 	jnb	_P2_2,00110$
+      00061A 30 A3 03         [24] 1794 	jnb	_P2_3,00150$
+      00061D 02r06rCB         [24] 1795 	ljmp	00111$
+      000620                       1796 00150$:
+      000620                       1797 00110$:
+                                   1798 ;	main.c:167: LCD_cursorOff();
+      000620 C0 07            [24] 1799 	push	ar7
+      000622 C0 06            [24] 1800 	push	ar6
+      000624 C0 05            [24] 1801 	push	ar5
+      000626 C0 04            [24] 1802 	push	ar4
+      000628 12r03rFF         [24] 1803 	lcall	_LCD_cursorOff
+      00062B D0 04            [24] 1804 	pop	ar4
+      00062D D0 05            [24] 1805 	pop	ar5
+      00062F D0 06            [24] 1806 	pop	ar6
+      000631 D0 07            [24] 1807 	pop	ar7
+                                   1808 ;	main.c:168: if(P_INC==0)   // Si se ha pulsado INC
+      000633 20 A2 27         [24] 1809 	jb	_P2_2,00107$
+                                   1810 ;	main.c:170: (*dato)++;
+      000636 8C 82            [24] 1811 	mov	dpl,r4
+      000638 8D 83            [24] 1812 	mov	dph,r5
+      00063A 8E F0            [24] 1813 	mov	b,r6
+      00063C 12r00r00         [24] 1814 	lcall	__gptrget
+      00063F FB               [12] 1815 	mov	r3,a
+      000640 0B               [12] 1816 	inc	r3
+      000641 8C 82            [24] 1817 	mov	dpl,r4
+      000643 8D 83            [24] 1818 	mov	dph,r5
+      000645 8E F0            [24] 1819 	mov	b,r6
+      000647 EB               [12] 1820 	mov	a,r3
+      000648 12r00r00         [24] 1821 	lcall	__gptrput
+                                   1822 ;	main.c:171: if(*dato>limSup) *dato=limInf;
+      00064B C3               [12] 1823 	clr	c
+      00064C E5*14            [12] 1824 	mov	a,_cicloTimeSet_PARM_2
+      00064E 9B               [12] 1825 	subb	a,r3
+      00064F 50 3E            [24] 1826 	jnc	00108$
+      000651 8C 82            [24] 1827 	mov	dpl,r4
+      000653 8D 83            [24] 1828 	mov	dph,r5
+      000655 8E F0            [24] 1829 	mov	b,r6
+      000657 EF               [12] 1830 	mov	a,r7
+      000658 12r00r00         [24] 1831 	lcall	__gptrput
+      00065B 80 32            [24] 1832 	sjmp	00108$
+      00065D                       1833 00107$:
+                                   1834 ;	main.c:175: (*dato)--;
+      00065D 8C 82            [24] 1835 	mov	dpl,r4
+      00065F 8D 83            [24] 1836 	mov	dph,r5
+      000661 8E F0            [24] 1837 	mov	b,r6
+      000663 12r00r00         [24] 1838 	lcall	__gptrget
+      000666 FB               [12] 1839 	mov	r3,a
+      000667 1B               [12] 1840 	dec	r3
+      000668 8C 82            [24] 1841 	mov	dpl,r4
+      00066A 8D 83            [24] 1842 	mov	dph,r5
+      00066C 8E F0            [24] 1843 	mov	b,r6
+      00066E EB               [12] 1844 	mov	a,r3
+      00066F 12r00r00         [24] 1845 	lcall	__gptrput
+                                   1846 ;	main.c:176: if((*dato<limInf)||(*dato==0xFF)) *dato=limSup; // Si limInf==0 (*Dato)-- puede ser 0xFF.
+      000672 8C 82            [24] 1847 	mov	dpl,r4
+      000674 8D 83            [24] 1848 	mov	dph,r5
+      000676 8E F0            [24] 1849 	mov	b,r6
+      000678 12r00r00         [24] 1850 	lcall	__gptrget
+      00067B FA               [12] 1851 	mov	r2,a
+      00067C C3               [12] 1852 	clr	c
+      00067D EB               [12] 1853 	mov	a,r3
+      00067E 9F               [12] 1854 	subb	a,r7
+      00067F 40 03            [24] 1855 	jc	00103$
+      000681 BA FF 0B         [24] 1856 	cjne	r2,#0xff,00108$
+      000684                       1857 00103$:
+      000684 8C 82            [24] 1858 	mov	dpl,r4
+      000686 8D 83            [24] 1859 	mov	dph,r5
+      000688 8E F0            [24] 1860 	mov	b,r6
+      00068A E5*14            [12] 1861 	mov	a,_cicloTimeSet_PARM_2
+      00068C 12r00r00         [24] 1862 	lcall	__gptrput
+      00068F                       1863 00108$:
+                                   1864 ;	main.c:178: LCD_gotoXY(lcdX, lcdY);
+      00068F 85*16*07         [24] 1865 	mov	_LCD_gotoXY_PARM_2,_cicloTimeSet_PARM_4
+      000692 85*15 82         [24] 1866 	mov	dpl,_cicloTimeSet_PARM_3
+      000695 C0 07            [24] 1867 	push	ar7
+      000697 C0 06            [24] 1868 	push	ar6
+      000699 C0 05            [24] 1869 	push	ar5
+      00069B C0 04            [24] 1870 	push	ar4
+      00069D 12r03rAB         [24] 1871 	lcall	_LCD_gotoXY
+      0006A0 D0 04            [24] 1872 	pop	ar4
+      0006A2 D0 05            [24] 1873 	pop	ar5
+      0006A4 D0 06            [24] 1874 	pop	ar6
+                                   1875 ;	main.c:179: LCDPrintNumero(*dato);
+      0006A6 8C 82            [24] 1876 	mov	dpl,r4
+      0006A8 8D 83            [24] 1877 	mov	dph,r5
+      0006AA 8E F0            [24] 1878 	mov	b,r6
+      0006AC 12r00r00         [24] 1879 	lcall	__gptrget
+      0006AF F5 82            [12] 1880 	mov	dpl,a
+      0006B1 C0 06            [24] 1881 	push	ar6
+      0006B3 C0 05            [24] 1882 	push	ar5
+      0006B5 C0 04            [24] 1883 	push	ar4
+      0006B7 12r05r83         [24] 1884 	lcall	_LCDPrintNumero
+                                   1885 ;	main.c:180: delay_ms(TIEMPO_REPETICION);
+      0006BA 90 01 F4         [24] 1886 	mov	dptr,#0x01f4
+      0006BD 12r00r21         [24] 1887 	lcall	_delay_ms
+      0006C0 D0 04            [24] 1888 	pop	ar4
+      0006C2 D0 05            [24] 1889 	pop	ar5
+      0006C4 D0 06            [24] 1890 	pop	ar6
+      0006C6 D0 07            [24] 1891 	pop	ar7
+      0006C8 02r06r17         [24] 1892 	ljmp	00109$
+      0006CB                       1893 00111$:
+                                   1894 ;	main.c:182: if(P_SET==0)
+      0006CB 20 A4 34         [24] 1895 	jb	_P2_4,00118$
+                                   1896 ;	main.c:184: k++;
+      0006CE 05*10            [12] 1897 	inc	_k
+                                   1898 ;	main.c:185: while(P_SET==0) delay_ms(TIEMPO_ANTIREBOTE);  // Espera antirebote mecánico del pulsador.
+      0006D0                       1899 00112$:
+      0006D0 20 A4 14         [24] 1900 	jb	_P2_4,00114$
+      0006D3 90 00 0A         [24] 1901 	mov	dptr,#0x000a
+      0006D6 C0 06            [24] 1902 	push	ar6
+      0006D8 C0 05            [24] 1903 	push	ar5
+      0006DA C0 04            [24] 1904 	push	ar4
+      0006DC 12r00r21         [24] 1905 	lcall	_delay_ms
+      0006DF D0 04            [24] 1906 	pop	ar4
+      0006E1 D0 05            [24] 1907 	pop	ar5
+      0006E3 D0 06            [24] 1908 	pop	ar6
+      0006E5 80 E9            [24] 1909 	sjmp	00112$
+      0006E7                       1910 00114$:
+                                   1911 ;	main.c:186: if(*dato>limSup) *dato=limSup;  // Evita posible bug al modificar el año o el mes, si
+      0006E7 8C 82            [24] 1912 	mov	dpl,r4
+      0006E9 8D 83            [24] 1913 	mov	dph,r5
+      0006EB 8E F0            [24] 1914 	mov	b,r6
+      0006ED 12r00r00         [24] 1915 	lcall	__gptrget
+      0006F0 FF               [12] 1916 	mov	r7,a
+      0006F1 C3               [12] 1917 	clr	c
+      0006F2 E5*14            [12] 1918 	mov	a,_cicloTimeSet_PARM_2
+      0006F4 9F               [12] 1919 	subb	a,r7
+      0006F5 50 0B            [24] 1920 	jnc	00118$
+      0006F7 8C 82            [24] 1921 	mov	dpl,r4
+      0006F9 8D 83            [24] 1922 	mov	dph,r5
+      0006FB 8E F0            [24] 1923 	mov	b,r6
+      0006FD E5*14            [12] 1924 	mov	a,_cicloTimeSet_PARM_2
+      0006FF 12r00r00         [24] 1925 	lcall	__gptrput
+      000702                       1926 00118$:
+                                   1927 ;	main.c:189: LCD_gotoXY(++lcdX, lcdY);
+      000702 05*15            [12] 1928 	inc	_cicloTimeSet_PARM_3
+      000704 85*16*07         [24] 1929 	mov	_LCD_gotoXY_PARM_2,_cicloTimeSet_PARM_4
+      000707 85*15 82         [24] 1930 	mov	dpl,_cicloTimeSet_PARM_3
+      00070A 12r03rAB         [24] 1931 	lcall	_LCD_gotoXY
+                                   1932 ;	main.c:190: LCD_cursorUnderline();
+      00070D 02r03rED         [24] 1933 	ljmp	_LCD_cursorUnderline
+                                   1934 ;------------------------------------------------------------
+                                   1935 ;Allocation info for local variables in function 'timeSet'
+                                   1936 ;------------------------------------------------------------
+                                   1937 ;	main.c:204: void timeSet(void)
+                                   1938 ;	-----------------------------------------
+                                   1939 ;	 function timeSet
+                                   1940 ;	-----------------------------------------
+      000710                       1941 _timeSet:
+                                   1942 ;	main.c:213: LCD_gotoXY(7,1);           // Goto posición de Segundos en display.
+      000710 75*07 01         [24] 1943 	mov	_LCD_gotoXY_PARM_2,#0x01
+      000713 75 82 07         [24] 1944 	mov	dpl,#0x07
+      000716 12r03rAB         [24] 1945 	lcall	_LCD_gotoXY
+                                   1946 ;	main.c:214: LCD_print("00");           // 00 en posición de Segundos del display.
+      000719 90r00r2A         [24] 1947 	mov	dptr,#___str_10
+      00071C 75 F0 80         [24] 1948 	mov	b,#0x80
+      00071F 12r04r68         [24] 1949 	lcall	_LCD_print
+                                   1950 ;	main.c:215: LCD_cursorUnderline();     // Cursor On
+      000722 12r03rED         [24] 1951 	lcall	_LCD_cursorUnderline
+                                   1952 ;	main.c:218: ahora.Segundo = 0;            // Siempre que se ajusta la fecha y hora los segundos empiezan en cero.
+      000725 75*06 00         [24] 1953 	mov	(_ahora + 0x0006),#0x00
+                                   1954 ;	main.c:219: while(k<SALIR_SET_TIME)
+      000728                       1955 00138$:
+      000728 74 F9            [12] 1956 	mov	a,#0x100 - 0x07
+      00072A 25*10            [12] 1957 	add	a,_k
+      00072C 50 03            [24] 1958 	jnc	00215$
+      00072E 02r08r45         [24] 1959 	ljmp	00140$
+      000731                       1960 00215$:
+                                   1961 ;	main.c:221: while(k==SET_ANO)    cicloTimeSet(0,99,7,0,&ahora.Ano);            // Set año.
+      000731                       1962 00101$:
+      000731 74 01            [12] 1963 	mov	a,#0x01
+      000733 B5*10 1A         [24] 1964 	cjne	a,_k,00104$
+      000736 75*17r03         [24] 1965 	mov	_cicloTimeSet_PARM_5,#(_ahora + 0x0003)
+      000739 75*18 00         [24] 1966 	mov	(_cicloTimeSet_PARM_5 + 1),#0x00
+      00073C 75*19 40         [24] 1967 	mov	(_cicloTimeSet_PARM_5 + 2),#0x40
+      00073F 75*14 63         [24] 1968 	mov	_cicloTimeSet_PARM_2,#0x63
+      000742 75*15 07         [24] 1969 	mov	_cicloTimeSet_PARM_3,#0x07
+      000745 75*16 00         [24] 1970 	mov	_cicloTimeSet_PARM_4,#0x00
+      000748 75 82 00         [24] 1971 	mov	dpl,#0x00
+      00074B 12r06r0F         [24] 1972 	lcall	_cicloTimeSet
+                                   1973 ;	main.c:222: while(k==SET_MES)    cicloTimeSet(1,12,4,0,&ahora.Mes);            // Set mes.
+      00074E 80 E1            [24] 1974 	sjmp	00101$
+      000750                       1975 00104$:
+      000750 74 02            [12] 1976 	mov	a,#0x02
+      000752 B5*10 1A         [24] 1977 	cjne	a,_k,00107$
+      000755 75*17r02         [24] 1978 	mov	_cicloTimeSet_PARM_5,#(_ahora + 0x0002)
+      000758 75*18 00         [24] 1979 	mov	(_cicloTimeSet_PARM_5 + 1),#0x00
+      00075B 75*19 40         [24] 1980 	mov	(_cicloTimeSet_PARM_5 + 2),#0x40
+      00075E 75*14 0C         [24] 1981 	mov	_cicloTimeSet_PARM_2,#0x0c
+      000761 75*15 04         [24] 1982 	mov	_cicloTimeSet_PARM_3,#0x04
+      000764 75*16 00         [24] 1983 	mov	_cicloTimeSet_PARM_4,#0x00
+      000767 75 82 01         [24] 1984 	mov	dpl,#0x01
+      00076A 12r06r0F         [24] 1985 	lcall	_cicloTimeSet
+                                   1986 ;	main.c:223: while(k==SET_DIA)    cicloTimeSet(1,diasDelMes(),1,0,&ahora.Dia);  // Set día.
+      00076D 80 E1            [24] 1987 	sjmp	00104$
+      00076F                       1988 00107$:
+      00076F 74 03            [12] 1989 	mov	a,#0x03
+      000771 B5*10 1D         [24] 1990 	cjne	a,_k,00110$
+      000774 12r05r56         [24] 1991 	lcall	_diasDelMes
+      000777 85 82*14         [24] 1992 	mov	_cicloTimeSet_PARM_2,dpl
+      00077A 75*17r01         [24] 1993 	mov	_cicloTimeSet_PARM_5,#(_ahora + 0x0001)
+      00077D 75*18 00         [24] 1994 	mov	(_cicloTimeSet_PARM_5 + 1),#0x00
+      000780 75*19 40         [24] 1995 	mov	(_cicloTimeSet_PARM_5 + 2),#0x40
+      000783 75*15 01         [24] 1996 	mov	_cicloTimeSet_PARM_3,#0x01
+      000786 75*16 00         [24] 1997 	mov	_cicloTimeSet_PARM_4,#0x00
+      000789 75 82 01         [24] 1998 	mov	dpl,#0x01
+      00078C 12r06r0F         [24] 1999 	lcall	_cicloTimeSet
+                                   2000 ;	main.c:224: while(k==SET_HORA)   cicloTimeSet(0,23,1,1,&ahora.Hora);           // Set hora.
+      00078F 80 DE            [24] 2001 	sjmp	00107$
+      000791                       2002 00110$:
+      000791 74 04            [12] 2003 	mov	a,#0x04
+      000793 B5*10 1A         [24] 2004 	cjne	a,_k,00113$
+      000796 75*17r04         [24] 2005 	mov	_cicloTimeSet_PARM_5,#(_ahora + 0x0004)
+      000799 75*18 00         [24] 2006 	mov	(_cicloTimeSet_PARM_5 + 1),#0x00
+      00079C 75*19 40         [24] 2007 	mov	(_cicloTimeSet_PARM_5 + 2),#0x40
+      00079F 75*14 17         [24] 2008 	mov	_cicloTimeSet_PARM_2,#0x17
+      0007A2 75*15 01         [24] 2009 	mov	_cicloTimeSet_PARM_3,#0x01
+      0007A5 75*16 01         [24] 2010 	mov	_cicloTimeSet_PARM_4,#0x01
+      0007A8 75 82 00         [24] 2011 	mov	dpl,#0x00
+      0007AB 12r06r0F         [24] 2012 	lcall	_cicloTimeSet
+                                   2013 ;	main.c:225: while(k==SET_MINUTO) cicloTimeSet(0,59,4,1,&ahora.Minuto);         // Set minutos.
+      0007AE 80 E1            [24] 2014 	sjmp	00110$
+      0007B0                       2015 00113$:
+      0007B0 74 05            [12] 2016 	mov	a,#0x05
+      0007B2 B5*10 1A         [24] 2017 	cjne	a,_k,00135$
+      0007B5 75*17r05         [24] 2018 	mov	_cicloTimeSet_PARM_5,#(_ahora + 0x0005)
+      0007B8 75*18 00         [24] 2019 	mov	(_cicloTimeSet_PARM_5 + 1),#0x00
+      0007BB 75*19 40         [24] 2020 	mov	(_cicloTimeSet_PARM_5 + 2),#0x40
+      0007BE 75*14 3B         [24] 2021 	mov	_cicloTimeSet_PARM_2,#0x3b
+      0007C1 75*15 04         [24] 2022 	mov	_cicloTimeSet_PARM_3,#0x04
+      0007C4 75*16 01         [24] 2023 	mov	_cicloTimeSet_PARM_4,#0x01
+      0007C7 75 82 00         [24] 2024 	mov	dpl,#0x00
+      0007CA 12r06r0F         [24] 2025 	lcall	_cicloTimeSet
+                                   2026 ;	main.c:226: while(k==SET_DIA_SEM)                                             // Set día de la semana.
+      0007CD 80 E1            [24] 2027 	sjmp	00113$
+      0007CF                       2028 00135$:
+      0007CF 74 06            [12] 2029 	mov	a,#0x06
+      0007D1 B5*10 02         [24] 2030 	cjne	a,_k,00226$
+      0007D4 80 03            [24] 2031 	sjmp	00227$
+      0007D6                       2032 00226$:
+      0007D6 02r07r28         [24] 2033 	ljmp	00138$
+      0007D9                       2034 00227$:
+                                   2035 ;	main.c:231: if(P_INC==0)
+      0007D9 20 A2 25         [24] 2036 	jb	_P2_2,00122$
+                                   2037 ;	main.c:233: ahora.DiaSemana++;
+      0007DC E5*00            [12] 2038 	mov	a,_ahora
+      0007DE FF               [12] 2039 	mov	r7,a
+      0007DF 04               [12] 2040 	inc	a
+      0007E0 F5*00            [12] 2041 	mov	_ahora,a
+                                   2042 ;	main.c:234: while(P_INC==0) delay_ms(TIEMPO_ANTIREBOTE);     // Espera fin pulsación y antirebote mecánico.
+      0007E2                       2043 00116$:
+      0007E2 20 A2 08         [24] 2044 	jb	_P2_2,00118$
+      0007E5 90 00 0A         [24] 2045 	mov	dptr,#0x000a
+      0007E8 12r00r21         [24] 2046 	lcall	_delay_ms
+      0007EB 80 F5            [24] 2047 	sjmp	00116$
+      0007ED                       2048 00118$:
+                                   2049 ;	main.c:235: if(ahora.DiaSemana==8)
+      0007ED 74 08            [12] 2050 	mov	a,#0x08
+      0007EF B5*00 03         [24] 2051 	cjne	a,_ahora,00120$
+                                   2052 ;	main.c:237: ahora.DiaSemana=1;
+      0007F2 75*00 01         [24] 2053 	mov	_ahora,#0x01
+      0007F5                       2054 00120$:
+                                   2055 ;	main.c:239: LCD_gotoXY(12,0);
+      0007F5 75*07 00         [24] 2056 	mov	_LCD_gotoXY_PARM_2,#0x00
+      0007F8 75 82 0C         [24] 2057 	mov	dpl,#0x0c
+      0007FB 12r03rAB         [24] 2058 	lcall	_LCD_gotoXY
+                                   2059 ;	main.c:240: LCDPrintDiaSemana();
+      0007FE 12r04rE7         [24] 2060 	lcall	_LCDPrintDiaSemana
+      000801                       2061 00122$:
+                                   2062 ;	main.c:242: if(P_DEC==0)
+      000801 20 A3 24         [24] 2063 	jb	_P2_3,00129$
+                                   2064 ;	main.c:244: ahora.DiaSemana--;
+      000804 E5*00            [12] 2065 	mov	a,_ahora
+      000806 FF               [12] 2066 	mov	r7,a
+      000807 14               [12] 2067 	dec	a
+      000808 F5*00            [12] 2068 	mov	_ahora,a
+                                   2069 ;	main.c:245: while(P_DEC==0) delay_ms(TIEMPO_ANTIREBOTE);     // Espera fin pulsación y antirebote mecánico.
+      00080A                       2070 00123$:
+      00080A 20 A3 08         [24] 2071 	jb	_P2_3,00125$
+      00080D 90 00 0A         [24] 2072 	mov	dptr,#0x000a
+      000810 12r00r21         [24] 2073 	lcall	_delay_ms
+      000813 80 F5            [24] 2074 	sjmp	00123$
+      000815                       2075 00125$:
+                                   2076 ;	main.c:246: if(ahora.DiaSemana==0)
+      000815 E5*00            [12] 2077 	mov	a,_ahora
+      000817 70 03            [24] 2078 	jnz	00127$
+                                   2079 ;	main.c:248: ahora.DiaSemana=7;
+      000819 75*00 07         [24] 2080 	mov	_ahora,#0x07
+      00081C                       2081 00127$:
+                                   2082 ;	main.c:250: LCD_gotoXY(12,0);
+      00081C 75*07 00         [24] 2083 	mov	_LCD_gotoXY_PARM_2,#0x00
+      00081F 75 82 0C         [24] 2084 	mov	dpl,#0x0c
+      000822 12r03rAB         [24] 2085 	lcall	_LCD_gotoXY
+                                   2086 ;	main.c:251: LCDPrintDiaSemana();
+      000825 12r04rE7         [24] 2087 	lcall	_LCDPrintDiaSemana
+      000828                       2088 00129$:
+                                   2089 ;	main.c:253: if(P_SET==0)
+      000828 20 A4 0E         [24] 2090 	jb	_P2_4,00134$
+                                   2091 ;	main.c:255: k=SALIR_SET_TIME;
+      00082B 75*10 07         [24] 2092 	mov	_k,#0x07
+                                   2093 ;	main.c:256: while(P_SET==0) delay_ms(TIEMPO_ANTIREBOTE);     // Espera fin pulsación y antirebote mecánico.
+      00082E                       2094 00130$:
+      00082E 20 A4 08         [24] 2095 	jb	_P2_4,00134$
+      000831 90 00 0A         [24] 2096 	mov	dptr,#0x000a
+      000834 12r00r21         [24] 2097 	lcall	_delay_ms
+      000837 80 F5            [24] 2098 	sjmp	00130$
+      000839                       2099 00134$:
+                                   2100 ;	main.c:258: LCD_gotoXY(14,0);
+      000839 75*07 00         [24] 2101 	mov	_LCD_gotoXY_PARM_2,#0x00
+      00083C 75 82 0E         [24] 2102 	mov	dpl,#0x0e
+      00083F 12r03rAB         [24] 2103 	lcall	_LCD_gotoXY
+      000842 02r07rCF         [24] 2104 	ljmp	00135$
+      000845                       2105 00140$:
+                                   2106 ;	main.c:261: LCD_cursorOff();
+      000845 02r03rFF         [24] 2107 	ljmp	_LCD_cursorOff
+                                   2108 ;------------------------------------------------------------
+                                   2109 ;Allocation info for local variables in function 'setup'
+                                   2110 ;------------------------------------------------------------
+                                   2111 ;	main.c:271: void setup(void)
+                                   2112 ;	-----------------------------------------
+                                   2113 ;	 function setup
+                                   2114 ;	-----------------------------------------
+      000848                       2115 _setup:
+                                   2116 ;	main.c:273: P_INC = 1;   // Configura Pulsadores como Entradas Digitales.
+      000848 D2 A2            [12] 2117 	setb	_P2_2
+                                   2118 ;	main.c:274: P_DEC = 1;
+      00084A D2 A3            [12] 2119 	setb	_P2_3
+                                   2120 ;	main.c:275: P_SET = 1;
+      00084C D2 A4            [12] 2121 	setb	_P2_4
+                                   2122 ;	main.c:277: LCD_init();  // Inicializa display LCD.
+      00084E 02r04r93         [24] 2123 	ljmp	_LCD_init
+                                   2124 ;------------------------------------------------------------
+                                   2125 ;Allocation info for local variables in function 'main'
+                                   2126 ;------------------------------------------------------------
+                                   2127 ;	main.c:286: void main(void)
+                                   2128 ;	-----------------------------------------
+                                   2129 ;	 function main
+                                   2130 ;	-----------------------------------------
+      000851                       2131 _main:
+                                   2132 ;	main.c:288: setup();
+      000851 12r08r48         [24] 2133 	lcall	_setup
+                                   2134 ;	main.c:290: while(1)
+      000854                       2135 00110$:
+                                   2136 ;	main.c:292: if(P_SET==0)                          // Comprueba si se ha pulsado SET
+      000854 20 A4 1A         [24] 2137 	jb	_P2_4,00105$
+                                   2138 ;	main.c:294: k=1;
+      000857 75*10 01         [24] 2139 	mov	_k,#0x01
+                                   2140 ;	main.c:295: while(P_SET==0) delay_ms(TIEMPO_ANTIREBOTE);  // Espera fin pulsación y antirebote mecánico.
+      00085A                       2141 00101$:
+      00085A 20 A4 08         [24] 2142 	jb	_P2_4,00103$
+      00085D 90 00 0A         [24] 2143 	mov	dptr,#0x000a
+      000860 12r00r21         [24] 2144 	lcall	_delay_ms
+      000863 80 F5            [24] 2145 	sjmp	00101$
+      000865                       2146 00103$:
+                                   2147 ;	main.c:296: timeSet();
+      000865 12r07r10         [24] 2148 	lcall	_timeSet
+                                   2149 ;	main.c:297: DS1307_timeWrite(&ahora);
+      000868 90r00r00         [24] 2150 	mov	dptr,#_ahora
+      00086B 75 F0 40         [24] 2151 	mov	b,#0x40
+      00086E 12r02r3D         [24] 2152 	lcall	_DS1307_timeWrite
+      000871                       2153 00105$:
+                                   2154 ;	main.c:300: DS1307_timeRead(&ahora);
+      000871 90r00r00         [24] 2155 	mov	dptr,#_ahora
+      000874 75 F0 40         [24] 2156 	mov	b,#0x40
+      000877 12r00rC9         [24] 2157 	lcall	_DS1307_timeRead
+                                   2158 ;	main.c:304: if(ahora.Segundo != timeSec_old)
+      00087A E5*11            [12] 2159 	mov	a,_timeSec_old
+      00087C B5*06 02         [24] 2160 	cjne	a,(_ahora + 0x0006),00131$
+      00087F 80 0E            [24] 2161 	sjmp	00107$
+      000881                       2162 00131$:
+                                   2163 ;	main.c:306: timeShow();      // Actualiza display LCD con fecha y hora.
+      000881 12r05rA3         [24] 2164 	lcall	_timeShow
+                                   2165 ;	main.c:307: timeSec_old = ahora.Segundo;
+      000884 85*06*11         [24] 2166 	mov	_timeSec_old,(_ahora + 0x0006)
+                                   2167 ;	main.c:308: refresco    = 800;
+      000887 75*12 20         [24] 2168 	mov	_refresco,#0x20
+      00088A 75*13 03         [24] 2169 	mov	(_refresco + 1),#0x03
+      00088D 80 06            [24] 2170 	sjmp	00108$
+      00088F                       2171 00107$:
+                                   2172 ;	main.c:310: else refresco = 50;
+      00088F 75*12 32         [24] 2173 	mov	_refresco,#0x32
+      000892 75*13 00         [24] 2174 	mov	(_refresco + 1),#0x00
+      000895                       2175 00108$:
+                                   2176 ;	main.c:311: delay_ms(refresco);
+      000895 85*12 82         [24] 2177 	mov	dpl,_refresco
+      000898 85*13 83         [24] 2178 	mov	dph,(_refresco + 1)
+      00089B 12r00r21         [24] 2179 	lcall	_delay_ms
+      00089E 80 B4            [24] 2180 	sjmp	00110$
+                                   2181 	.area CSEG    (CODE)
+                                   2182 	.area CONST   (CODE)
+      000000                       2183 ___str_0:
+      000000 44 4F 4D              2184 	.ascii "DOM"
+      000003 00                    2185 	.db 0x00
+      000004                       2186 ___str_1:
+      000004 4C 55 4E              2187 	.ascii "LUN"
+      000007 00                    2188 	.db 0x00
+      000008                       2189 ___str_2:
+      000008 4D 41 52              2190 	.ascii "MAR"
+      00000B 00                    2191 	.db 0x00
+      00000C                       2192 ___str_3:
+      00000C 4D 49 45              2193 	.ascii "MIE"
+      00000F 00                    2194 	.db 0x00
+      000010                       2195 ___str_4:
+      000010 4A 55 45              2196 	.ascii "JUE"
+      000013 00                    2197 	.db 0x00
+      000014                       2198 ___str_5:
+      000014 56 49 45              2199 	.ascii "VIE"
+      000017 00                    2200 	.db 0x00
+      000018                       2201 ___str_6:
+      000018 53 41 42              2202 	.ascii "SAB"
+      00001B 00                    2203 	.db 0x00
+      00001C                       2204 ___str_7:
+      00001C 20 20 20              2205 	.ascii "   "
+      00001F 00                    2206 	.db 0x00
+      000020                       2207 ___str_8:
+      000020 20                    2208 	.ascii " "
+      000021 00                    2209 	.db 0x00
+      000022                       2210 ___str_9:
+      000022 20 20 20 20 20 20 20  2211 	.ascii "       "
+      000029 00                    2212 	.db 0x00
+      00002A                       2213 ___str_10:
+      00002A 30 30                 2214 	.ascii "00"
+      00002C 00                    2215 	.db 0x00
+                                   2216 	.area XINIT   (CODE)
+                                   2217 	.area CABS    (ABS,CODE)
