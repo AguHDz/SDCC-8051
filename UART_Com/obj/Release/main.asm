@@ -14,6 +14,24 @@
 	.globl _serial_ISR
 	.globl _main
 	.globl _SendStringONOFFSerally_PARM_2
+	.globl _TF2
+	.globl _EXF2
+	.globl _RCLK
+	.globl _TCLK
+	.globl _EXEN2
+	.globl _TR2
+	.globl _C_T2
+	.globl _CP_RL2
+	.globl _T2CON_7
+	.globl _T2CON_6
+	.globl _T2CON_5
+	.globl _T2CON_4
+	.globl _T2CON_3
+	.globl _T2CON_2
+	.globl _T2CON_1
+	.globl _T2CON_0
+	.globl _PT2
+	.globl _ET2
 	.globl _CY
 	.globl _AC
 	.globl _F0
@@ -89,6 +107,11 @@
 	.globl _P0_2
 	.globl _P0_1
 	.globl _P0_0
+	.globl _TH2
+	.globl _TL2
+	.globl _RCAP2H
+	.globl _RCAP2L
+	.globl _T2CON
 	.globl _B
 	.globl _ACC
 	.globl _PSW
@@ -145,6 +168,11 @@ _IP	=	0x00b8
 _PSW	=	0x00d0
 _ACC	=	0x00e0
 _B	=	0x00f0
+_T2CON	=	0x00c8
+_RCAP2L	=	0x00ca
+_RCAP2H	=	0x00cb
+_TL2	=	0x00cc
+_TH2	=	0x00cd
 ;--------------------------------------------------------
 ; special function bits
 ;--------------------------------------------------------
@@ -225,6 +253,24 @@ _RS1	=	0x00d4
 _F0	=	0x00d5
 _AC	=	0x00d6
 _CY	=	0x00d7
+_ET2	=	0x00ad
+_PT2	=	0x00bd
+_T2CON_0	=	0x00c8
+_T2CON_1	=	0x00c9
+_T2CON_2	=	0x00ca
+_T2CON_3	=	0x00cb
+_T2CON_4	=	0x00cc
+_T2CON_5	=	0x00cd
+_T2CON_6	=	0x00ce
+_T2CON_7	=	0x00cf
+_CP_RL2	=	0x00c8
+_C_T2	=	0x00c9
+_TR2	=	0x00ca
+_EXEN2	=	0x00cb
+_TCLK	=	0x00cc
+_RCLK	=	0x00cd
+_EXF2	=	0x00ce
+_TF2	=	0x00cf
 _SendStringONOFFSerally_PARM_2:
 	.ds 1
 ;--------------------------------------------------------
@@ -435,30 +481,30 @@ _delay:
 ;	 function cct_init
 ;	-----------------------------------------
 _cct_init:
-;	main.c:66:     P0 = 0x00; //not used
+;	main.c:66:     P0 = 0x00;      //not used
 	mov	_P0,#0x00
-;	main.c:67:     P1 = 0x00; //Used for Appliances
+;	main.c:67:     P1 = 0x00;      //Used for Appliances
 	mov	_P1,#0x00
-;	main.c:68:     P2 = 0x00; //not used
+;	main.c:68:     P2 = 0x00;      //not used
 	mov	_P2,#0x00
-;	main.c:69:     P3 = 0x03; //used for serial
+;	main.c:69:     P3 = 0x03;      //used for serial
 	mov	_P3,#0x03
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'SerialInitialize'
 ;------------------------------------------------------------
-;	main.c:72: void SerialInitialize(void)                   // INITIALIZE SERIAL PORT
+;	main.c:72: void SerialInitialize(void)                    // INITIALIZE SERIAL PORT
 ;	-----------------------------------------
 ;	 function SerialInitialize
 ;	-----------------------------------------
 _SerialInitialize:
-;	main.c:74:     TMOD = 0x20;                           // Timer 1 IN MODE 2 -AUTO RELOAD TO GENERATE BAUD RATE
+;	main.c:74:     TMOD = 0x20;                               // Timer 1 IN MODE 2 -AUTO RELOAD TO GENERATE BAUD RATE
 	mov	_TMOD,#0x20
-;	main.c:75:     SCON = 0x50;                           // SERIAL MODE 1, 8-DATA BIT 1-START BIT, 1-STOP BIT, REN ENABLED
+;	main.c:75:     SCON = 0x50;                               // SERIAL MODE 1, 8-DATA BIT 1-START BIT, 1-STOP BIT, REN ENABLED
 	mov	_SCON,#0x50
-;	main.c:76:     TH1 = Baud_rate;                       // LOAD BAUDRATE TO TIMER REGISTER
+;	main.c:76:     TH1  = Baud_rate;                          // LOAD BAUDRATE TO TIMER REGISTER
 	mov	_TH1,#0xfd
-;	main.c:77:     TR1 = 1;                               // START TIMER
+;	main.c:77:     TR1  = 1;                                  // START TIMER
 	setb	_TR1
 	ret
 ;------------------------------------------------------------
@@ -672,7 +718,7 @@ _serial_ISR:
 	mov	b,#0x80
 	lcall	_SendStringCRLFSerally
 	ljmp	00114$
-;	main.c:129: case '1':  Salida1 = !Salida1; SendStringONOFFSerally("Salida 1",Salida1);  break;
+;	main.c:129: case '1':  Salida1 = !Salida1; SendStringONOFFSerally("Salida 1",Salida1);    break;
 00104$:
 	cpl	_P1_0
 	mov	c,_P1_0
@@ -681,7 +727,7 @@ _serial_ISR:
 	mov	b,#0x80
 	lcall	_SendStringONOFFSerally
 	ljmp	00114$
-;	main.c:130:      case '2':  Salida2 = !Salida2; SendStringONOFFSerally("Salida 2",Salida2);  break;
+;	main.c:130:      case '2':  Salida2 = !Salida2; SendStringONOFFSerally("Salida 2",Salida2);    break;
 00105$:
 	cpl	_P1_1
 	mov	c,_P1_1
@@ -690,7 +736,7 @@ _serial_ISR:
 	mov	b,#0x80
 	lcall	_SendStringONOFFSerally
 	ljmp	00114$
-;	main.c:131:      case '3':  Salida3 = !Salida3; SendStringONOFFSerally("Salida 3",Salida3);  break;
+;	main.c:131:      case '3':  Salida3 = !Salida3; SendStringONOFFSerally("Salida 3",Salida3);    break;
 00106$:
 	cpl	_P1_2
 	mov	c,_P1_2
@@ -698,7 +744,7 @@ _serial_ISR:
 	mov	dptr,#___str_5
 	mov	b,#0x80
 	lcall	_SendStringONOFFSerally
-;	main.c:132:      case '4':  Salida4 = !Salida4; SendStringONOFFSerally("Salida 4",Salida4);  break;
+;	main.c:132:      case '4':  Salida4 = !Salida4; SendStringONOFFSerally("Salida 4",Salida4);    break;
 	sjmp	00114$
 00107$:
 	cpl	_P1_3
@@ -707,7 +753,7 @@ _serial_ISR:
 	mov	dptr,#___str_6
 	mov	b,#0x80
 	lcall	_SendStringONOFFSerally
-;	main.c:133:      case '5':  Salida5 = !Salida5; SendStringONOFFSerally("Salida 5",Salida5);  break;
+;	main.c:133:      case '5':  Salida5 = !Salida5; SendStringONOFFSerally("Salida 5",Salida5);    break;
 	sjmp	00114$
 00108$:
 	cpl	_P1_4
@@ -716,7 +762,7 @@ _serial_ISR:
 	mov	dptr,#___str_7
 	mov	b,#0x80
 	lcall	_SendStringONOFFSerally
-;	main.c:134:      case '6':  Salida6 = !Salida6; SendStringONOFFSerally("Salida 6",Salida6);  break;
+;	main.c:134:      case '6':  Salida6 = !Salida6; SendStringONOFFSerally("Salida 6",Salida6);    break;
 	sjmp	00114$
 00109$:
 	cpl	_P1_5
@@ -725,7 +771,7 @@ _serial_ISR:
 	mov	dptr,#___str_8
 	mov	b,#0x80
 	lcall	_SendStringONOFFSerally
-;	main.c:135:      case '7':  Salida7 = !Salida7; SendStringONOFFSerally("Salida 7",Salida7);  break;
+;	main.c:135:      case '7':  Salida7 = !Salida7; SendStringONOFFSerally("Salida 7",Salida7);    break;
 	sjmp	00114$
 00110$:
 	cpl	_P1_6
@@ -734,7 +780,7 @@ _serial_ISR:
 	mov	dptr,#___str_9
 	mov	b,#0x80
 	lcall	_SendStringONOFFSerally
-;	main.c:136:      case '8':  Salida8 = !Salida8; SendStringONOFFSerally("Salida 8",Salida8);  break;
+;	main.c:136:      case '8':  Salida8 = !Salida8; SendStringONOFFSerally("Salida 8",Salida8);    break;
 	sjmp	00114$
 00111$:
 	cpl	_P1_7
@@ -743,7 +789,7 @@ _serial_ISR:
 	mov	dptr,#___str_10
 	mov	b,#0x80
 	lcall	_SendStringONOFFSerally
-;	main.c:137: case '9':  Salidas = 0xFF; SendStringCRLFSerally("Todas las Salidas : ON");  break;
+;	main.c:137: case '9':  Salidas = 0xFF; SendStringCRLFSerally("Todas las Salidas : ON");   break;
 	sjmp	00114$
 00112$:
 	mov	_P1,#0xff

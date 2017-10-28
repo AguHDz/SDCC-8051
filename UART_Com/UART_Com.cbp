@@ -5,6 +5,7 @@
 		<Option title="UART_Com" />
 		<Option pch_mode="2" />
 		<Option compiler="sdcc" />
+		<Option virtualFolders="info_files\;" />
 		<Build>
 			<Target title="Release">
 				<Option output="bin/Release/UART_Com.ihx" prefix_auto="1" extension_auto="0" />
@@ -30,8 +31,16 @@
 		<ExtraCommands>
 			<Add after='cmd /c &quot;packihx &lt;$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).ihx &gt;$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).hex&quot;' />
 		</ExtraCommands>
+		<Unit filename="bin/Release/UART_Com.mem">
+			<Option virtualFolder="info_files/" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="obj/Release/main.asm">
+			<Option compile="0" />
+			<Option link="0" />
+			<Option virtualFolder="info_files/" />
 		</Unit>
 		<Extensions>
 			<code_completion />

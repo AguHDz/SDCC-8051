@@ -11,7 +11,7 @@
 -b ISEG = 0x0000
 -b BSEG = 0x0000
 -k D:\Program Files\SDCC\lib
--k D:\Program Files\SDCC\bin\..\lib\small
+-k C:\Program Files\SDCC\bin\..\lib\small
 -l mcs51
 -l libsdcc
 -l libint

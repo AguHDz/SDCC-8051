@@ -3,7 +3,7 @@
   Activa/Desactiva 8 salidas pulsanod las teclas 1 a 8 en el teclado del terminal serie al que se conecte.
  */
 
-#include <mcs51/8051.h>
+#include <mcs51/8052.h>
 
 #define Baud_rate 0xFD  // BAUD RATE 9600 para CLOCK = 11.0592 MHz.
 
@@ -63,23 +63,23 @@ void delay(unsigned int vueltas)
 
 void cct_init(void)   //initialize cct
 {
-    P0 = 0x00; //not used
-    P1 = 0x00; //Used for Appliances
-    P2 = 0x00; //not used
-    P3 = 0x03; //used for serial
+    P0 = 0x00;      //not used
+    P1 = 0x00;      //Used for Appliances
+    P2 = 0x00;      //not used
+    P3 = 0x03;      //used for serial
 }
 
-void SerialInitialize(void)                   // INITIALIZE SERIAL PORT
+void SerialInitialize(void)                    // INITIALIZE SERIAL PORT
 {
-    TMOD = 0x20;                           // Timer 1 IN MODE 2 -AUTO RELOAD TO GENERATE BAUD RATE
-    SCON = 0x50;                           // SERIAL MODE 1, 8-DATA BIT 1-START BIT, 1-STOP BIT, REN ENABLED
-    TH1 = Baud_rate;                       // LOAD BAUDRATE TO TIMER REGISTER
-    TR1 = 1;                               // START TIMER
+    TMOD = 0x20;                               // Timer 1 IN MODE 2 -AUTO RELOAD TO GENERATE BAUD RATE
+    SCON = 0x50;                               // SERIAL MODE 1, 8-DATA BIT 1-START BIT, 1-STOP BIT, REN ENABLED
+    TH1  = Baud_rate;                          // LOAD BAUDRATE TO TIMER REGISTER
+    TR1  = 1;                                  // START TIMER
 }
 
 void SendByteSerially(unsigned char serialdata)
 {    
-    SBUF = serialdata;                        // LOAD DATA TO SERIAL BUFFER REGISTER
+    SBUF = serialdata;                         // LOAD DATA TO SERIAL BUFFER REGISTER
     while(TI == 0);                            // WAIT UNTIL TRANSMISSION TO COMPLETE
     TI = 0;                                    // CLEAR TRANSMISSION INTERRUPT FLAG
 }
@@ -126,16 +126,16 @@ void serial_ISR (void) __interrupt (4)
     {
     
      case '0':  Salidas = 0x00; SendStringCRLFSerally("Todas las Salidas : OFF");  break;
-     case '1':  Salida1 = !Salida1; SendStringONOFFSerally("Salida 1",Salida1);  break;
-     case '2':  Salida2 = !Salida2; SendStringONOFFSerally("Salida 2",Salida2);  break;
-     case '3':  Salida3 = !Salida3; SendStringONOFFSerally("Salida 3",Salida3);  break;
-     case '4':  Salida4 = !Salida4; SendStringONOFFSerally("Salida 4",Salida4);  break;
-     case '5':  Salida5 = !Salida5; SendStringONOFFSerally("Salida 5",Salida5);  break;
-     case '6':  Salida6 = !Salida6; SendStringONOFFSerally("Salida 6",Salida6);  break;
-     case '7':  Salida7 = !Salida7; SendStringONOFFSerally("Salida 7",Salida7);  break;
-     case '8':  Salida8 = !Salida8; SendStringONOFFSerally("Salida 8",Salida8);  break;
-     case '9':  Salidas = 0xFF; SendStringCRLFSerally("Todas las Salidas : ON");  break;
-     default: ;    break;     //do nothing
+     case '1':  Salida1 = !Salida1; SendStringONOFFSerally("Salida 1",Salida1);    break;
+     case '2':  Salida2 = !Salida2; SendStringONOFFSerally("Salida 2",Salida2);    break;
+     case '3':  Salida3 = !Salida3; SendStringONOFFSerally("Salida 3",Salida3);    break;
+     case '4':  Salida4 = !Salida4; SendStringONOFFSerally("Salida 4",Salida4);    break;
+     case '5':  Salida5 = !Salida5; SendStringONOFFSerally("Salida 5",Salida5);    break;
+     case '6':  Salida6 = !Salida6; SendStringONOFFSerally("Salida 6",Salida6);    break;
+     case '7':  Salida7 = !Salida7; SendStringONOFFSerally("Salida 7",Salida7);    break;
+     case '8':  Salida8 = !Salida8; SendStringONOFFSerally("Salida 8",Salida8);    break;
+     case '9':  Salidas = 0xFF; SendStringCRLFSerally("Todas las Salidas : ON");   break;
+     default: ;                                                                    break;     //do nothing
     }
 
     RI = 0;
