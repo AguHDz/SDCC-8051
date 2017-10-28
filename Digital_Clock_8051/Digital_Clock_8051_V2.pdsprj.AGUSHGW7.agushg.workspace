@@ -1,21 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c0000000000000001000000ffffffffffffffffffffffffffffffffb90100004400000063060000b2030000</PLACEMENT>
+  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff00fbffff36000000ecffffff00040000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="63" flags="00000002" y="116" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="38" flags="00000003" y="128" h="200" pid="0" iid="-1">
     <PROPERTIES>
-     <ITEM name="Message Column Width">542</ITEM>
+     <ITEM name="Message Column Width">663</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
      <ITEM name="Source Column Width">100</ITEM>
      <ITEM name="Time Column Width">120</ITEM>
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="350" x="58" flags="00000032" y="149" h="200" pid="1" iid="-1">
+   <POPUP w="350" x="58" flags="00000032" y="148" h="200" pid="1" iid="-1">
     <PROPERTIES>
      <ITEM name="Address Column Width">83</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -32,7 +32,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1321" x="172" flags="00000022" y="277" h="773" pid="0" iid="20">
+   <POPUP w="1145" x="46" flags="00000023" y="330" h="250" pid="0" iid="12">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
@@ -48,10 +48,10 @@
      <ITEM name="VSplitter1Pos">238</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="184" x="98" flags="00000008" y="189" h="226" pid="1" iid="1">
+   <POPUP w="24" x="98" flags="00000008" y="188" h="17" pid="1" iid="1">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="8" x="118" flags="0000000a" y="209" h="16" pid="3" iid="1">
+   <POPUP w="8" x="118" flags="0000000a" y="208" h="16" pid="3" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -61,7 +61,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="8" x="138" flags="0000000a" y="229" h="16" pid="2" iid="1">
+   <POPUP w="8" x="138" flags="0000000a" y="228" h="16" pid="2" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -71,10 +71,10 @@
      <ITEM name="TopLineAddress">00000080</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="156" x="158" flags="00000000" y="249" h="72" pid="1" iid="2">
+   <POPUP w="20" x="158" flags="00000000" y="248" h="3" pid="1" iid="13">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="8" x="178" flags="00000008" y="269" h="8" pid="2" iid="2">
+   <POPUP w="8" x="178" flags="00000008" y="268" h="8" pid="2" iid="13">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -84,33 +84,21 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="600" x="-1882" flags="0000002b" y="129" h="400" pid="1000" iid="1">
+   <POPUP w="20" x="38" flags="00000000" y="128" h="3" pid="1" iid="2">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP w="8" x="58" flags="00000008" y="148" h="8" pid="2" iid="2">
     <PROPERTIES>
-     <ITEM name="CaseSensitive">No</ITEM>
-     <ITEM name="DISPADDRS">Yes</ITEM>
-     <ITEM name="DISPLNUMS">No</ITEM>
-     <ITEM name="DISPOPCODES">No</ITEM>
-     <ITEM name="FIXUPBPTS">Yes</ITEM>
-     <ITEM name="WordsOnly">No</ITEM>
-     <ITEM name="nBreakpoints">0</ITEM>
+     <ITEM name="DataType">2</ITEM>
+     <ITEM name="DispChars">Yes</ITEM>
+     <ITEM name="DispFormat">2</ITEM>
+     <ITEM name="ShowChanges">Yes</ITEM>
+     <ITEM name="ShowToolTips">Yes</ITEM>
+     <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="300" x="-1797" flags="0000000b" y="539" h="300" pid="1001" iid="1">
-    <PROPERTIES>
-     <ITEM name="Address Column Width">94</ITEM>
-     <ITEM name="AutoResize">No</ITEM>
-     <ITEM name="Gridlines">Yes</ITEM>
-     <ITEM name="Name Column Width">94</ITEM>
-     <ITEM name="ShowAddresses">Yes</ITEM>
-     <ITEM name="ShowGlobals">Yes</ITEM>
-     <ITEM name="ShowPreviousValues">No</ITEM>
-     <ITEM name="ShowTypes">No</ITEM>
-     <ITEM name="ShowWatchPoint">No</ITEM>
-     <ITEM name="TriggerMode">0</ITEM>
-     <ITEM name="Value Column Width">94</ITEM>
-     <ITEM name="Version">100</ITEM>
-     <ITEM name="nItems">0</ITEM>
-    </PROPERTIES>
+   <POPUP w="695" x="-1051" flags="00008001" y="345" h="448" pid="0" iid="23">
+    <PROPERTIES/>
    </POPUP>
   </PWI>
  </MODULE>

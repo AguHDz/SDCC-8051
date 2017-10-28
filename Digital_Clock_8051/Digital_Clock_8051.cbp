@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Digital_Clock_8051" />
+		<Option title="Digital_Clock_AT89C2051" />
 		<Option pch_mode="2" />
 		<Option compiler="sdcc" />
 		<Build>
@@ -33,22 +33,21 @@
 		</Compiler>
 		<Linker>
 			<Add option="--xram-size 0" />
-			<Add option="--iram-size 256" />
-			<Add option="--code-size 8000" />
+			<Add option="--iram-size 128" />
+			<Add option="--code-size 2000" />
 			<Add option="--out-fmt-ihx" />
 		</Linker>
 		<ExtraCommands>
 			<Add after='cmd /c &quot;packihx &lt;$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).ihx &gt;$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).hex&quot;' />
 		</ExtraCommands>
-		<Unit filename="DS1307_LIB.h" />
-		<Unit filename="I2C_LIB.H" />
-		<Unit filename="LCD_LIB.H" />
+		<Unit filename="bin/Release/Digital_Clock_8051.hex">
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="bin/Release/Digital_Clock_8051.map" />
 		<Unit filename="bin/Release/Digital_Clock_8051.mem" />
-		<Unit filename="delay_Lib.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="math_LIB.h" />
 		<Unit filename="obj/Release/main.asm">
 			<Option compile="0" />
 			<Option link="0" />

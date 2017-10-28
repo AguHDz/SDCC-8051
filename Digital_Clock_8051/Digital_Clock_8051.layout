@@ -2,44 +2,29 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
-	<File name="I2C_LIB.H" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="bin\Release\Digital_Clock_8051.map" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="617" topLine="0" />
+			<Cursor1 position="15829" topLine="345" />
 		</Cursor>
 	</File>
 	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="730" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1020" topLine="5" />
+			<Cursor1 position="435" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="math_LIB.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="bin\Release\Digital_Clock_8051.hex" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="42" topLine="0" />
+			<Cursor1 position="3880" topLine="47" />
 		</Cursor>
 	</File>
-	<File name="bin\Release\Digital_Clock_8051.mem" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="bin\Release\Digital_Clock_8051.mem" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="287" topLine="0" />
+			<Cursor1 position="1231" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="delay_Lib.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="obj\Release\main.asm" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="obj\Release\main.asm" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="17266" topLine="2170" />
-		</Cursor>
-	</File>
-	<File name="DS1307_LIB.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1010" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="LCD_LIB.H" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="91" topLine="0" />
+			<Cursor1 position="14132" topLine="545" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
