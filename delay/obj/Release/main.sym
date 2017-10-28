@@ -334,10 +334,9 @@ Symbol Table
     __sdcc_gsinit_startup                                          ****** GX
   F __sdcc_program_startup                                         000003 GR
   7 __start__stack                                                 000000 GR
- 18 _delay_ms                                                      000021 GR
- 18 _delay_x100_cycles                                             00000E GR
+ 18 _delay_ms                                                      00000E GR
  18 _delay_x10_cycles                                              000000 GR
- 18 _main                                                          000037 GR
+ 18 _main                                                          000038 GR
     a                                                           =  0000E0 L
     a.0                                                         =  0000E0 L
     a.1                                                         =  0000E1 L
@@ -358,12 +357,12 @@ Symbol Table
     acc.6                                                       =  0000E6 L
     acc.7                                                       =  0000E7 L
     ar0                                                         =  000000 
+    ar1                                                         =  000001 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 7.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    ar1                                                         =  000001 
     ar2                                                         =  000002 
     ar3                                                         =  000003 
     ar4                                                         =  000004 
@@ -382,13 +381,12 @@ Symbol Table
     cprl2                                                       =  0000C8 L
     ct2                                                         =  0000C9 L
     cy                                                          =  0000D7 L
- 18 delay_ms_lib_fin                                               000036 R
- 18 delay_ms_lib_loop                                              000025 R
- 18 delay_ms_lib_seguir                                            00002A R
+ 18 delay_ms_lib_fin                                               00002D R
+ 18 delay_ms_lib_loop                                              00001C R
+ 18 delay_ms_lib_seguir                                            000021 R
     dph                                                         =  000083 L
     dpl                                                         =  000082 L
     ea                                                          =  0000AF L
- 18 end_delay_x100_cycles                                          000020 R
  18 end_delay_x10_cycles                                           00000D R
     es                                                          =  0000AC L
     et0                                                         =  0000A9 L
@@ -418,17 +416,14 @@ Symbol Table
     ip.3                                                        =  0000BB L
     ip.4                                                        =  0000BC L
     ip.5                                                        =  0000BD L
+    it0                                                         =  000088 L
+    it1                                                         =  00008A L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 8.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    it0                                                         =  000088 L
-    it1                                                         =  00008A L
- 18 loop_delay_100_cycles                                          00001B R
  18 loop_delay_10_cycles                                           000008 R
- 18 loop_delay_x100_cycles                                         000019 R
- 18 loop_delay_x100_cycles_init                                    000014 R
  18 loop_delay_x10_cycles                                          000006 R
     ov                                                          =  0000D2 L
     p                                                           =  0000D0 L
@@ -478,16 +473,16 @@ Symbol Table
     psw.4                                                       =  0000D4 L
     psw.5                                                       =  0000D5 L
     psw.6                                                       =  0000D6 L
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
-Hexadecimal [24-Bits]
-
-Symbol Table
-
     psw.7                                                       =  0000D7 L
     pt0                                                         =  0000B9 L
     pt1                                                         =  0000BB L
     pt2                                                         =  0000BD L
     px0                                                         =  0000B8 L
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
     px1                                                         =  0000BA L
     rb8                                                         =  00009A L
     rcap2h                                                      =  0000CB L
@@ -538,20 +533,21 @@ Symbol Table
     th0                                                         =  00008C L
     th1                                                         =  00008D L
     th2                                                         =  0000CD L
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 10.
-Hexadecimal [24-Bits]
-
-Symbol Table
-
     ti                                                          =  000099 L
     tl0                                                         =  00008A L
     tl1                                                         =  00008B L
     tl2                                                         =  0000CC L
     tmod                                                        =  000089 L
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 10.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
     tr0                                                         =  00008C L
     tr1                                                         =  00008E L
     tr2                                                         =  0000CA L
     txd                                                         =  0000B1 L
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 11.
 Hexadecimal [24-Bits]
@@ -582,7 +578,7 @@ Area Table
   15 GSINIT5                                    size      0   flags   20
   16 GSINIT                                     size      0   flags   20
   17 GSFINAL                                    size      3   flags   20
-  18 CSEG                                       size     4B   flags   20
+  18 CSEG                                       size     4C   flags   20
   19 CONST                                      size      0   flags   20
   1A XINIT                                      size      0   flags   20
   1B CABS                                       size      0   flags   28

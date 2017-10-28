@@ -1,0 +1,163 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.6.0 #9615 (MINGW32)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module delay
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _delay_x10_cycles
+                                     12 	.globl _delay_ms
+                                     13 ;--------------------------------------------------------
+                                     14 ; special function registers
+                                     15 ;--------------------------------------------------------
+                                     16 	.area RSEG    (ABS,DATA)
+      000000                         17 	.org 0x0000
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function bits
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG    (ABS,DATA)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; overlayable register banks
+                                     25 ;--------------------------------------------------------
+                                     26 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                         27 	.ds 8
+                                     28 ;--------------------------------------------------------
+                                     29 ; internal ram data
+                                     30 ;--------------------------------------------------------
+                                     31 	.area DSEG    (DATA)
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in internal ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG    (OVR,DATA)
+                                     36 ;--------------------------------------------------------
+                                     37 ; indirectly addressable internal ram data
+                                     38 ;--------------------------------------------------------
+                                     39 	.area ISEG    (DATA)
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute internal ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area IABS    (ABS,DATA)
+                                     44 	.area IABS    (ABS,DATA)
+                                     45 ;--------------------------------------------------------
+                                     46 ; bit data
+                                     47 ;--------------------------------------------------------
+                                     48 	.area BSEG    (BIT)
+                                     49 ;--------------------------------------------------------
+                                     50 ; paged external ram data
+                                     51 ;--------------------------------------------------------
+                                     52 	.area PSEG    (PAG,XDATA)
+                                     53 ;--------------------------------------------------------
+                                     54 ; external ram data
+                                     55 ;--------------------------------------------------------
+                                     56 	.area XSEG    (XDATA)
+                                     57 ;--------------------------------------------------------
+                                     58 ; absolute external ram data
+                                     59 ;--------------------------------------------------------
+                                     60 	.area XABS    (ABS,XDATA)
+                                     61 ;--------------------------------------------------------
+                                     62 ; external initialized ram data
+                                     63 ;--------------------------------------------------------
+                                     64 	.area XISEG   (XDATA)
+                                     65 	.area HOME    (CODE)
+                                     66 	.area GSINIT0 (CODE)
+                                     67 	.area GSINIT1 (CODE)
+                                     68 	.area GSINIT2 (CODE)
+                                     69 	.area GSINIT3 (CODE)
+                                     70 	.area GSINIT4 (CODE)
+                                     71 	.area GSINIT5 (CODE)
+                                     72 	.area GSINIT  (CODE)
+                                     73 	.area GSFINAL (CODE)
+                                     74 	.area CSEG    (CODE)
+                                     75 ;--------------------------------------------------------
+                                     76 ; global & static initialisations
+                                     77 ;--------------------------------------------------------
+                                     78 	.area HOME    (CODE)
+                                     79 	.area GSINIT  (CODE)
+                                     80 	.area GSFINAL (CODE)
+                                     81 	.area GSINIT  (CODE)
+                                     82 ;--------------------------------------------------------
+                                     83 ; Home
+                                     84 ;--------------------------------------------------------
+                                     85 	.area HOME    (CODE)
+                                     86 	.area HOME    (CODE)
+                                     87 ;--------------------------------------------------------
+                                     88 ; code
+                                     89 ;--------------------------------------------------------
+                                     90 	.area CSEG    (CODE)
+                                     91 ;------------------------------------------------------------
+                                     92 ;Allocation info for local variables in function 'delay_x10_cycles'
+                                     93 ;------------------------------------------------------------
+                                     94 ;x10cycles                 Allocated to registers 
+                                     95 ;------------------------------------------------------------
+                                     96 ;	..\Libs\delay.c:48: void delay_x10_cycles(uint8_t x10cycles)
+                                     97 ;	-----------------------------------------
+                                     98 ;	 function delay_x10_cycles
+                                     99 ;	-----------------------------------------
+      000000                        100 _delay_x10_cycles:
+                           000007   101 	ar7 = 0x07
+                           000006   102 	ar6 = 0x06
+                           000005   103 	ar5 = 0x05
+                           000004   104 	ar4 = 0x04
+                           000003   105 	ar3 = 0x03
+                           000002   106 	ar2 = 0x02
+                           000001   107 	ar1 = 0x01
+                           000000   108 	ar0 = 0x00
+                                    109 ;	..\Libs\delay.c:66: __endasm;
+      000000 AF 82            [24]  110 	mov	r7,dpl
+      000002 1F               [12]  111 	dec	r7
+      000003 EF               [12]  112 	mov	a, r7
+      000004 60 07            [24]  113 	jz	end_delay_x10_cycles
+      000006                        114 	    loop_delay_x10_cycles:
+      000006 7E 03            [12]  115 	mov	r6,#3
+      000008                        116 	    loop_delay_10_cycles:
+      000008 DE FE            [24]  117 	djnz	r6,loop_delay_10_cycles
+      00000A 00               [12]  118 	nop
+      00000B DF F9            [24]  119 	djnz	r7,loop_delay_x10_cycles
+      00000D                        120 	    end_delay_x10_cycles:
+      00000D 22               [24]  121 	ret
+                                    122 ;------------------------------------------------------------
+                                    123 ;Allocation info for local variables in function 'delay_ms'
+                                    124 ;------------------------------------------------------------
+                                    125 ;delayTimeMS               Allocated to registers 
+                                    126 ;------------------------------------------------------------
+                                    127 ;	..\Libs\delay.c:98: void delay_ms(uint16_t delayTimeMS)
+                                    128 ;	-----------------------------------------
+                                    129 ;	 function delay_ms
+                                    130 ;	-----------------------------------------
+      00000E                        131 _delay_ms:
+                                    132 ;	..\Libs\delay.c:127: __endasm;
+      00000E C0 07            [24]  133 	push	ar7
+      000010 C0 06            [24]  134 	push	ar6
+      000012 C0 05            [24]  135 	push	ar5
+      000014 C0 04            [24]  136 	push	ar4
+      000016 C0 03            [24]  137 	push	ar3
+      000018 AB 82            [24]  138 	mov	r3,dpl
+      00001A AC 83            [24]  139 	mov	r4,dph
+      00001C                        140 	    delay_ms_lib_loop:
+      00001C 1B               [12]  141 	dec	r3
+      00001D BB FF 01         [24]  142 	cjne	r3,#0xff,delay_ms_lib_seguir
+      000020 1C               [12]  143 	dec	r4
+      000021                        144 	    delay_ms_lib_seguir:
+      000021 EB               [12]  145 	mov	a,r3
+      000022 4C               [12]  146 	orl	a,r4
+      000023 60 08            [24]  147 	jz	delay_ms_lib_fin
+                                    148 ;	..\Libs\delay.c:129: CALL_DELAY_MS;
+      000025 75 82 61         [24]  149 	mov	dpl,#0x61
+      000028 12r00r00         [24]  150 	lcall	_delay_x10_cycles
+                                    151 ;	..\Libs\delay.c:139: __endasm;
+      00002B 80 EF            [24]  152 	sjmp	delay_ms_lib_loop
+      00002D                        153 	    delay_ms_lib_fin:
+      00002D D0 03            [24]  154 	pop	ar3
+      00002F D0 04            [24]  155 	pop	ar4
+      000031 D0 05            [24]  156 	pop	ar5
+      000033 D0 06            [24]  157 	pop	ar6
+      000035 D0 07            [24]  158 	pop	ar7
+      000037 22               [24]  159 	ret
+                                    160 	.area CSEG    (CODE)
+                                    161 	.area CONST   (CODE)
+                                    162 	.area XINIT   (CODE)
+                                    163 	.area CABS    (ABS,CODE)

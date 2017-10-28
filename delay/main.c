@@ -6,7 +6,7 @@
 
 #define FOSC            12000000L
 #define TICKS           12
-#include "delay_lib.h"
+#include "../Libs/delay.c"
 
 void main(void)
 {
@@ -16,9 +16,9 @@ void main(void)
     while(1)
     {
         P1_5 = 1;
-        delay_ms(500);
+        delay_ms(1);
         P1_5 = 0;
-        delay_ms(500);
+        delay_ms(1);
     }
 
 }

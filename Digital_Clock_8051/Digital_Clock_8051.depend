@@ -4,30 +4,95 @@
 	<stdio.h>
 	<stdint.h>
 
-1507947402 source:o:\github\sdcc-8051\digital_clock_8051\main.c
-	<mcs51/8052.h>
+1509194982 source:o:\github\sdcc-8051\digital_clock_8051\main.c
+	<mcs51/at89x51.h>
 	<stdio.h>
 	<stdint.h>
-	"delay_Lib.h"
-	"I2C_Lib.h"
-	"DS1307_LIB.h"
-	"LCD_LIB.H"
+	<stdbool.h>
+	"../Libs/delay.h"
+	"../Libs/I2C.h"
+	"../Libs/DS1307.h"
+	"../Libs/LCD.h"
 
 1507020880 o:\github\sdcc-8051\digital_clock_8051\common.h
 	<stdint.h>
 	<mcs51/8052.h>
 
-1507945696 o:\github\sdcc-8051\digital_clock_8051\delay_lib.h
-	<mcs51/8052.h>
+1508279170 o:\github\sdcc-8051\digital_clock_8051\delay_lib.h
 	<stdint.h>
 
-1507938856 o:\github\sdcc-8051\digital_clock_8051\i2c_lib.h
+1508061546 o:\github\sdcc-8051\digital_clock_8051\i2c_lib.h
+	<stdint.h>
 
-1507947402 o:\github\sdcc-8051\digital_clock_8051\lcd_lib.h
+1508282192 o:\github\sdcc-8051\digital_clock_8051\lcd_lib.h
+
+1508278216 o:\github\sdcc-8051\digital_clock_8051\ds1307_lib.h
+	<stdint.h>
+	"MATH_LIB.H"
+	"I2C_LIB.H"
+
+1508148262 o:\github\sdcc-8051\digital_clock_8051\math_lib.h
+
+1508279944 source:o:\github\sdcc-8051\digital_clock_8051\delay_lib.c
 	"delay_Lib.h"
 
-1507947578 o:\github\sdcc-8051\digital_clock_8051\ds1307_lib.h
-	"MATH_LIB.H"
+1508274180 o:\github\sdcc-8051\digital_clock_8051\delay_lib.c
+	"delay_Lib.h"
 
-1507947402 o:\github\sdcc-8051\digital_clock_8051\math_lib.h
+1508281534 source:o:\github\sdcc-8051\libs\delay_lib.c
+	"delay_Lib.h"
+
+1508282640 o:\github\sdcc-8051\libs\delay_lib.h
+	<stdint.h>
+
+1508148262 o:\github\sdcc-8051\libs\math_lib.h
+
+1508061546 o:\github\sdcc-8051\libs\i2c_lib.h
+	<stdint.h>
+
+1508278216 o:\github\sdcc-8051\libs\ds1307_lib.h
+	<stdint.h>
+	"MATH_LIB.H"
+	"I2C_LIB.H"
+
+1508282442 o:\github\sdcc-8051\libs\lcd_lib.h
+	"delay_Lib.h"
+
+1509193782 o:\github\sdcc-8051\libs\delay.c
+	<stdint.h>
+
+1509193868 o:\github\sdcc-8051\libs\i2c.c
+	"I2C.h"
+
+1509191900 o:\github\sdcc-8051\libs\ds1307.c
+	<stdint.h>
+	"math.c"
+	"I2C.c"
+	"delay.c"
+
+1508148262 o:\github\sdcc-8051\libs\math.c
+
+1509024258 o:\github\sdcc-8051\libs\lcd.c
+	"delay.c"
+
+1508292166 source:o:\github\sdcc-8051\libs\delay.c
+	<stdint.h>
+
+1509194876 o:\github\sdcc-8051\libs\i2c.h
+	<stdint.h>
+	<stdbool.h>
+
+1509195008 o:\github\sdcc-8051\libs\ds1307.h
+	<stdint.h>
+	"math.h"
+	"I2C.h"
+	"delay.h"
+
+1509193782 o:\github\sdcc-8051\libs\delay.h
+	<stdint.h>
+
+1508148262 o:\github\sdcc-8051\libs\math.h
+
+1509194828 o:\github\sdcc-8051\libs\lcd.h
+	"delay.h"
 

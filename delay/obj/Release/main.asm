@@ -129,7 +129,6 @@
 	.globl _SP
 	.globl _P0
 	.globl _delay_x10_cycles
-	.globl _delay_x100_cycles
 	.globl _delay_ms
 ;--------------------------------------------------------
 ; special function registers
@@ -273,7 +272,6 @@ _TF2	=	0x00cf
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
 	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
 ;--------------------------------------------------------
 ; Stack segment in internal ram 
 ;--------------------------------------------------------
@@ -358,7 +356,7 @@ __sdcc_program_startup:
 ;------------------------------------------------------------
 ;x10cycles                 Allocated to registers 
 ;------------------------------------------------------------
-;	delay_lib.h:47: void delay_x10_cycles(uint8_t x10cycles)
+;	../Libs/delay.c:48: void delay_x10_cycles(uint8_t x10cycles)
 ;	-----------------------------------------
 ;	 function delay_x10_cycles
 ;	-----------------------------------------
@@ -371,7 +369,7 @@ _delay_x10_cycles:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-;	delay_lib.h:65: __endasm;
+;	../Libs/delay.c:66: __endasm;
 	mov	r7,dpl
 	dec	r7
 	mov	a, r7
@@ -385,43 +383,21 @@ _delay_x10_cycles:
 	    end_delay_x10_cycles:
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'delay_x100_cycles'
-;------------------------------------------------------------
-;x100cycles                Allocated to registers 
-;------------------------------------------------------------
-;	delay_lib.h:70: void delay_x100_cycles(uint8_t x100cycles)
-;	-----------------------------------------
-;	 function delay_x100_cycles
-;	-----------------------------------------
-_delay_x100_cycles:
-;	delay_lib.h:89: __endasm;
-	mov	r7,dpl
-	dec	r7
-	mov	a, r7
-	mov	r6,#44
-	    loop_delay_x100_cycles_init:
-	djnz	r6,loop_delay_x100_cycles_init
-	nop
-	jz	end_delay_x100_cycles
-	    loop_delay_x100_cycles:
-	mov	r5,#48
-	    loop_delay_100_cycles:
-	djnz	r5,loop_delay_100_cycles
-	nop
-	djnz	r7,loop_delay_x100_cycles
-	    end_delay_x100_cycles:
-	ret
-;------------------------------------------------------------
 ;Allocation info for local variables in function 'delay_ms'
 ;------------------------------------------------------------
-;delayTimeUS               Allocated to registers 
+;delayTimeMS               Allocated to registers 
 ;------------------------------------------------------------
-;	delay_lib.h:94: void delay_ms(uint16_t delayTimeUS)
+;	../Libs/delay.c:98: void delay_ms(uint16_t delayTimeMS)
 ;	-----------------------------------------
 ;	 function delay_ms
 ;	-----------------------------------------
 _delay_ms:
-;	delay_lib.h:112: __endasm;
+;	../Libs/delay.c:127: __endasm;
+	push	ar7
+	push	ar6
+	push	ar5
+	push	ar4
+	push	ar3
 	mov	r3,dpl
 	mov	r4,dph
 	    delay_ms_lib_loop:
@@ -432,12 +408,17 @@ _delay_ms:
 	mov	a,r3
 	orl	a,r4
 	jz	delay_ms_lib_fin
-;	delay_lib.h:114: CALL_DELAY;
-	mov	dpl,#0x64
+;	../Libs/delay.c:129: CALL_DELAY_MS;
+	mov	dpl,#0x61
 	lcall	_delay_x10_cycles
-;	delay_lib.h:119: __endasm;
+;	../Libs/delay.c:139: __endasm;
 	sjmp	delay_ms_lib_loop
 	    delay_ms_lib_fin:
+	pop	ar3
+	pop	ar4
+	pop	ar5
+	pop	ar6
+	pop	ar7
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
@@ -453,13 +434,13 @@ _main:
 00102$:
 ;	main.c:18: P1_5 = 1;
 	setb	_P1_5
-;	main.c:19: delay_ms(500);
-	mov	dptr,#0x01f4
+;	main.c:19: delay_ms(1);
+	mov	dptr,#0x0001
 	lcall	_delay_ms
 ;	main.c:20: P1_5 = 0;
 	clr	_P1_5
-;	main.c:21: delay_ms(500);
-	mov	dptr,#0x01f4
+;	main.c:21: delay_ms(1);
+	mov	dptr,#0x0001
 	lcall	_delay_ms
 	sjmp	00102$
 	.area CSEG    (CODE)
